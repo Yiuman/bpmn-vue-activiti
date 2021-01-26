@@ -1,0 +1,24 @@
+.bpmn-actions {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
+.bpmn-actions button {
+  margin: 0 20px;
+}
+
+.render-icon {
+  cursor: pointer;
+  display: inline;
+}
+
+.render-icon .anticon {
+  margin: 0 10px;
+  font-size: 30px;
+}
+
+.render-icon .anticon:hover {
+  position: relative;
+  bottom: 8px;
+}

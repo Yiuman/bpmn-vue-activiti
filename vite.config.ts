@@ -19,7 +19,7 @@ function rawTransform(
 }
 export default {
   optimizeDeps: {
-    include: ['bpmn-js/lib/Modeler'],
+    include: ['bpmn-js/lib/Modeler', '@ant-design/icons-vue'],
   },
   plugins: [vue(), rawTransform([/\.bpmn$/]), vueJsx()],
 };

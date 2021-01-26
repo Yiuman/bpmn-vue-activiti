@@ -6,11 +6,13 @@
     "build": "vite build"
   },
   "dependencies": {
+    "ant-design-vue": "^2.0.0-rc.9",
     "bpmn-js": "^8.1.0",
     "bpmn-js-properties-panel": "^0.39.0",
     "vue": "^3.0.4"
   },
   "devDependencies": {
+    "@types/node": "^14.14.22",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "@vitejs/plugin-vue": "^1.0.6",
