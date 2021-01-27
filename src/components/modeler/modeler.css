@@ -14,4 +14,8 @@
     repeat !important;
 }
 
-
+.djs-palette {
+  border: none !important;
+  background-color: #fff !important;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}

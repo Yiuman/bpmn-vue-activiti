@@ -27,14 +27,10 @@ export default defineComponent({
           if (!item.icon) {
             return <a-button click={props.buttonClick(item)}>{item.label}</a-button>;
           } else {
-            console.warn(item.icon);
             return (
-              // <a-button >
               <div class="render-icon" onClick={() => props.buttonClick(item)}>
                 <icon-font type={item.icon} />
               </div>
-
-              // </a-button>
             );
           }
         })}

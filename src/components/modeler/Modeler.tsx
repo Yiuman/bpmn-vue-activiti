@@ -42,10 +42,6 @@ export default defineComponent({
         });
     });
 
-    return () => (
-      <>
-        <div id="modeler-container"></div>
-      </>
-    );
+    return () => <div id="modeler-container"></div>;
   },
 });

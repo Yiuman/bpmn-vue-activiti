@@ -13,9 +13,7 @@ export default defineComponent({
         <div class="app-containers">
           <Modeler />
           <Panel />
-          <div>
-            <BpmnActions />
-          </div>
+          <BpmnActions />
         </div>
       </>
     );

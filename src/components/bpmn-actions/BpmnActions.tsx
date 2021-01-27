@@ -18,11 +18,9 @@ export default defineComponent({
         { label: '预览', icon: 'icon-xianshi' },
       ],
       buttonClick: (btn) => {
-        console.warn(btn);
+        console.warn(bpmnContext, btn);
       },
     };
-
-    console.warn(bpmnContext);
 
     return () => (
       <div class="bpmn-actions">
