@@ -9,6 +9,7 @@
     "ant-design-vue": "^2.0.0-rc.9",
     "bpmn-js": "^8.1.0",
     "bpmn-js-properties-panel": "^0.39.0",
+    "element-plus": "^1.0.2-beta.30",
     "vue": "^3.0.4"
   },
   "devDependencies": {

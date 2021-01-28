@@ -1,34 +1,32 @@
-import { defineComponent, onMounted, reactive, watch } from 'vue';
+import { defineComponent } from 'vue';
 import { useBpmnInject } from '../../bpmn/store';
 import DynamicBinder, { FieldDefine } from '../../components/dynamic-binder';
-import { Input } from 'ant-design-vue';
+import { ElInput } from 'element-plus';
+
+import './panel.css';
 
 export default defineComponent({
   name: 'Panel',
   setup() {
     const bpmnContext = useBpmnInject();
     const contextState = bpmnContext.getState();
-    const state = reactive({
-      businessObject: {},
-    });
-
-    onMounted(() => {
-      watch(
-        () => contextState.activeElement,
-        function (newActive: any, preActive: any) {
-          const elementRegistry = bpmnContext.getModeler().get('elementRegistry');
-          const shape = elementRegistry.get(newActive.element.id);
-          console.warn('shape', shape);
-          console.warn('newActive', newActive, 'preActive', preActive);
-          console.warn('modeling', bpmnContext.getModeling());
-          state.businessObject = shape.businessObject;
-        },
-      );
-    });
+    //动态数据绑定器的字段变化后更新到xml，视图刷新
+    function onFieldChange(key: string, value: unknown): void {
+      const shape = bpmnContext.getShape();
+      bpmnContext.getModeling().updateProperties(shape, { [key]: value });
+    }
 
     return () => (
       <div class="bpmn-panel">
-        <DynamicBinder fieldDefine={StartEventBindDefine} sourceModel={state.businessObject} />
+        {contextState.isActive ? (
+          <DynamicBinder
+            {...{ onFieldChange: onFieldChange }}
+            fieldDefine={StartEventBindDefine}
+            v-model={contextState.businessObject}
+          />
+        ) : (
+          ''
+        )}
       </div>
     );
   },
@@ -36,11 +34,15 @@ export default defineComponent({
 
 const StartEventBindDefine: FieldDefine = {
   id: {
-    component: Input,
+    component: ElInput,
     placeholder: '节点ID',
+    slots: {
+      prepend: () => <div>节点ID</div>,
+    },
   },
   name: {
-    component: Input,
+    component: ElInput,
+    // prefix: '节点名称',
     placeholder: '节点名称',
   },
 };

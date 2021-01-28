@@ -2,9 +2,7 @@ import { createApp } from 'vue';
 import App from './App';
 import './index.css';
 
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
+import 'element-plus/lib/theme-chalk/index.css';
 
 const app = createApp(App);
-app.use(Antd);
 app.mount('#app');

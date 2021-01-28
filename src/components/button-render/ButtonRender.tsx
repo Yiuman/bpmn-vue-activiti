@@ -28,7 +28,10 @@ export default defineComponent({
             return <a-button click={props.buttonClick(item)}>{item.label}</a-button>;
           } else {
             return (
-              <div class="render-icon" onClick={() => props.buttonClick(item)}>
+              <div
+                class="render-icon"
+                onClick={() => (item.action ? item.action() : props.buttonClick(item))}
+              >
                 <icon-font type={item.icon} />
               </div>
             );

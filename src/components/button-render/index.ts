@@ -1,8 +1,9 @@
 import ButtonRender from './ButtonRender';
 
 export interface Button {
-  label: string;
-  icon: string;
+  label?: string;
+  icon?: string;
+  action?: () => void;
 }
 
 export interface ButtonRenderProps {

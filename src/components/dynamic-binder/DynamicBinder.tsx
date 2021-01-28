@@ -1,6 +1,7 @@
-import { defineComponent, PropType, reactive, watch, toRaw } from 'vue';
+import { defineComponent, PropType, reactive, toRaw, watchEffect, watch } from 'vue';
 import ScriptHelper from '../../utils/script-helper';
 import { FieldDefine } from './index';
+
 /**
  * 动态绑定组件
  * 传入源对象及数据绑定的定义，根据组件名动态渲染出组件进行数据绑定
@@ -9,9 +10,9 @@ export default defineComponent({
   name: 'DynamicBinder',
   props: {
     //传进来的源对象，这里需要通过动态组件修改源对象的值进行数据动态绑定
-    sourceModel: {
+    modelValue: {
       type: Object as PropType<any>,
-      default: () => ({}),
+      default: () => Object.assign({}),
       required: true,
     },
     /**
@@ -28,32 +29,48 @@ export default defineComponent({
       default: undefined,
     },
   },
+  emits: ['update:modelValue', 'fieldChange'],
   setup(props, context) {
-    console.warn('context', context);
     const state = reactive({
       flatfieldDefine: flatObject(props.fieldDefine || {}, {}),
+      handingModel: Object.assign({}),
     });
-    watch(
-      () => props.fieldDefine,
-      () => {
-        state.flatfieldDefine = flatObject(props.fieldDefine, {});
-      },
-    );
+    watchEffect(() => (state.handingModel = JSON.parse(JSON.stringify(props.modelValue))));
+    watchEffect(() => (state.flatfieldDefine = flatObject(props.fieldDefine, {})));
+
     const bindTransformer = props.bindTransformer || defaultTransformer;
     //绑定转换函数赋值，然props有则用props的否则用默认的
     const dataBindTransformer = function (key: string, value: any) {
-      return bindTransformer(props.sourceModel, key, value);
+      return bindTransformer(state.handingModel, key, value);
     };
 
     return () => (
       <div class="dynamic-binder">
         {Object.keys(state.flatfieldDefine).map((key) => {
           const define = state.flatfieldDefine[key];
-          const Component = toRaw(define.component);
+          const bindData = dataBindTransformer(key, define);
 
+          //组件不能是代理对象，这里直接用目标对象
+          const Component = toRaw(define.component);
+          console.warn(Component);
+
+          watch(
+            () => bindData.value,
+            () => {
+              state.handingModel[bindData.bindKey] = bindData.value;
+              context.emit('update:modelValue', state.handingModel);
+              context.emit('fieldChange', bindData.bindKey, bindData.value);
+            },
+          );
           if (define && predicate(define)) {
-            console.warn('123123', { ...dataBindTransformer(key, define) });
-            return <Component class="123123" key={key} {...dataBindTransformer(key, define)} />;
+            Component.slots = toRaw(bindData.slots);
+            return (
+              <Component
+                {...bindData}
+                v-model={bindData.value}
+                class={`${Component.name}-${key} dynamic-binder-item`}
+              ></Component>
+            );
           }
           return null;
         })}
@@ -123,12 +140,12 @@ function predicate(obj: FieldDefine): boolean {
  * @param bindDefine 绑定定义
  */
 function defaultTransformer(sourceModel: any, bindKey: string, bindDefine: any): any {
-  return {
+  return reactive({
     bindKey,
     ...bindDefine,
     sourceModel,
     value: resolve(bindKey, sourceModel) || '',
-  };
+  });
 }
 
 /**

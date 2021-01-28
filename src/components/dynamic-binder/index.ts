@@ -1,3 +1,4 @@
+import { Component } from 'vue';
 import DynamicBinder from './DynamicBinder';
 
 /**
@@ -6,6 +7,7 @@ import DynamicBinder from './DynamicBinder';
 export interface FieldDefine extends Map {
   //用于断言此绑定的组件是否是否显示
   predicate?: string | ((obj: any) => boolean);
+  component?: string | Component;
 }
 
 export interface Map {

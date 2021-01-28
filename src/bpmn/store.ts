@@ -1,18 +1,22 @@
-import { reactive, UnwrapRef, provide, inject } from 'vue';
+import { reactive, UnwrapRef, provide, inject, nextTick } from 'vue';
 import Modeler from 'bpmn-js/lib/Modeler';
 const bpmnSymbol = Symbol();
 
 interface BpmnState {
   activeElement: any;
+  businessObject: any;
+  isActive: boolean;
 }
 
 interface BpmnContext {
   modeler: any;
   state: UnwrapRef<BpmnState>;
   getState(): UnwrapRef<BpmnState>;
-  initModeler(options: any): void;
+  initModeler(options: unknown): void;
   importXML(xml: string): Promise<Array<string> | any>;
   getModeler(): typeof Modeler;
+  getShape(): any;
+  getBusinessObject(): any;
   getActiveElement(): any;
   getModeling(): any;
   addEvent(name: string, func: (e: any) => void): void;
@@ -21,6 +25,8 @@ interface BpmnContext {
 export const useBpmnProvider = (): void => {
   const state = reactive<BpmnState>({
     activeElement: null,
+    businessObject: null,
+    isActive: false,
   });
   const context: BpmnContext = {
     modeler: null,
@@ -30,12 +36,33 @@ export const useBpmnProvider = (): void => {
     },
     initModeler(options) {
       this.modeler = new Modeler(options);
-      this.addEvent('element.click', function (e) {
-        state.activeElement = e;
+      const elementRegistry = this.modeler.get('elementRegistry');
+
+      function refreshSate(elementAction: any): void {
+        state.activeElement = elementAction;
+        const shape = elementRegistry.get(elementAction.element.id);
+        state.businessObject = shape.businessObject;
+        state.isActive = true;
+      }
+
+      this.addEvent('element.click', function (elementAction) {
+        refreshSate(elementAction);
+      });
+      this.addEvent('element.changed', function (elementAction: any) {
+        state.businessObject = null;
+        state.isActive = false;
+        nextTick(() => {
+          refreshSate(elementAction);
+        });
+        // state.businessObject = labelCreated.context.labelTarget.businessObject;
       });
     },
     getModeler() {
       return this.modeler;
+    },
+    getShape() {
+      const elementRegistry = this.getModeler().get('elementRegistry');
+      return elementRegistry.get(state.activeElement.element.id);
     },
     importXML(string) {
       return this.modeler.importXML(string);
@@ -46,10 +73,15 @@ export const useBpmnProvider = (): void => {
     getActiveElement() {
       return state.activeElement;
     },
+    getBusinessObject() {
+      return state.businessObject;
+    },
     addEvent(string, func) {
-      this.getModeler().on(string, function (e: any) {
-        func(e);
-      });
+      this.getModeler()
+        .get('eventBus')
+        .on(string, function (e: any) {
+          func(e);
+        });
     },
   };
 
