@@ -1,14 +1,13 @@
 import { defineComponent, PropType } from 'vue';
 import { Button, ButtonRenderProps } from './index';
-import { createFromIconfontCN } from '@ant-design/icons-vue';
-const IconFont = createFromIconfontCN({
-  scriptUrl: '/public/iconfont.js',
-});
+import { ElButton } from 'element-plus';
+// import { createFromIconfontCN } from '@ant-design/icons-vue';
+// const IconFont = createFromIconfontCN({
+//   scriptUrl: '/public/iconfont.js',
+// });
 export default defineComponent({
   name: 'ButtonRender',
-  components: {
-    IconFont,
-  },
+
   props: {
     buttons: {
       type: Array as PropType<Array<Button>>,
@@ -25,14 +24,27 @@ export default defineComponent({
       <div class="button-render">
         {props.buttons.map((item) => {
           if (!item.icon) {
-            return <a-button click={props.buttonClick(item)}>{item.label}</a-button>;
+            return (
+              <ElButton
+                round
+                type="info"
+                {...{
+                  onClick: (): void => (item.action ? item.action() : props.buttonClick(item)),
+                }}
+              >
+                {item.label}
+              </ElButton>
+            );
           } else {
             return (
               <div
                 class="render-icon"
                 onClick={() => (item.action ? item.action() : props.buttonClick(item))}
               >
-                <icon-font type={item.icon} />
+                <svg class="icon" aria-hidden="true">
+                  <use xlinkHref={`#${item.icon}`}></use>
+                </svg>
+                {/* <icon-font type={item.icon} /> */}
               </div>
             );
           }

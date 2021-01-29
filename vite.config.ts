@@ -19,7 +19,15 @@ function rawTransform(
 }
 export default {
   optimizeDeps: {
-    include: ['bpmn-js/lib/Modeler', '@ant-design/icons-vue'],
+    //声明深度路径模块
+    include: [
+      'bpmn-js/lib/Modeler',
+      '@ant-design/icons-vue',
+      'highlight.js',
+      'codemirror',
+      'codemirror/mode/xml/xml.js',
+      'codemirror/addon/hint/xml-hint.js',
+    ],
   },
   plugins: [vue(), rawTransform([/\.bpmn$/]), vueJsx()],
 };

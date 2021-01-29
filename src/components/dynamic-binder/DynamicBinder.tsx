@@ -52,7 +52,6 @@ export default defineComponent({
 
           //组件不能是代理对象，这里直接用目标对象
           const Component = toRaw(define.component);
-          console.warn(Component);
 
           watch(
             () => bindData.value,
@@ -63,13 +62,13 @@ export default defineComponent({
             },
           );
           if (define && predicate(define)) {
-            Component.slots = toRaw(bindData.slots);
             return (
               <Component
                 {...bindData}
                 v-model={bindData.value}
+                v-slots={bindData.vSlots}
                 class={`${Component.name}-${key} dynamic-binder-item`}
-              ></Component>
+              />
             );
           }
           return null;

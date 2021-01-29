@@ -1,6 +1,13 @@
 .bpmn-panel {
   position: absolute;
-  width: 30%;
+  width: 450pxs;
   top: 0;
   right: 0;
+  background-color: #fff !important;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.dynamic-binder > * {
+  padding: 10px 0;
 }

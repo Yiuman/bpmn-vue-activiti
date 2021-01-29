@@ -8,6 +8,6 @@ export interface Button {
 
 export interface ButtonRenderProps {
   buttons: Array<Button>;
-  buttonClick: (btn: Button) => void;
+  buttonClick?: (btn: Button) => void;
 }
 export default ButtonRender;

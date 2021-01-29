@@ -3,23 +3,81 @@ import Modeler from 'bpmn-js/lib/Modeler';
 const bpmnSymbol = Symbol();
 
 interface BpmnState {
+  /**
+   * 当前活动的节点
+   */
   activeElement: any;
+  /**
+   * 当前活动节点的业务对象
+   */
   businessObject: any;
+  /**
+   * 是否活动
+   */
   isActive: boolean;
 }
 
+/**
+ * 流程管理的上下文
+ */
 interface BpmnContext {
+  /**
+   * 流程设计器
+   */
   modeler: any;
+  /**
+   * 状态管理
+   */
   state: UnwrapRef<BpmnState>;
+  /**
+   * 获取当前的状态
+   */
   getState(): UnwrapRef<BpmnState>;
+  /**
+   * 初始化流程设计器
+   * @param options 流程设计器参数
+   */
   initModeler(options: unknown): void;
-  importXML(xml: string): Promise<Array<string> | any>;
+  /**
+   *获取设计器
+   */
   getModeler(): typeof Modeler;
+  /**
+   * 导入xml
+   * @param xml xml字符串
+   */
+  importXML(xml: string): Promise<Array<string> | any>;
+  /**
+   * 获取流程xml
+   */
+  getXML(): Promise<{ xml: string }>;
+  /**
+   * 获取流程的SVG图
+   */
+  getSVG(): Promise<{ svg: string }>;
+
+  /**
+   * 获取当前节点的Shape对象，此对象用于操作节点与业务流程对象等
+   */
   getShape(): any;
+  /**
+   * 获取当前的流程的业务对象
+   */
   getBusinessObject(): any;
+  /**
+   * 获取当前的活动节点
+   */
   getActiveElement(): any;
+  /**
+   * 获取当前节点的modeling
+   */
   getModeling(): any;
-  addEvent(name: string, func: (e: any) => void): void;
+  /**
+   * 添加设计器事件监听
+   * @param name 事件名称
+   * @param func 触发事件的回调
+   */
+  addEventLisener(name: string, func: (e: any) => void): void;
 }
 
 export const useBpmnProvider = (): void => {
@@ -45,10 +103,10 @@ export const useBpmnProvider = (): void => {
         state.isActive = true;
       }
 
-      this.addEvent('element.click', function (elementAction) {
+      this.addEventLisener('element.click', function (elementAction) {
         refreshSate(elementAction);
       });
-      this.addEvent('element.changed', function (elementAction: any) {
+      this.addEventLisener('element.changed', function (elementAction: any) {
         state.businessObject = null;
         state.isActive = false;
         nextTick(() => {
@@ -67,6 +125,30 @@ export const useBpmnProvider = (): void => {
     importXML(string) {
       return this.modeler.importXML(string);
     },
+    getXML() {
+      return new Promise((resolve, reject) => {
+        this.getModeler()
+          .saveXML({ format: true })
+          .then((response: { xml: string }) => {
+            resolve(response);
+          })
+          .catch((err: unknown) => {
+            reject(err);
+          });
+      });
+    },
+    getSVG() {
+      return new Promise((resolve, reject) => {
+        this.getModeler()
+          .saveSVG()
+          .then((response: { svg: string }) => {
+            resolve(response);
+          })
+          .catch((err: unknown) => {
+            reject(err);
+          });
+      });
+    },
     getModeling() {
       return this.getModeler().get('modeling');
     },
@@ -76,7 +158,7 @@ export const useBpmnProvider = (): void => {
     getBusinessObject() {
       return state.businessObject;
     },
-    addEvent(string, func) {
+    addEventLisener(string, func) {
       this.getModeler()
         .get('eventBus')
         .on(string, function (e: any) {

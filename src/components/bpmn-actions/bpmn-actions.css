@@ -13,12 +13,16 @@
   display: inline;
 }
 
-.render-icon .anticon {
+.render-icon .icon {
   margin: 0 10px;
   font-size: 30px;
 }
 
-.render-icon .anticon:hover {
+.render-icon .icon:hover {
   position: relative;
   bottom: 6px;
+}
+
+.CodeMirror {
+  height: 100%;
 }
