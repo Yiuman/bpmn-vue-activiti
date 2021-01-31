@@ -1,6 +1,6 @@
 import { defineComponent, PropType } from 'vue';
 import { Button, ButtonRenderProps } from './index';
-import { ElButton } from 'element-plus';
+import { ElButton, ElTooltip } from 'element-plus';
 // import { createFromIconfontCN } from '@ant-design/icons-vue';
 // const IconFont = createFromIconfontCN({
 //   scriptUrl: '/public/iconfont.js',
@@ -16,10 +16,17 @@ export default defineComponent({
     },
     buttonClick: {
       type: Function as PropType<(btn: Button) => void>,
-      default: () => null,
+      default: () => (item: any) => {
+        console.log(item);
+      },
     },
   },
   setup(props: ButtonRenderProps) {
+    const globalClick = (item: any) => {
+      if (props.buttonClick) {
+        props.buttonClick(item);
+      }
+    };
     return () => (
       <div class="button-render">
         {props.buttons.map((item) => {
@@ -29,23 +36,33 @@ export default defineComponent({
                 round
                 type="info"
                 {...{
-                  onClick: (): void => (item.action ? item.action() : props.buttonClick(item)),
+                  onClick: (): void => (item.action ? item.action() : globalClick(item)),
                 }}
               >
                 {item.label}
               </ElButton>
             );
           } else {
+            const tooltipProps = {
+              effect: 'light',
+              content: item.label,
+              placement: 'top',
+              offset: 10,
+              'open-delay': 300,
+            };
             return (
-              <div
-                class="render-icon"
-                onClick={() => (item.action ? item.action() : props.buttonClick(item))}
-              >
-                <svg class="icon" aria-hidden="true">
-                  <use xlinkHref={`#${item.icon}`}></use>
-                </svg>
-                {/* <icon-font type={item.icon} /> */}
-              </div>
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              //@ts-ignore
+              <ElTooltip class="render-icon-tooltip" {...tooltipProps} placement="top">
+                <div
+                  class="render-icon"
+                  onClick={() => (item.action ? item.action() : globalClick(item))}
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use xlinkHref={`#${item.icon}`}></use>
+                  </svg>
+                </div>
+              </ElTooltip>
             );
           }
         })}
