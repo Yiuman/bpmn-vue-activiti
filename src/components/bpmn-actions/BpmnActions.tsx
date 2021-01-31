@@ -70,6 +70,14 @@ export default defineComponent({
           },
         },
         {
+          label: '还原并居中',
+          icon: 'icon-quxiaoquanping',
+          action: () => {
+            zoom.value = 1;
+            bpmnContext.getModeler().get('canvas').zoom('fit-viewport', 'auto');
+          },
+        },
+        {
           label: '预览',
           icon: 'icon-xianshi',
           action: () => {

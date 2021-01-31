@@ -19,7 +19,7 @@ export default defineComponent({
 
     return () => (
       <div class="bpmn-panel">
-        {contextState.isActive ? (
+        {contextState.isActive && contextState.businessObject != null ? (
           <DynamicBinder
             {...{ onFieldChange: onFieldChange }}
             fieldDefine={StartEventBindDefine}

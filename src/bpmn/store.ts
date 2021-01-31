@@ -2,7 +2,7 @@ import { reactive, UnwrapRef, provide, inject, nextTick } from 'vue';
 import Modeler from 'bpmn-js/lib/Modeler';
 const bpmnSymbol = Symbol();
 
-interface BpmnState {
+export interface BpmnState {
   /**
    * 当前活动的节点
    */
@@ -20,7 +20,7 @@ interface BpmnState {
 /**
  * 流程管理的上下文
  */
-interface BpmnContext {
+export interface BpmnContext {
   /**
    * 流程设计器
    */
@@ -107,12 +107,12 @@ export const useBpmnProvider = (): void => {
         refreshSate(elementAction);
       });
       this.addEventLisener('element.changed', function (elementAction: any) {
-        state.businessObject = null;
-        state.isActive = false;
+        //这里是处理修改shape中的label后导致的不及时更新问题
+        //现将业务对象至为空对象，视图更新后，再重新进行渲染
+        state.businessObject = {};
         nextTick(() => {
           refreshSate(elementAction);
         });
-        // state.businessObject = labelCreated.context.labelTarget.businessObject;
       });
     },
     getModeler() {

@@ -1,6 +1,6 @@
 .bpmn-actions {
   position: absolute;
-  bottom: 20px;
+  bottom: 5px;
   width: 100%;
 }
 
@@ -10,12 +10,13 @@
 
 .render-icon {
   cursor: pointer;
-  display: inline;
+  display: inline-block;
 }
 
 .render-icon .icon {
   margin: 0 10px;
   font-size: 30px;
+  padding: 3px;
 }
 
 .render-icon .icon:hover {
@@ -23,6 +24,20 @@
   bottom: 6px;
 }
 
-.CodeMirror {
+.render-icon-tooltip {
+  margin-bottom: 5px;
+}
+
+.el-drawer__body {
   height: 100%;
+}
+
+.CodeMirror {
+  font-family: monospace;
+  height: 100%;
+  font-family: Monaco, Menlo, Consolas, 'COURIER NEW', monospace;
+  font-size: 12px;
+}
+.CodeMirror-scroll {
+  overflow: auto;
 }

@@ -22,3 +22,19 @@ body {
   fill: currentColor;
   overflow: hidden;
 }
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: #f1f1f1;
+  border-radius: 0.6px;
+  height: 4px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  width: 4px;
+  height: 60px;
+  background-color: #475156;
+  border-radius: 2px;
+}
