@@ -1,6 +1,6 @@
 {
   "include": [
-    "./**/*.ts",
+    "./**/*.ts", "src/bpmn/config/common.tsx",
   ],
   "compilerOptions": {
     "jsx": "react",

@@ -1,4 +1,5 @@
 import { reactive, UnwrapRef, provide, inject, nextTick } from 'vue';
+import BpmnGroupPropertisConfig, { GroupProperties } from '../bpmn/config';
 import Modeler from 'bpmn-js/lib/Modeler';
 const bpmnSymbol = Symbol();
 
@@ -15,6 +16,11 @@ export interface BpmnState {
    * 是否活动
    */
   isActive: boolean;
+
+  /**
+   * 当前活动节点的绑定字段配置
+   */
+  activeBindDefine: Array<GroupProperties>;
 }
 
 /**
@@ -84,6 +90,7 @@ export const useBpmnProvider = (): void => {
   const state = reactive<BpmnState>({
     activeElement: null,
     businessObject: null,
+    activeBindDefine: Object.assign({}),
     isActive: false,
   });
   const context: BpmnContext = {
@@ -101,6 +108,7 @@ export const useBpmnProvider = (): void => {
         const shape = elementRegistry.get(elementAction.element.id);
         state.businessObject = shape.businessObject;
         state.isActive = true;
+        state.activeBindDefine = BpmnGroupPropertisConfig[elementAction.element.type];
       }
 
       this.addEventLisener('element.click', function (elementAction) {

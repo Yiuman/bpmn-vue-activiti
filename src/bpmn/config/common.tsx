@@ -1,22 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ElInput } from 'element-plus';
 import { FieldDefine } from '../../components/dynamic-binder';
-
-/**
- * 属性Map接口
- */
-export interface PropertiesMap<T> {
-  [key: string]: T;
-}
-
-/**
- * 组属性（属性分组）
- */
-export interface GroupProperties {
-  name?: string;
-  icno?: string;
-  properties: PropertiesMap<FieldDefine>;
-}
+import { PropertiesMap, GroupProperties } from './index';
 
 /**
  * 所有通用节点的属性（每个节点都有的）
@@ -26,7 +11,7 @@ const commonProperties: PropertiesMap<FieldDefine> = {
     component: ElInput,
     placeholder: '节点ID',
     vSlots: {
-      prepend: () => '<div>节点ID</div>',
+      prepend: () => <div>节点ID</div>,
     },
   },
   name: {
@@ -34,7 +19,7 @@ const commonProperties: PropertiesMap<FieldDefine> = {
     // prefix: '节点名称',
     placeholder: '节点名称',
     vSlots: {
-      prepend: () => '<div>节点名称</div>',
+      prepend: () => <div>节点名称</div>,
     },
   },
 };
@@ -42,36 +27,39 @@ const commonProperties: PropertiesMap<FieldDefine> = {
 /**
  * （基础信息）每个节点都有的
  */
-const CommonGroupProperties: GroupProperties = {
+export const CommonGroupProperties: GroupProperties = {
   name: '基础信息',
+  icon: 'el-icon-info',
   properties: { ...commonProperties },
 };
 
 /**
  * 用户任务属性配置
  */
-const BpmnUserTaskGroupPropertis: GroupProperties = {
+export const BpmnUserTaskGroupPropertis: GroupProperties = {
   name: '人员设置',
   properties: {
     assignee: {
       component: ElInput,
       placeholder: '处理人',
       vSlots: {
-        prepend: () => '<div>处理人</div>',
+        prepend: () => <div>处理人</div>,
       },
     },
     candidateUsers: {
       component: ElInput,
       placeholder: '候选人',
       vSlots: {
-        prepend: () => '<div>候选人</div>',
+        prepend: () => <div>候选人</div>,
       },
     },
   },
 };
 
-export const BpmnGroupPropertisConfig: PropertiesMap<Array<GroupProperties>> = {
-  'bpmn:Process': [{ ...CommonGroupProperties }],
-  'bpmn:StartEvent': [{ ...CommonGroupProperties }],
-  'bpmn:UserTask': [{ ...CommonGroupProperties }, BpmnUserTaskGroupPropertis],
-};
+// const BpmnGroupPropertisConfig: PropertiesMap<Array<GroupProperties>> = {
+//   'bpmn:Process': [{ ...CommonGroupProperties }],
+//   'bpmn:StartEvent': [{ ...CommonGroupProperties }],
+//   'bpmn:UserTask': [{ ...CommonGroupProperties }, BpmnUserTaskGroupPropertis],
+// };
+
+// export default BpmnGroupPropertisConfig;

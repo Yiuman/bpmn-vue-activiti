@@ -1,13 +1,26 @@
 .bpmn-panel {
   position: absolute;
-  width: 450pxs;
+  width: 450px;
   top: 0;
   right: 0;
   background-color: #fff !important;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-  padding: 10px;
+  /* margin: 10px 0; */
+}
+
+.bpmn-panel .dynamic-binder{
+  padding: 0 15px;
+}
+
+.group-title-block{
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.group-title-block i{
+  margin-right: 10px;
 }
 
 .dynamic-binder > * {
-  padding: 10px 0;
+  padding-top: 15px;
 }
