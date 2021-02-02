@@ -11,10 +11,15 @@ export default defineComponent({
   setup() {
     const bpmnContext = useBpmnInject();
     const contextState = bpmnContext.getState();
+
     //动态数据绑定器的字段变化后更新到xml，视图刷新
     function onFieldChange(key: string, value: unknown): void {
       const shape = bpmnContext.getShape();
-      bpmnContext.getModeling().updateProperties(shape, { [key]: value });
+      if (key === 'documentation.text') {
+        bpmnContext.createElement('bpmn:Documentation', 'documentation', { text: value });
+      } else {
+        bpmnContext.getModeling().updateProperties(shape, { [key]: value });
+      }
     }
 
     const panelState = reactive({
@@ -22,15 +27,16 @@ export default defineComponent({
       elCollapses: Object.assign([]),
     });
 
+    //打开所有抽屉
     watch(
       () => contextState.activeBindDefine,
       () => {
-        console.warn('123123');
         if (contextState.activeBindDefine) {
           panelState.elCollapses = contextState.activeBindDefine.map((groupItem) => groupItem.name);
         }
       },
     );
+
     /**
      * 获取字段配置组的插槽
      * @param groupItem 组对象项
@@ -52,6 +58,7 @@ export default defineComponent({
         ),
       };
     }
+
     return () => (
       <>
         {contextState.isActive && contextState.businessObject && contextState.activeBindDefine ? (

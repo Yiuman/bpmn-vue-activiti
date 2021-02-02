@@ -36,8 +36,9 @@ export const CommonGroupProperties: GroupProperties = {
 /**
  * 用户任务属性配置
  */
-export const BpmnUserTaskGroupPropertis: GroupProperties = {
+export const BpmnUserGroupProperties: GroupProperties = {
   name: '人员设置',
+  icon: 'el-icon-user-solid',
   properties: {
     assignee: {
       component: ElInput,
@@ -51,6 +52,20 @@ export const BpmnUserTaskGroupPropertis: GroupProperties = {
       placeholder: '候选人',
       vSlots: {
         prepend: () => <div>候选人</div>,
+      },
+    },
+  },
+};
+
+export const DocumentGroupProperties: GroupProperties = {
+  name: '元素文档',
+  icon: 'el-icon-document',
+  properties: {
+    'documentation.text': {
+      component: ElInput,
+      type: 'textarea',
+      getValue: (obj) => {
+        return obj['documentation']?.[0]?.['text'];
       },
     },
   },

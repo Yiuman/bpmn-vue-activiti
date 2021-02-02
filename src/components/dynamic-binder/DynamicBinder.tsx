@@ -81,16 +81,16 @@ export default defineComponent({
 /**
  * 将对象结构扁平化
  * 例如：
- * 
-  const obj = {
+ *
+ const obj = {
   a: {
     b: {
       c: 'xxx',
     },
   },
 };
-出来的对象会变成，{a.b.c:'xxx'}
- * 
+ 出来的对象会变成，{a.b.c:'xxx'}
+ *
  * @param source 源对象
  * @param target 目标对象
  * @param prefix 前缀
@@ -138,12 +138,14 @@ function predicate(obj: FieldDefine): boolean {
  * @param bindKey 绑定数据的Key
  * @param bindDefine 绑定定义
  */
-function defaultTransformer(sourceModel: any, bindKey: string, bindDefine: any): any {
+function defaultTransformer(sourceModel: any, bindKey: string, bindDefine: FieldDefine): any {
   return reactive({
     bindKey,
     ...bindDefine,
     sourceModel,
-    value: resolve(bindKey, sourceModel) || '',
+    value: bindDefine.getValue
+      ? bindDefine.getValue(sourceModel)
+      : resolve(bindKey, sourceModel) || '',
   });
 }
 

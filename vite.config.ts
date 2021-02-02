@@ -27,6 +27,7 @@ export default {
       'codemirror',
       'codemirror/mode/xml/xml.js',
       'codemirror/addon/hint/xml-hint.js',
+      'bpmn-js/lib/features/label-editing/LabelUtil.js',
     ],
   },
   plugins: [vue(), rawTransform([/\.bpmn$/]), vueJsx()],

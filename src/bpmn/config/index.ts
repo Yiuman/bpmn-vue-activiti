@@ -1,4 +1,5 @@
 import { FieldDefine } from '../../components/dynamic-binder';
+
 /**
  * 属性Map接口
  */
@@ -18,17 +19,17 @@ export interface GroupProperties {
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 const modules = import.meta.glob('./modules/*.tsx');
-const getBpmnGroupPropertisConfig = () => {
-  const BpmnGroupPropertisConfig: PropertiesMap<Array<GroupProperties>> = {};
+const getBpmnGroupPropertiesConfig = () => {
+  const BpmnGroupPropertiesConfig: PropertiesMap<Array<GroupProperties>> = {};
   for (const path in modules) {
     modules[path]().then((mod: any) => {
       const moduleDefuatlExport = mod.default;
       for (const moduleKey in moduleDefuatlExport) {
-        BpmnGroupPropertisConfig[moduleKey] = moduleDefuatlExport[moduleKey];
+        BpmnGroupPropertiesConfig[moduleKey] = moduleDefuatlExport[moduleKey];
       }
     });
   }
-  return BpmnGroupPropertisConfig;
+  return BpmnGroupPropertiesConfig;
 };
 
-export default getBpmnGroupPropertisConfig();
+export default getBpmnGroupPropertiesConfig();
