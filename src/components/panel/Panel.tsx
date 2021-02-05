@@ -5,6 +5,7 @@ import { ElCollapse, ElCollapseItem } from 'element-plus';
 import { GroupProperties } from '../../bpmn/config';
 
 import './panel.css';
+import { set } from '../../utils/script-helper';
 
 export default defineComponent({
   name: 'Panel',
@@ -15,8 +16,27 @@ export default defineComponent({
     //动态数据绑定器的字段变化后更新到xml，视图刷新
     function onFieldChange(key: string, value: unknown): void {
       const shape = bpmnContext.getShape();
-      if (key === 'documentation.text') {
-        bpmnContext.createElement('bpmn:Documentation', 'documentation', { text: value });
+      console.warn('key', key, value);
+      if (~key.indexOf('.')) {
+        if (key === 'documentation.text') {
+          bpmnContext.createElement('bpmn:Documentation', 'documentation', { text: value });
+        } else {
+          const businessObject = bpmnContext.getBusinessObject();
+          set(businessObject, key, value);
+          console.warn('businessObjectbusinessObject', businessObject);
+          // const firstKey = key.split('.')[0];
+          // const secondKey = key.split('.')[1];
+          // const businessObject = toRaw(bpmnContext.getBusinessObject());
+          // const businessObjectElement = businessObject[firstKey];
+          // console.warn('businessObjectElement', businessObjectElement, firstKey, secondKey);
+          // if (businessObjectElement.id) {
+          //   const businessObjectElementShape = bpmnContext.getShapeById(businessObjectElement.id);
+          //   console.warn('businessObjectElementShape', businessObjectElementShape);
+          //   bpmnContext.getModeling().updateProperties(businessObjectElementShape, {
+          //     [secondKey]: value,
+          //   });
+          // }
+        }
       } else {
         bpmnContext.getModeling().updateProperties(shape, { [key]: value });
       }
@@ -45,7 +65,7 @@ export default defineComponent({
       return {
         title: () => (
           <div class="group-title-block">
-            {groupItem.icon ? <i class={groupItem.icon}></i> : ''}
+            {groupItem.icon ? <i class={groupItem.icon} /> : ''}
             {groupItem.name}
           </div>
         ),
@@ -63,14 +83,10 @@ export default defineComponent({
       <>
         {contextState.isActive && contextState.businessObject && contextState.activeBindDefine ? (
           <div class="bpmn-panel">
+            <div class="title">{bpmnContext.getActiveElementName()}</div>
             <ElCollapse v-model={panelState.elCollapses}>
               {contextState.activeBindDefine.map((groupItem) => {
-                return (
-                  <ElCollapseItem
-                    name={groupItem.name}
-                    v-slots={getSlotObject(groupItem)}
-                  ></ElCollapseItem>
-                );
+                return <ElCollapseItem name={groupItem.name} v-slots={getSlotObject(groupItem)} />;
               })}
             </ElCollapse>
           </div>

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ElInput } from 'element-plus';
 import { FieldDefine } from '../../components/dynamic-binder';
 import { PropertiesMap, GroupProperties } from './index';
@@ -64,6 +63,7 @@ export const DocumentGroupProperties: GroupProperties = {
     'documentation.text': {
       component: ElInput,
       type: 'textarea',
+      // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
       getValue: (obj) => {
         return obj['documentation']?.[0]?.['text'];
       },
@@ -71,10 +71,20 @@ export const DocumentGroupProperties: GroupProperties = {
   },
 };
 
-// const BpmnGroupPropertisConfig: PropertiesMap<Array<GroupProperties>> = {
-//   'bpmn:Process': [{ ...CommonGroupProperties }],
-//   'bpmn:StartEvent': [{ ...CommonGroupProperties }],
-//   'bpmn:UserTask': [{ ...CommonGroupProperties }, BpmnUserTaskGroupPropertis],
-// };
-
-// export default BpmnGroupPropertisConfig;
+const formProperties: PropertiesMap<FieldDefine> = {
+  formKey: {
+    component: ElInput,
+    placeholder: '表单key',
+    vSlots: {
+      prepend: () => <div>表单key</div>,
+    },
+  },
+};
+/**
+ * （基础信息）表单
+ */
+export const FormGroupProperties: GroupProperties = {
+  name: '表单信息',
+  icon: 'el-icon-edit',
+  properties: { ...formProperties },
+};

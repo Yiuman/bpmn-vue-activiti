@@ -1,6 +1,6 @@
-import { CommonGroupProperties, DocumentGroupProperties } from '../common';
+import { CommonGroupProperties } from '../common';
 
 export default {
   //顺序流
-  'bpmn:SequenceFlow': [{ ...CommonGroupProperties }, { ...DocumentGroupProperties }],
+  'bpmn:SequenceFlow': [{ ...CommonGroupProperties }],
 };

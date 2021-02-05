@@ -34,7 +34,7 @@ export default defineComponent({
         .importXML(createDefaultBpmnXml(defaultProcessIdAndName, defaultProcessIdAndName))
         .then((result: Array<string>) => {
           if (result.length) {
-            console.warn('importSuccess warrings', result);
+            console.warn('importSuccess warnings', result);
           }
         })
         .catch((err: any) => {
@@ -42,6 +42,6 @@ export default defineComponent({
         });
     });
 
-    return () => <div id="modeler-container"></div>;
+    return () => <div id="modeler-container" />;
   },
 });

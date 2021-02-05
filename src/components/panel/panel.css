@@ -1,26 +1,34 @@
 .bpmn-panel {
-  position: absolute;
-  width: 450px;
-  top: 0;
-  right: 0;
-  background-color: #fff !important;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-  /* margin: 10px 0; */
+    position: absolute;
+    width: 450px;
+    top: 0;
+    right: 0;
+    background-color: #fff !important;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    /* margin: 10px 0; */
 }
 
-.bpmn-panel .dynamic-binder{
-  padding: 0 15px;
+.bpmn-panel .dynamic-binder {
+    padding: 0 15px;
 }
 
-.group-title-block{
-  font-size: 16px;
-  margin-left: 10px;
+.bpmn-panel .title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    color: #303133;
 }
 
-.group-title-block i{
-  margin-right: 10px;
+.group-title-block {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.group-title-block i {
+    margin-right: 4px;
 }
 
 .dynamic-binder > * {
-  padding-top: 15px;
+    padding-top: 15px;
 }
+

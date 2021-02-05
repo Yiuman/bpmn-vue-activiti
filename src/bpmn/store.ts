@@ -1,5 +1,6 @@
 import { reactive, UnwrapRef, provide, inject, nextTick } from 'vue';
-import BpmnGroupPropertiesConfig, { GroupProperties } from '../bpmn/config';
+import BpmnGroupPropertiesConfig, { GroupProperties } from './config';
+import { resolveTypeName } from './config/TypeNameMapping';
 import Modeler from 'bpmn-js/lib/Modeler';
 
 const bpmnSymbol = Symbol();
@@ -74,6 +75,8 @@ export interface BpmnContext {
    */
   getShape(): any;
 
+  getShapeById(id: string): any;
+
   /**
    * 获取当前的流程的业务对象
    */
@@ -83,6 +86,11 @@ export interface BpmnContext {
    * 获取当前的活动节点
    */
   getActiveElement(): any;
+
+  /**
+   * 获取当前节点的名称
+   */
+  getActiveElementName(): string;
 
   /**
    * 获取当前节点的modeling
@@ -139,6 +147,7 @@ export const useBpmnProvider = (): void => {
         bpmnState.activeBindDefine = shape
           ? BpmnGroupPropertiesConfig[elementAction.element.type]
           : null;
+        console.warn('currentShape', shape);
       }
 
       this.addEventListener('element.click', function (elementAction) {
@@ -157,8 +166,11 @@ export const useBpmnProvider = (): void => {
       return this.modeler;
     },
     getShape() {
+      return this.getShapeById(this.getState().activeElement.element.id);
+    },
+    getShapeById(id) {
       const elementRegistry = this.getModeler().get('elementRegistry');
-      return elementRegistry.get(this.getState().activeElement.element.id);
+      return elementRegistry.get(id);
     },
     getBpmnFactory() {
       return this.modeler.get('bpmnFactory');
@@ -200,6 +212,10 @@ export const useBpmnProvider = (): void => {
     },
     getActiveElement() {
       return this.getState().activeElement;
+    },
+    getActiveElementName() {
+      const businessObject = this.getBusinessObject();
+      return businessObject ? resolveTypeName(businessObject) : '';
     },
     getBusinessObject() {
       return this.getState().businessObject;

@@ -2,6 +2,7 @@ import { CommonGroupProperties, DocumentGroupProperties } from '../common';
 
 const idAndName = { ...CommonGroupProperties };
 const documentation = { ...DocumentGroupProperties };
+
 export default {
   //互斥网关
   'bpmn:ExclusiveGateway': [idAndName, documentation],

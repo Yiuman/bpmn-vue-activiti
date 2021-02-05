@@ -1,27 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="" />
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bpmn/config/TypeNameMapping.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Other.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Gateway.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Gateway.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Process.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Process.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modeler/Modeler.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modeler/Modeler.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/panel/panel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/panel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/script-helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/script-helper.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="ProjectId" id="1nQ0xj4XoIWEBlxhJ1MDIuUn7Cl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/bpmn/config/modules" />
+      <recent name="$PROJECT_DIR$/src/bpmn/config" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -35,6 +107,7 @@
       </list>
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -46,10 +119,37 @@
       <option name="presentableId" value="Default" />
       <updated>1611307256120</updated>
       <workItem from="1611307259233" duration="168000" />
+      <workItem from="1612250440890" duration="934000" />
+      <workItem from="1612252387837" duration="1231000" />
+      <workItem from="1612254554200" duration="694000" />
+      <workItem from="1612255286490" duration="178000" />
+      <workItem from="1612255477711" duration="6634000" />
+      <workItem from="1612262238352" duration="225000" />
+      <workItem from="1612315570569" duration="662000" />
+      <workItem from="1612344021633" duration="920000" />
+      <workItem from="1612490092409" duration="1024000" />
+      <workItem from="1612491304745" duration="898000" />
+      <workItem from="1612511319567" duration="10268000" />
     </task>
+    <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
+      <created>1612262300163</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1612262300163</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="添加节点可配置的属性、完善动态数据绑定组件获取value的方式" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加节点可配置的属性、完善动态数据绑定组件获取value的方式" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
