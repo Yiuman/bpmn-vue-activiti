@@ -1,5 +1,5 @@
 import { defineComponent, PropType, reactive, toRaw, watchEffect, watch } from 'vue';
-import ScriptHelper from '../../utils/script-helper';
+import ScriptHelper, { resolve } from '../../utils/script-helper';
 import { FieldDefine } from './index';
 
 /**
@@ -32,11 +32,11 @@ export default defineComponent({
   emits: ['update:modelValue', 'fieldChange'],
   setup(props, context) {
     const state = reactive({
-      flatfieldDefine: flatObject(props.fieldDefine || {}, {}),
+      flatFieldDefine: flatObject(props.fieldDefine || {}, {}),
       handingModel: Object.assign({}),
     });
     watchEffect(() => (state.handingModel = JSON.parse(JSON.stringify(props.modelValue))));
-    watchEffect(() => (state.flatfieldDefine = flatObject(props.fieldDefine, {})));
+    watchEffect(() => (state.flatFieldDefine = flatObject(props.fieldDefine, {})));
 
     const bindTransformer = props.bindTransformer || defaultTransformer;
     //绑定转换函数赋值，然props有则用props的否则用默认的
@@ -46,8 +46,8 @@ export default defineComponent({
 
     return () => (
       <div class="dynamic-binder">
-        {Object.keys(state.flatfieldDefine).map((key) => {
-          const define = state.flatfieldDefine[key];
+        {Object.keys(state.flatFieldDefine).map((key) => {
+          const define = state.flatFieldDefine[key];
           const bindData = dataBindTransformer(key, define);
 
           //组件不能是代理对象，这里直接用目标对象
@@ -59,6 +59,9 @@ export default defineComponent({
               state.handingModel[bindData.bindKey] = bindData.value;
               context.emit('update:modelValue', state.handingModel);
               context.emit('fieldChange', bindData.bindKey, bindData.value);
+              if (bindData.setValue) {
+                bindData.setValue(props.modelValue, bindData.bindKey, bindData.value);
+              }
             },
           );
           if (define && predicate(define)) {
@@ -83,12 +86,12 @@ export default defineComponent({
  * 例如：
  *
  const obj = {
-  a: {
-    b: {
-      c: 'xxx',
-    },
-  },
-};
+                    a: {
+                    b: {
+                    c: 'xxx',
+                },
+                },
+                };
  出来的对象会变成，{a.b.c:'xxx'}
  *
  * @param source 源对象
@@ -148,15 +151,3 @@ function defaultTransformer(sourceModel: any, bindKey: string, bindDefine: Field
       : resolve(bindKey, sourceModel) || '',
   });
 }
-
-/**
- * 根据路径获取目标对象的值
- * 如:{a:{b:{c:'xxxx'}}} 路径为:a.b.c ,则获取的则为xxxx
- * @param path 对象深度属性路径
- * @param obj 取值的对象
- */
-const resolve = (path: string, obj: any) => {
-  return path.split('.').reduce(function (prev, curr) {
-    return prev ? prev[curr] : null;
-  }, obj || self);
-};

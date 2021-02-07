@@ -1,6 +1,7 @@
 import { ElInput } from 'element-plus';
 import { FieldDefine } from '../../components/dynamic-binder';
 import { PropertiesMap, GroupProperties } from './index';
+import SubList from '../../components/sublist/SubList';
 
 /**
  * 所有通用节点的属性（每个节点都有的）
@@ -10,7 +11,7 @@ const commonProperties: PropertiesMap<FieldDefine> = {
     component: ElInput,
     placeholder: '节点ID',
     vSlots: {
-      prepend: () => <div>节点ID</div>,
+      prepend: (): JSX.Element => <div>节点ID</div>,
     },
   },
   name: {
@@ -18,7 +19,7 @@ const commonProperties: PropertiesMap<FieldDefine> = {
     // prefix: '节点名称',
     placeholder: '节点名称',
     vSlots: {
-      prepend: () => <div>节点名称</div>,
+      prepend: (): JSX.Element => <div>节点名称</div>,
     },
   },
 };
@@ -43,18 +44,22 @@ export const BpmnUserGroupProperties: GroupProperties = {
       component: ElInput,
       placeholder: '处理人',
       vSlots: {
-        prepend: () => <div>处理人</div>,
+        prepend: (): JSX.Element => <div>处理人</div>,
       },
     },
     candidateUsers: {
       component: ElInput,
       placeholder: '候选人',
       vSlots: {
-        prepend: () => <div>候选人</div>,
+        prepend: (): JSX.Element => <div>候选人</div>,
       },
     },
   },
 };
+
+interface Documentation {
+  text: string;
+}
 
 export const DocumentGroupProperties: GroupProperties = {
   name: '元素文档',
@@ -63,28 +68,65 @@ export const DocumentGroupProperties: GroupProperties = {
     'documentation.text': {
       component: ElInput,
       type: 'textarea',
-      // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-      getValue: (obj) => {
+      getValue: (obj: { documentation: Array<Documentation> }): string => {
         return obj['documentation']?.[0]?.['text'];
       },
     },
   },
 };
 
-const formProperties: PropertiesMap<FieldDefine> = {
-  formKey: {
-    component: ElInput,
-    placeholder: '表单key',
-    vSlots: {
-      prepend: () => <div>表单key</div>,
-    },
-  },
-};
 /**
  * （基础信息）表单
  */
 export const FormGroupProperties: GroupProperties = {
   name: '表单信息',
   icon: 'el-icon-edit',
-  properties: { ...formProperties },
+  properties: {
+    formKey: {
+      component: ElInput,
+      placeholder: '表单key',
+      vSlots: {
+        prepend: () => <div>表单key</div>,
+      },
+    },
+  },
+};
+
+/**
+ * 扩展属性组配置
+ */
+export const ExtensionGroupProperties: GroupProperties = {
+  name: '扩展属性',
+  icon: 'el-icon-document-add',
+  properties: {
+    'extensionElements.properties': {
+      component: SubList,
+      tableProps: {
+        stripe: true,
+        border: true,
+        size: 'small',
+      },
+      columns: [
+        {
+          type: 'index',
+          label: '序号',
+          align: 'center',
+        },
+        {
+          prop: 'name',
+          label: '属性名',
+          align: 'center',
+        },
+        {
+          prop: 'value',
+          label: '属性值',
+          align: 'center',
+        },
+      ],
+      // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+      getValue: (businessObject: any): Array<any> => {
+        return businessObject?.extensionElements?.values;
+      },
+    },
+  },
 };

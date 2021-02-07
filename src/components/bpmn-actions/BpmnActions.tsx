@@ -111,6 +111,20 @@ export default defineComponent({
               });
           },
         },
+        // {
+        //   label: '撤销',
+        //   icon: 'icon-weibiaoti545',
+        //   action: () => {
+        //     bpmnContext.getModeler().get('commandStack').undo();
+        //   },
+        // },
+        // {
+        //   label: '恢复',
+        //   icon: 'icon-weibiaoti546',
+        //   action: () => {
+        //     bpmnContext.getModeler().get('commandStack').redo();
+        //   },
+        // },
       ],
     };
 
@@ -118,7 +132,7 @@ export default defineComponent({
       <div class="bpmn-actions">
         <ButtonRender {...buttonRenderProps} />
         <el-drawer size="35%" direction="ltr" withHeader={false} v-model={previewActive.value}>
-          <textarea id="xml-highlight-container" v-model={xml.value}></textarea>
+          <textarea id="xml-highlight-container" v-model={xml.value} />
         </el-drawer>
       </div>
     );

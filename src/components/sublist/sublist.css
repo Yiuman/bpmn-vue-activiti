@@ -1,0 +1,37 @@
+.sublist-add {
+    margin: 4px 0;
+    border: 1px solid #ebeef5;
+    text-align: center;
+    cursor: pointer;
+    color: #909399;
+    font-weight: bold;
+}
+
+.sublist-add:hover {
+    border-color: #c6e2ff;
+    background-color: #ecf5ff;
+    color: #409eff;
+}
+
+.sublist-actions span {
+    padding: 0 5px;
+}
+
+.sublist-edit {
+    color: #409eff;
+    cursor: pointer;
+}
+
+.sublist-edit:hover {
+    color: #66b1ff;
+}
+
+.sublist-delete {
+    color: #fa3b3b;
+    cursor: pointer;
+}
+
+.sublist-delete:hover {
+    color: #f78989
+}
+

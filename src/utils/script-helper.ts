@@ -19,7 +19,7 @@ const ScriptHelper = {
  * @param value 值
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const set = (obj: any, path: string, value: unknown) => {
+export const set = (obj: any, path: string, value: unknown): void => {
   let schema = obj;
   const pList = path.split('.');
   const len = pList.length;
@@ -29,6 +29,19 @@ export const set = (obj: any, path: string, value: unknown) => {
   }
 
   schema[pList[len - 1]] = value;
+};
+
+/**
+ * 根据路径获取目标对象的值
+ * 如:{a:{b:{c:'xxxx'}}} 路径为:a.b.c ,则获取的则为xxxx
+ * @param path 对象深度属性路径
+ * @param obj 取值的对象
+ */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const resolve = (path: string, obj: any): unknown => {
+  return path.split('.').reduce(function (prev, curr) {
+    return prev ? prev[curr] : null;
+  }, obj || self);
 };
 
 export default ScriptHelper;
