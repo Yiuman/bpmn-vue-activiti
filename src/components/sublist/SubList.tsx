@@ -126,7 +126,12 @@ export default defineComponent({
      */
     tableProps: {
       type: Object as PropType<TableProps>,
-      default: () => Object.assign({}),
+      default: () => ({
+        stripe: true,
+        border: true,
+        size: 'small',
+        'empty-text': '没有数据',
+      }),
     },
     /**
      * 添加按钮的标题
@@ -177,7 +182,7 @@ export default defineComponent({
     };
     return () => (
       <div class="sublist-div">
-        <ElTable {...tableProps} data={sublistState.data} v-slots={{ empty: () => '没有数据' }}>
+        <ElTable {...tableProps} data={sublistState.data}>
           {props.columns.map((column) => {
             if (sublistState.editing && column.type !== 'index') {
               const editComponentBuilder =

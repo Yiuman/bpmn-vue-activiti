@@ -101,11 +101,6 @@ export const ExtensionGroupProperties: GroupProperties = {
   properties: {
     'extensionElements.properties': {
       component: SubList,
-      tableProps: {
-        stripe: true,
-        border: true,
-        size: 'small',
-      },
       columns: [
         {
           type: 'index',
