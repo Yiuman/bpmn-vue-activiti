@@ -3,7 +3,6 @@ import { ElInput, ElTable, ElTableColumn } from 'element-plus';
 import { TableProps } from 'element-plus/lib/el-table/src/table.type';
 import { TableColumn, SubListState } from './type';
 import './sublist.css';
-import _default from 'ant-design-vue/es/color-picker';
 
 /**
  * 深拷贝
