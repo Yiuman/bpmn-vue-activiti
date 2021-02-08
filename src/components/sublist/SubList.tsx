@@ -1,29 +1,94 @@
 import { defineComponent, PropType, reactive } from 'vue';
-import { ElTable, ElTableColumn } from 'element-plus';
-import { TableColumnCtx, TableProps } from 'element-plus/lib/el-table/src/table.type';
+import { ElInput, ElTable, ElTableColumn } from 'element-plus';
+import { TableProps } from 'element-plus/lib/el-table/src/table.type';
+import { TableColumn, SubListState } from './type';
 import './sublist.css';
+
+/**
+ * 深拷贝
+ * @param prototype 原型
+ */
+const deepCopy = (prototype: any): typeof prototype => {
+  return JSON.parse(JSON.stringify(prototype));
+};
 
 /**
  * 创建执行操作的列（编辑、删除）
  */
-const buildActionColumnProps = (): any => {
+const buildActionColumnProps = (state: SubListState<any>): any => {
+  function actionEdit(scope: any): void {
+    state.editIndex = scope.$index;
+    state.editing = true;
+    state.editItem = deepCopy(scope.row);
+  }
+
+  function actionRemove(index: number): void {
+    state?.data?.splice(index, 1);
+  }
+
+  function actionConfirm() {
+    if (typeof state?.editIndex === 'number') {
+      state.data.splice(state?.editIndex, 1, deepCopy(state.editItem));
+    }
+    state.editIndex = undefined;
+    state.editItem = undefined;
+    state.editing = false;
+  }
+
+  function actionCancel() {
+    if (state.isNew) {
+      state.data.splice(state.data.length - 1, 1);
+    }
+    state.editItem = undefined;
+    state.editing = false;
+    state.editIndex = undefined;
+  }
+
   return {
     align: 'center',
+    label: '操作',
     vSlots: {
-      header: () => '操作',
-      default: () => (
+      default: (scope: any) => (
         <div class="sublist-actions">
-          <span class="sublist-edit">编辑</span>
-          <span>|</span>
-          <span class="sublist-delete">删除</span>
+          {state.editing && scope.$index === state.editIndex ? (
+            <div>
+              <span class="sublist-confirm sublist-btn" onClick={() => actionConfirm()}>
+                确认
+              </span>
+              <span>|</span>
+              <span class="sublist-cancel sublist-btn" onClick={() => actionCancel()}>
+                取消
+              </span>
+            </div>
+          ) : (
+            <div>
+              <span
+                class={`${state.editing ? 'readonly' : ''} sublist-edit sublist-btn`}
+                onClick={() => {
+                  if (!state.editing) {
+                    actionEdit(scope);
+                  }
+                }}
+              >
+                编辑
+              </span>
+              <span class={`${state.editing ? 'readonly' : ''} `}>|</span>
+              <span
+                class={`${state.editing ? 'readonly' : ''} sublist-delete sublist-btn`}
+                onClick={() => {
+                  if (!state.editing) {
+                    actionRemove(scope.$index);
+                  }
+                }}
+              >
+                删除
+              </span>
+            </div>
+          )}
         </div>
       ),
     },
   };
-};
-
-const deepCopy = (prototype: any): any => {
-  return JSON.parse(JSON.stringify(prototype));
 };
 
 export default defineComponent({
@@ -34,7 +99,7 @@ export default defineComponent({
       required: true,
     },
     columns: {
-      type: Array as PropType<Array<TableColumnCtx>>,
+      type: Array as PropType<Array<TableColumn>>,
       required: true,
     },
     model: {
@@ -55,39 +120,69 @@ export default defineComponent({
     },
   },
   emits: ['update:modelValue'],
-  setup(props, context) {
-    const extensionState = reactive({
-      data: JSON.parse(JSON.stringify(props.modelValue)),
+  setup(props) {
+    const sublistState: SubListState<unknown> = reactive({
+      data: props.modelValue ? JSON.parse(JSON.stringify(props.modelValue)) : [],
       editing: false,
-      activeIndex: null,
+      editItem: undefined,
+      editIndex: undefined,
+      isNew: false,
     });
-    // watch(
-    //   () => extensionState.data,
-    //   () => {
-    //     context.emit('update:modelValue', extensionState.data);
-    //   },
-    // );
     const tableProps = JSON.parse(JSON.stringify(props.tableProps));
-    const actionColumnProps = buildActionColumnProps();
-    const vSlot = context.slots;
-    const DefaultSlot = vSlot.default;
 
+    const actionColumnProps = buildActionColumnProps(sublistState);
+
+    /**
+     * 添加数据项并进行编辑
+     */
     const addData = (): void => {
-      extensionState.data.push(deepCopy(props.model));
+      sublistState.data.push(deepCopy(props.model));
+      sublistState.editIndex = sublistState.data.length - 1;
+      sublistState.editing = true;
+      sublistState.editItem = deepCopy(deepCopy(props.model));
+      sublistState.isNew = true;
     };
     return () => (
       <div class="sublist-div">
-        <ElTable {...tableProps} data={extensionState.data}>
+        <ElTable {...tableProps} data={sublistState.data} v-slots={{ empty: () => '没有数据' }}>
           {props.columns.map((column) => {
-            return <ElTableColumn {...column} />;
+            if (sublistState.editing && column.type !== 'index') {
+              const editComponentBuilder =
+                column.editComponent || getDefaultEditComponent(sublistState);
+              const slots = {
+                default: (scope: any) => {
+                  return sublistState.editIndex === scope.$index
+                    ? editComponentBuilder(scope)
+                    : scope.row[scope.column.property];
+                },
+              };
+              return <ElTableColumn v-slots={slots} {...column} />;
+            } else {
+              return <ElTableColumn {...column} />;
+            }
           })}
           <ElTableColumn {...actionColumnProps} v-slots={actionColumnProps.vSlots} />
         </ElTable>
-        {DefaultSlot ? <DefaultSlot /> : ''}
-        <div class="sublist-add" onClick={() => addData()}>
-          {props.addTitle}
-        </div>
+        {!sublistState.editing ? (
+          <div class="sublist-add" onClick={() => addData()}>
+            {props.addTitle}
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     );
   },
 });
+
+function getDefaultEditComponent(state: SubListState<any>): (scope: any) => JSX.Element {
+  return function (scope) {
+    return (
+      <ElInput
+        label={scope.column.label}
+        size="mini"
+        v-model={state.editItem[scope.column.property]}
+      />
+    );
+  };
+}

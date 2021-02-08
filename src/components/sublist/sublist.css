@@ -1,37 +1,53 @@
 .sublist-add {
-    margin: 4px 0;
-    border: 1px solid #ebeef5;
+    margin-top: 8px;
+    border: 1px solid #409eff;
     text-align: center;
     cursor: pointer;
-    color: #909399;
+    color: #fff;
     font-weight: bold;
+    border-radius: 4px;
+    background-color: #409eff;
 }
 
 .sublist-add:hover {
-    border-color: #c6e2ff;
-    background-color: #ecf5ff;
-    color: #409eff;
+    border-color: #66b1ff;
+    background-color: #66b1ff;
 }
 
 .sublist-actions span {
-    padding: 0 5px;
+    margin: 0 5px;
 }
 
-.sublist-edit {
+.sublist-edit, .sublist-confirm {
     color: #409eff;
+}
+
+.sublist-btn {
     cursor: pointer;
 }
 
-.sublist-edit:hover {
+.sublist-btn:hover {
+    border-bottom: 2px solid;
+}
+
+.sublist-edit :hover, .sublist-confirm:hover {
     color: #66b1ff;
 }
 
 .sublist-delete {
     color: #fa3b3b;
-    cursor: pointer;
 }
 
 .sublist-delete:hover {
-    color: #f78989
+    color: #f78989;
+}
+
+.sublist-actions .readonly {
+    color: #bbbec3;
+    cursor: default;
+}
+
+.sublist-actions .readonly:hover {
+    border-bottom: none;
 }
 
