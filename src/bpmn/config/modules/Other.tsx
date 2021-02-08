@@ -1,13 +1,15 @@
 import {
   CommonGroupProperties,
-  DocumentGroupProperties,
   ExtensionGroupProperties,
+  DocumentGroupProperties,
 } from '../common';
 import { ElInput } from 'element-plus';
 
-const idAndName = { ...CommonGroupProperties };
-const documentation = { ...DocumentGroupProperties };
-const extensionProperties = { ...ExtensionGroupProperties };
+const CommonGroupPropertiesArray = [
+  CommonGroupProperties,
+  ExtensionGroupProperties,
+  DocumentGroupProperties,
+];
 
 interface CategoryValueRef {
   value: string;
@@ -40,11 +42,11 @@ const BpmnGroupBaseProperties = {
 
 export default {
   //池
-  'bpmn:Participant': [idAndName, extensionProperties, documentation],
+  'bpmn:Participant': CommonGroupPropertiesArray,
   //分组
-  'bpmn:Group': [BpmnGroupBaseProperties, extensionProperties, documentation],
+  'bpmn:Group': [BpmnGroupBaseProperties, ExtensionGroupProperties, DocumentGroupProperties],
   //数据存储
-  'bpmn:DataStoreReference': [idAndName, extensionProperties, documentation],
+  'bpmn:DataStoreReference': CommonGroupPropertiesArray,
   //数据对象
-  'bpmn:DataObjectReference': [idAndName, extensionProperties, documentation],
+  'bpmn:DataObjectReference': CommonGroupPropertiesArray,
 };

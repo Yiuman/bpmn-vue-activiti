@@ -1,15 +1,18 @@
 import {
   CommonGroupProperties,
-  DocumentGroupProperties,
   ExtensionGroupProperties,
+  DocumentGroupProperties,
 } from '../common';
 
-const idAndName = { ...CommonGroupProperties };
-const documentation = { ...DocumentGroupProperties };
-const extensionProperties = { ...ExtensionGroupProperties };
+const CommonGroupPropertiesArray = [
+  CommonGroupProperties,
+  ExtensionGroupProperties,
+  DocumentGroupProperties,
+];
+
 export default {
   //流程
-  'bpmn:Process': [idAndName, extensionProperties, documentation],
+  'bpmn:Process': CommonGroupPropertiesArray,
   //子流程
-  'bpmn:SubProcess': [idAndName, extensionProperties, documentation],
+  'bpmn:SubProcess': CommonGroupPropertiesArray,
 };

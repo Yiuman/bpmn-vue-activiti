@@ -6,32 +6,36 @@ import {
   ExtensionGroupProperties,
 } from '../common';
 
-const idAndName = { ...CommonGroupProperties };
-const documentation = { ...DocumentGroupProperties };
-const extensionProperties = { ...ExtensionGroupProperties };
+const CommonGroupPropertiesArray = [
+  CommonGroupProperties,
+  FormGroupProperties,
+  ExtensionGroupProperties,
+  DocumentGroupProperties,
+];
+
 export default {
   //普通任务
-  'bpmn:Task': [idAndName, FormGroupProperties, extensionProperties, documentation],
+  'bpmn:Task': CommonGroupPropertiesArray,
   //用户任务
   'bpmn:UserTask': [
-    idAndName,
-    { ...BpmnUserGroupProperties },
+    CommonGroupProperties,
+    BpmnUserGroupProperties,
     FormGroupProperties,
-    extensionProperties,
-    documentation,
+    ExtensionGroupProperties,
+    DocumentGroupProperties,
   ],
   //接收任务
-  'bpmn:ReceiveTask': [idAndName, FormGroupProperties, extensionProperties, documentation],
+  'bpmn:ReceiveTask': CommonGroupPropertiesArray,
   //发送任务
-  'bpmn:SendTask': [idAndName, FormGroupProperties, extensionProperties, documentation],
+  'bpmn:SendTask': CommonGroupPropertiesArray,
   //手工任务
-  'bpmn:ManualTask': [idAndName, FormGroupProperties, extensionProperties, documentation],
+  'bpmn:ManualTask': CommonGroupPropertiesArray,
   //业务规则任务
-  'bpmn:BusinessRuleTask': [idAndName, FormGroupProperties, extensionProperties, documentation],
+  'bpmn:BusinessRuleTask': CommonGroupPropertiesArray,
   //服务任务
-  'bpmn:ServiceTask': [idAndName, FormGroupProperties, extensionProperties, documentation],
+  'bpmn:ServiceTask': CommonGroupPropertiesArray,
   //脚本任务
-  'bpmn:ScriptTask': [idAndName, FormGroupProperties, extensionProperties, documentation],
+  'bpmn:ScriptTask': CommonGroupPropertiesArray,
   //调用任务
-  'bpmn:CallActivity': [idAndName, FormGroupProperties, extensionProperties, documentation],
+  'bpmn:CallActivity': CommonGroupPropertiesArray,
 };
