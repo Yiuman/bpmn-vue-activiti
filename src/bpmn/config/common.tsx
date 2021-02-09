@@ -92,6 +92,12 @@ export const FormGroupProperties: GroupProperties = {
   },
 };
 
+interface PropertyElement {
+  $type: string;
+  name: string;
+  value: unknown;
+}
+
 /**
  * 扩展属性组配置
  */
@@ -118,9 +124,22 @@ export const ExtensionGroupProperties: GroupProperties = {
           align: 'center',
         },
       ],
+      rules: {
+        name: [{ required: true, message: '属性名不能为空' }],
+        value: [{ required: true, message: '属性值不能为空' }],
+      },
       // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
       getValue: (businessObject: any): Array<any> => {
-        return businessObject?.extensionElements?.values;
+        console.warn('getValue', businessObject?.extensionElements?.values);
+        // $type: "activiti:Property"
+        const properties = businessObject?.extensionElements?.values
+          ?.filter((item: PropertyElement) => item.$type === 'activiti:Properties')[0]
+          .values.map((item: PropertyElement) => ({
+            name: item.name,
+            value: item.value,
+          }));
+        console.warn('properties', properties);
+        return properties;
       },
     },
   },

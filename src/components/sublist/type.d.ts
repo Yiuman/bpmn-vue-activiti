@@ -9,6 +9,7 @@ export interface SubListState<T> {
   editItem: T | undefined | null;
   editIndex: number | undefined;
   isNew: boolean;
+  sublistForm: any | null;
 }
 
 /**
