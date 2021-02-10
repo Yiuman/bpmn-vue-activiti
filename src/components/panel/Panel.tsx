@@ -48,6 +48,8 @@ export default defineComponent({
     const panelState = reactive({
       //活动的数据配置组
       elCollapses: Object.assign([]),
+      //panel面板的开关
+      shrinkageOff: false,
     });
 
     //打开所有抽屉
@@ -85,14 +87,28 @@ export default defineComponent({
     return () => (
       <>
         {contextState.isActive && contextState.businessObject && contextState.activeBindDefine ? (
-          <div class="bpmn-panel">
-            <div class="title">{bpmnContext.getActiveElementName()}</div>
-            <ElCollapse v-model={panelState.elCollapses}>
-              {contextState.activeBindDefine.map((groupItem) => {
-                return <ElCollapseItem name={groupItem.name} v-slots={getSlotObject(groupItem)} />;
-              })}
-            </ElCollapse>
-          </div>
+          <>
+            <div
+              class="bpmn-panel-shrinkage"
+              onClick={() => (panelState.shrinkageOff = !panelState.shrinkageOff)}
+            >
+              {panelState.shrinkageOff ? (
+                <i class="el-icon-s-fold" />
+              ) : (
+                <i class="el-icon-s-unfold" />
+              )}
+            </div>
+            <div class="bpmn-panel" v-show={!panelState.shrinkageOff}>
+              <div class="title">{bpmnContext.getActiveElementName()}</div>
+              <ElCollapse v-model={panelState.elCollapses}>
+                {contextState.activeBindDefine.map((groupItem) => {
+                  return (
+                    <ElCollapseItem name={groupItem.name} v-slots={getSlotObject(groupItem)} />
+                  );
+                })}
+              </ElCollapse>
+            </div>
+          </>
         ) : (
           ''
         )}

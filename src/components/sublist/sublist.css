@@ -22,6 +22,10 @@
     color: #409eff;
 }
 
+.sublist-split {
+    color: #bbbec3;
+}
+
 .sublist-btn {
     cursor: pointer;
 }

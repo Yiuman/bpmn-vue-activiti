@@ -221,7 +221,7 @@ const buildActionColumnProps = (state: SubListState<any>, ctx: SetupContext<any>
               <span class="sublist-confirm sublist-btn" onClick={() => actionConfirm()}>
                 确认
               </span>
-              <span>|</span>
+              <span class="sublist-split">|</span>
               <span class="sublist-cancel sublist-btn" onClick={() => actionCancel()}>
                 取消
               </span>
