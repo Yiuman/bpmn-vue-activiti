@@ -11,35 +11,42 @@ export default defineComponent({
   setup() {
     const bpmnContext = useBpmnInject();
     const contextState = bpmnContext.getState();
+    //属性处理适配器，用于处理特别字段
+    const fieldChangeAdapter: { [key: string]: (key: string, value: any) => void } = {
+      //文档属性处理
+      'documentation.text': (key, value) =>
+        bpmnContext.createElement('bpmn:Documentation', 'documentation', { text: value }),
+      //扩展属性处理
+      'extensionElements.properties': (key, value) => {
+        const moddle = bpmnContext.getModeler().get('moddle');
+        const properties = moddle.create(`activiti:Properties`, {
+          values: value.map((attr: { name: string; value: unknown }) => {
+            return moddle.create(`activiti:Property`, { name: attr.name, value: attr.value });
+          }),
+        });
+        bpmnContext.updateExtensionElements('activiti:Properties', properties);
+      },
+      //监听器
+      'extensionElements.listeners': (key, value) => {
+        const moddle = bpmnContext.getModeler().get('moddle');
+        bpmnContext.updateExtensionElements(
+          'activiti:ExecutionListener',
+          value.map((attr: { event: string; type: string; content: string }) => {
+            return moddle.create(`activiti:ExecutionListener`, {
+              event: attr.event,
+              [attr.type]: attr.content,
+            });
+          }),
+        );
+      },
+    };
 
     //动态数据绑定器的字段变化后更新到xml，视图刷新
     function onFieldChange(key: string, value: any): void {
       const shape = bpmnContext.getShape();
-      if (~key.indexOf('.')) {
-        if (key === 'documentation.text') {
-          bpmnContext.createElement('bpmn:Documentation', 'documentation', { text: value });
-        }
-        if (key === 'extensionElements.properties') {
-          const moddle = bpmnContext.getModeler().get('moddle');
-          const properties = moddle.create(`activiti:Properties`, {
-            values: value.map((attr: { name: string; value: unknown }) => {
-              return moddle.create(`activiti:Property`, { name: attr.name, value: attr.value });
-            }),
-          });
-          const element = bpmnContext.getShape();
-          const extensionElements = element.businessObject.get('extensionElements');
-          // 截取不是扩展属性的属性
-          const otherExtensions =
-            extensionElements
-              ?.get('values')
-              ?.filter((ex: any) => ex.$type !== `activiti:Properties`) || [];
-
-          // 重建扩展属性
-          const extensions = moddle.create('bpmn:ExtensionElements', {
-            values: otherExtensions.concat([properties]),
-          });
-          bpmnContext.getModeling().updateProperties(element, { extensionElements: extensions });
-        }
+      const fieldChangeAdapterElement = fieldChangeAdapter[key];
+      if (fieldChangeAdapterElement) {
+        fieldChangeAdapterElement(key, value);
       } else {
         bpmnContext.getModeling().updateProperties(shape, { [key]: value });
       }

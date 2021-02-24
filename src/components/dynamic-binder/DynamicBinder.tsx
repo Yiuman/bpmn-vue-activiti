@@ -35,8 +35,10 @@ export default defineComponent({
       flatFieldDefine: flatObject(props.fieldDefine || {}, {}),
       handingModel: Object.assign({}),
     });
-    watchEffect(() => (state.handingModel = JSON.parse(JSON.stringify(props.modelValue))));
-    watchEffect(() => (state.flatFieldDefine = flatObject(props.fieldDefine, {})));
+    watchEffect(() => {
+      state.handingModel = JSON.parse(JSON.stringify(props.modelValue));
+      state.flatFieldDefine = flatObject(props.fieldDefine, {});
+    });
 
     const bindTransformer = props.bindTransformer || defaultTransformer;
     //绑定转换函数赋值，然props有则用props的否则用默认的

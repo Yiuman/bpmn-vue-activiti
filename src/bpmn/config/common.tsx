@@ -130,16 +130,12 @@ export const ExtensionGroupProperties: GroupProperties = {
       },
       // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
       getValue: (businessObject: any): Array<any> => {
-        console.warn('getValue', businessObject?.extensionElements?.values);
-        // $type: "activiti:Property"
-        const properties = businessObject?.extensionElements?.values
+        return businessObject?.extensionElements?.values
           ?.filter((item: PropertyElement) => item.$type === 'activiti:Properties')[0]
-          .values.map((item: PropertyElement) => ({
+          ?.values.map((item: PropertyElement) => ({
             name: item.name,
             value: item.value,
           }));
-        console.warn('properties', properties);
-        return properties;
       },
     },
   },

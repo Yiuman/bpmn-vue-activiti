@@ -135,13 +135,20 @@ export default defineComponent({
           <ElTable {...tableProps} data={sublistState.data}>
             {props.columns.map((column) => {
               if (sublistState.editing && column.type !== 'index') {
-                const editComponentBuilder =
-                  column.editComponent || getDefaultEditComponent(sublistState);
+                const editComponentBuilder = column.editComponent || getDefaultEditComponent();
                 const slots = {
                   default: (scope: any) => {
+                    //获取列的像是方式，如果是正在编辑的行，则使用编辑组件，
+                    const cellValue = scope.row[scope.column.property];
+                    const getRowColumnValue = () => {
+                      return scope.column.formatter
+                        ? scope.column.formatter(scope.row, scope.column, cellValue, scope.$index)
+                        : cellValue;
+                    };
+
                     return sublistState.editIndex === scope.$index
-                      ? editComponentBuilder(scope)
-                      : scope.row[scope.column.property];
+                      ? editComponentBuilder(scope, sublistState)
+                      : getRowColumnValue();
                   },
                 };
                 return <ElTableColumn v-slots={slots} {...column} />;
@@ -259,10 +266,9 @@ const buildActionColumnProps = (state: SubListState<any>, ctx: SetupContext<any>
 
 /**
  * 默认的编辑组件，ElInput 用于编辑或新增
- * @param state SubList状态管理
  */
-function getDefaultEditComponent(state: SubListState<any>): (scope: any) => JSX.Element {
-  return function (scope) {
+function getDefaultEditComponent(): (scope: any, state: SubListState<any>) => JSX.Element {
+  return function (scope, state) {
     return (
       <ElFormItem
         size="mini"

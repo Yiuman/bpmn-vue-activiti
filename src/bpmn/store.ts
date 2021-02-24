@@ -1,122 +1,10 @@
-import { reactive, UnwrapRef, provide, inject, nextTick } from 'vue';
-import BpmnGroupPropertiesConfig, { GroupProperties } from './config';
+import { reactive, provide, inject, nextTick } from 'vue';
+import BpmnGroupPropertiesConfig from './config';
 import { resolveTypeName } from './config/TypeNameMapping';
 import Modeler from 'bpmn-js/lib/Modeler';
+import { BpmnState, BpmnContext } from './type';
 
 const bpmnSymbol = Symbol();
-
-export interface BpmnState {
-  /**
-   * 当前活动的节点
-   */
-  activeElement: any;
-  /**
-   * 当前活动节点的业务对象
-   */
-  businessObject: any;
-  /**
-   * 是否活动
-   */
-  isActive: boolean;
-
-  /**
-   * 当前活动节点的绑定字段配置
-   */
-  activeBindDefine: Array<GroupProperties> | null | never;
-}
-
-/**
- * 流程管理的上下文
- */
-export interface BpmnContext {
-  /**
-   * 流程设计器
-   */
-  modeler: any;
-  /**
-   * 状态管理
-   */
-  state: UnwrapRef<BpmnState>;
-
-  /**
-   * 获取当前的状态
-   */
-  getState(): UnwrapRef<BpmnState>;
-
-  /**
-   * 初始化流程设计器
-   * @param options 流程设计器参数
-   */
-  initModeler(options: unknown): void;
-
-  /**
-   *获取设计器
-   */
-  getModeler(): typeof Modeler;
-
-  /**
-   * 导入xml
-   * @param xml xml字符串
-   */
-  importXML(xml: string): Promise<Array<string> | any>;
-
-  /**
-   * 获取流程xml
-   */
-  getXML(): Promise<{ xml: string }>;
-
-  /**
-   * 获取流程的SVG图
-   */
-  getSVG(): Promise<{ svg: string }>;
-
-  /**
-   * 获取当前节点的Shape对象，此对象用于操作节点与业务流程对象等
-   */
-  getShape(): any;
-
-  getShapeById(id: string): any;
-
-  /**
-   * 获取当前的流程的业务对象
-   */
-  getBusinessObject(): any;
-
-  /**
-   * 获取当前的活动节点
-   */
-  getActiveElement(): any;
-
-  /**
-   * 获取当前节点的名称
-   */
-  getActiveElementName(): string;
-
-  /**
-   * 获取当前节点的modeling
-   */
-  getModeling(): any;
-
-  /**
-   * 获取bpmnFactory
-   */
-  getBpmnFactory(): any;
-
-  /**
-   * 创建节点
-   * @param nodeName 节点名称
-   * @param modelName 模型名称
-   * @param value 几点值
-   */
-  createElement(nodeName: string, modelName: string, value: { [key: string]: any }): void;
-
-  /**
-   * 添加设计器事件监听
-   * @param name 事件名称
-   * @param func 触发事件的回调
-   */
-  addEventListener(name: string, func: (e: any) => void): void;
-}
 
 export const useBpmnProvider = (): void => {
   const bpmnState = reactive<BpmnState>({
@@ -226,6 +114,20 @@ export const useBpmnProvider = (): void => {
         .on(string, function (e: any) {
           func(e);
         });
+    },
+    updateExtensionElements(elementName, value) {
+      const moddle = this.getModeler().get('moddle');
+      const element = this.getShape();
+      const extensionElements = element.businessObject.get('extensionElements');
+      // 截取不是扩展属性的属性
+      const otherExtensions =
+        extensionElements?.get('values')?.filter((ex: any) => ex.$type !== elementName) || [];
+
+      // 重建扩展属性
+      const extensions = moddle.create('bpmn:ExtensionElements', {
+        values: otherExtensions.concat(value instanceof Array ? value : [value]),
+      });
+      this.getModeling().updateProperties(element, { extensionElements: extensions });
     },
   };
 

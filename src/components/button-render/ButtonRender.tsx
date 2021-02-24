@@ -1,10 +1,6 @@
 import { defineComponent, PropType } from 'vue';
 import { Button, ButtonRenderProps } from './index';
 import { ElButton, ElTooltip } from 'element-plus';
-// import { createFromIconfontCN } from '@ant-design/icons-vue';
-// const IconFont = createFromIconfontCN({
-//   scriptUrl: '/public/iconfont.js',
-// });
 export default defineComponent({
   name: 'ButtonRender',
 
@@ -59,7 +55,7 @@ export default defineComponent({
                   onClick={() => (item.action ? item.action() : globalClick(item))}
                 >
                   <svg class="icon" aria-hidden="true">
-                    <use xlinkHref={`#${item.icon}`}></use>
+                    <use xlinkHref={`#${item.icon}`}/>
                   </svg>
                 </div>
               </ElTooltip>

@@ -101,6 +101,7 @@ export default defineComponent({
                         // theme: 'monokai', // 使用monokai模版
                       },
                     );
+                    coder.setSize('100%', '100%');
                   } else {
                     coder.setValue(xml.value);
                   }
