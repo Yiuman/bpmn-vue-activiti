@@ -36,7 +36,7 @@ export default defineComponent({
       handingModel: Object.assign({}),
     });
     watchEffect(() => {
-      state.handingModel = JSON.parse(JSON.stringify(props.modelValue));
+      state.handingModel = props.modelValue;
       state.flatFieldDefine = flatObject(props.fieldDefine, {});
     });
 
@@ -66,7 +66,7 @@ export default defineComponent({
               }
             },
           );
-          if (define && predicate(define)) {
+          if (define && predicate(define, props.modelValue)) {
             return (
               <Component
                 {...bindData}
@@ -121,17 +121,17 @@ function flatObject(source: FieldDefine, target: FieldDefine, prefix = ''): Fiel
  * 若对象中有predicate断言属性，则执行断言 返回true/false
  * 1.若属性为string,则使用脚本处理器执行，如 predicate='obj.a ===1' 则会传入当前对象进行判断；
  * 2.若属性为function，则直接传入目标对象直接执行
- * @param obj 断言的对象
+ * @param fieldDefine 断言的对象
  */
-function predicate(obj: FieldDefine): boolean {
-  const bindDefinePredicate = obj.predicate;
+function predicate(fieldDefine: FieldDefine, modelValue: any): boolean {
+  const bindDefinePredicate = fieldDefine.predicate;
   if (bindDefinePredicate) {
     if (typeof bindDefinePredicate === 'string') {
-      return ScriptHelper.executeEl(obj, bindDefinePredicate);
+      return ScriptHelper.executeEl(modelValue, bindDefinePredicate);
     }
 
     if (typeof bindDefinePredicate === 'function') {
-      return bindDefinePredicate(obj);
+      return bindDefinePredicate(modelValue);
     }
   }
   return true;
@@ -149,7 +149,7 @@ function defaultTransformer(sourceModel: any, bindKey: string, bindDefine: Field
     ...bindDefine,
     sourceModel,
     value: bindDefine.getValue
-      ? bindDefine.getValue(sourceModel)
+      ? bindDefine.getValue(toRaw(sourceModel))
       : resolve(bindKey, sourceModel) || '',
   });
 }

@@ -39,6 +39,40 @@ export default defineComponent({
           }),
         );
       },
+      //顺序流类型
+      'sequenceFlow.type': (key, value) => {
+        const line = bpmnContext.getShape();
+        const sourceShape = bpmnContext
+          .getModeler()
+          .get('elementRegistry')
+          .get(line.businessObject.sourceRef.id);
+        const modeling = bpmnContext.getModeling();
+        if (!value || value === 'normal') {
+          modeling.updateProperties(line, { conditionExpression: null });
+          delete line.businessObject.conditionExpression;
+        }
+
+        if (value === 'default') {
+          modeling.updateProperties(sourceShape, { default: line });
+          delete line.businessObject.conditionExpression;
+        }
+
+        if (value === 'condition') {
+          modeling.updateProperties(line, {
+            conditionExpression: bpmnContext
+              .getModeler()
+              .get('moddle')
+              .create('bpmn:FormalExpression'),
+          });
+        }
+      },
+      //条件表达式
+      'conditionExpression.body': (key, value) => {
+        const moddle = bpmnContext.getModeler().get('moddle');
+        bpmnContext.getModeling().updateProperties(bpmnContext.getShape(), {
+          conditionExpression: moddle.create('bpmn:FormalExpression', { body: value }),
+        });
+      },
     };
 
     //动态数据绑定器的字段变化后更新到xml，视图刷新

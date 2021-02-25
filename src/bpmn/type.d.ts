@@ -26,7 +26,7 @@ export interface BpmnState {
 export interface ModdleElement {
   $type: string;
   value?: [ModdleElement];
-  $attrs?: { [key: string]: any };
+  $attrs: { [key: string]: any };
 
   [key: string]: any;
 }
@@ -128,5 +128,5 @@ export interface BpmnContext {
    * @param elementName 节点名
    * @param value 值
    */
-  updateExtensionElements(elementName: string, value: ModdleElement | [ModdleElement]): void;
+  updateExtensionElements(elementName: string, value: ModdleElement | Array<ModdleElement>): void;
 }

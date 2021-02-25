@@ -86,7 +86,6 @@ export default defineComponent({
               .then((response) => {
                 xml.value = response.xml;
                 previewActive.value = true;
-                console.warn('xmlvalue', xml.value);
 
                 nextTick(() => {
                   if (!coder) {

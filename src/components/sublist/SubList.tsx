@@ -1,4 +1,4 @@
-import { defineComponent, PropType, reactive, watch, ref, onMounted } from 'vue';
+import { defineComponent, PropType, reactive, watch, ref, onMounted, toRaw } from 'vue';
 import { ElInput, ElTable, ElTableColumn, ElForm, ElFormItem } from 'element-plus';
 import { TableProps } from 'element-plus/lib/el-table/src/table.type';
 import { TableColumn, SubListState } from './type';
@@ -134,8 +134,9 @@ export default defineComponent({
         <ElForm ref="form" {...formProps}>
           <ElTable {...tableProps} data={sublistState.data}>
             {props.columns.map((column) => {
-              if (sublistState.editing && column.type !== 'index') {
-                const editComponentBuilder = column.editComponent || getDefaultEditComponent();
+              const rawColum = toRaw(column);
+              if (sublistState.editing && rawColum.type !== 'index') {
+                const editComponentBuilder = rawColum.editComponent || getDefaultEditComponent();
                 const slots = {
                   default: (scope: any) => {
                     //获取列的像是方式，如果是正在编辑的行，则使用编辑组件，
@@ -151,9 +152,10 @@ export default defineComponent({
                       : getRowColumnValue();
                   },
                 };
-                return <ElTableColumn v-slots={slots} {...column} />;
+                return <ElTableColumn v-slots={slots} {...rawColum} />;
               } else {
-                return <ElTableColumn {...column} />;
+                // <ElTableColumn {...newColumn} />;
+                return <ElTableColumn {...rawColum} />;
               }
             })}
             <ElTableColumn {...this.actionColumnProps} v-slots={this.actionColumnProps.vSlots} />

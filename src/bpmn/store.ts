@@ -1,8 +1,8 @@
-import { reactive, provide, inject, nextTick } from 'vue';
+import { reactive, provide, inject, toRaw, nextTick } from 'vue';
 import BpmnGroupPropertiesConfig from './config';
 import { resolveTypeName } from './config/TypeNameMapping';
 import Modeler from 'bpmn-js/lib/Modeler';
-import { BpmnState, BpmnContext } from './type';
+import { BpmnState, BpmnContext, ModdleElement } from './type';
 
 const bpmnSymbol = Symbol();
 
@@ -35,15 +35,14 @@ export const useBpmnProvider = (): void => {
         bpmnState.activeBindDefine = shape
           ? BpmnGroupPropertiesConfig[elementAction.element.type]
           : null;
-        console.warn('currentShape', shape);
       }
 
       this.addEventListener('element.click', function (elementAction) {
         refreshState(elementAction);
       });
       this.addEventListener('element.changed', function (elementAction: any) {
-        //这里是处理修改shape中的label后导致的不及时更新问题
-        //现将业务对象至为空对象，视图更新后，再重新进行渲染
+        // 这里是处理修改shape中的label后导致的不及时更新问题
+        // 现将业务对象至为空对象，视图更新后，再重新进行渲染
         bpmnState.businessObject = {};
         nextTick(() => {
           refreshState(elementAction);
@@ -118,10 +117,12 @@ export const useBpmnProvider = (): void => {
     updateExtensionElements(elementName, value) {
       const moddle = this.getModeler().get('moddle');
       const element = this.getShape();
-      const extensionElements = element.businessObject.get('extensionElements');
+      const extensionElements = this.getBusinessObject()?.extensionElements;
       // 截取不是扩展属性的属性
       const otherExtensions =
-        extensionElements?.get('values')?.filter((ex: any) => ex.$type !== elementName) || [];
+        extensionElements?.values
+          ?.filter((ex: any) => ex.$type !== elementName)
+          .map((item: ModdleElement) => toRaw(item)) || [];
 
       // 重建扩展属性
       const extensions = moddle.create('bpmn:ExtensionElements', {

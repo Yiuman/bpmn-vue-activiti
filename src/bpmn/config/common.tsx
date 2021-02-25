@@ -1,7 +1,9 @@
-import { ElInput } from 'element-plus';
+import { ElFormItem, ElInput, ElOption, ElSelect } from 'element-plus';
 import { FieldDefine } from '../../components/dynamic-binder';
 import { PropertiesMap, GroupProperties } from './index';
 import SubList from '../../components/sublist/SubList';
+import { SubListState } from '../../components/sublist/type';
+import { ModdleElement } from '../type';
 
 /**
  * 所有通用节点的属性（每个节点都有的）
@@ -86,7 +88,7 @@ export const FormGroupProperties: GroupProperties = {
       component: ElInput,
       placeholder: '表单key',
       vSlots: {
-        prepend: () => <div>表单key</div>,
+        prepend: (): JSX.Element => <div>表单key</div>,
       },
     },
   },
@@ -97,6 +99,139 @@ interface PropertyElement {
   name: string;
   value: unknown;
 }
+
+/**
+ * 流程事件类型选项
+ */
+const EVENT_OPTIONS = [
+  { label: '开始', value: 'start' },
+  { label: '结束', value: 'end' },
+];
+
+/**
+ * 监听器类型选项
+ */
+const TYPE_OPTIONS = [
+  { label: 'java类', value: 'class' },
+  { label: '调用表达式', value: 'expression' },
+  { label: '注入表达式', value: 'delegateExpression' },
+];
+
+/**
+ * 获取节点类型的监听器属性配置组
+ * @param options 参数
+ */
+export const getElementTypeListenerProperties = function (options: {
+  name: string;
+  icon?: string;
+  //时间类型选项
+  eventOptions?: Array<{ label: string; value: string }>;
+}): GroupProperties {
+  const eventOptions = options.eventOptions || EVENT_OPTIONS;
+  return {
+    name: options.name || '监听器',
+    icon: options.icon || 'el-icon-bell',
+    properties: {
+      'extensionElements.listeners': {
+        component: SubList,
+        columns: [
+          {
+            type: 'index',
+            label: '序号',
+            align: 'center',
+          },
+          {
+            prop: 'event',
+            label: '事件',
+            align: 'center',
+            // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+            formatter: (row: any, column: any) => {
+              return eventOptions.filter((item) => item.value === row[column.property])[0].label;
+            },
+            // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+            editComponent: function (scope: any, state: SubListState<any>): JSX.Element {
+              return (
+                <ElFormItem
+                  size="mini"
+                  class="sublist-form-item"
+                  label={scope.column.name}
+                  prop={scope.column.property}
+                >
+                  <ElSelect v-model={state.editItem.event}>
+                    {eventOptions.map((option) => {
+                      return (
+                        <ElOption key={option.value} label={option.label} value={option.value} />
+                      );
+                    })}
+                  </ElSelect>
+                </ElFormItem>
+              );
+            },
+          },
+          {
+            prop: 'type',
+            label: '执行类型',
+            align: 'center',
+            // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+            formatter: (row: any, column: any) => {
+              console.warn(
+                '执行类型formatter',
+                TYPE_OPTIONS.filter((item) => item.value === row[column.property])[0].label,
+              );
+              return TYPE_OPTIONS.filter((item) => item.value === row[column.property])[0].label;
+            },
+            // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+            editComponent: function (scope: any, state: SubListState<any>): JSX.Element {
+              return (
+                <ElFormItem
+                  size="mini"
+                  class="sublist-form-item"
+                  label={scope.column.name}
+                  prop={scope.column.property}
+                >
+                  <ElSelect v-model={state.editItem.type}>
+                    {TYPE_OPTIONS.map((option) => {
+                      return (
+                        <ElOption key={option.value} label={option.label} value={option.value} />
+                      );
+                    })}
+                  </ElSelect>
+                </ElFormItem>
+              );
+            },
+          },
+          {
+            prop: 'content',
+            label: '执行内容',
+            align: 'center',
+          },
+        ],
+        rules: {
+          event: [{ required: true, message: '事件不能为空' }],
+          type: [{ required: true, message: '类型不能为空' }],
+          content: [{ required: true, message: '执行内容不能为空' }],
+        },
+        // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+        getValue: (businessObject: any): Array<any> => {
+          return businessObject?.extensionElements?.values
+            ?.filter((item: ModdleElement) => item.$type === 'activiti:ExecutionListener')
+            ?.map((item: ModdleElement) => {
+              const type = item.expression
+                ? 'expression'
+                : item.delegateExpression
+                ? 'delegateExpression'
+                : 'class';
+              return {
+                event: item.event,
+                type: type,
+                content: item[type],
+              };
+            });
+        },
+      },
+    },
+  };
+};
 
 /**
  * 扩展属性组配置

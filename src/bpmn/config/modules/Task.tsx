@@ -4,11 +4,24 @@ import {
   FormGroupProperties,
   DocumentGroupProperties,
   ExtensionGroupProperties,
+  getElementTypeListenerProperties,
 } from '../common';
 
+const TASK_EVENT_OPTIONS = [
+  { label: '创建', value: 'create' },
+  { label: '签收', value: 'assignment' },
+  { label: '完成', value: 'complete' },
+  { label: '删除', value: 'delete' },
+  { label: '全部', value: 'all' },
+];
+const TaskListenerProperties = getElementTypeListenerProperties({
+  name: '任务监听器',
+  eventOptions: TASK_EVENT_OPTIONS,
+});
 const CommonGroupPropertiesArray = [
   CommonGroupProperties,
   FormGroupProperties,
+  TaskListenerProperties,
   ExtensionGroupProperties,
   DocumentGroupProperties,
 ];
@@ -20,6 +33,7 @@ export default {
   'bpmn:UserTask': [
     CommonGroupProperties,
     BpmnUserGroupProperties,
+    TaskListenerProperties,
     FormGroupProperties,
     ExtensionGroupProperties,
     DocumentGroupProperties,
