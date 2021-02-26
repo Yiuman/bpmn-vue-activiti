@@ -4,6 +4,7 @@ import { PropertiesMap, GroupProperties } from './index';
 import SubList from '../../components/sublist/SubList';
 import { SubListState } from '../../components/sublist/type';
 import { ModdleElement } from '../type';
+import { BpmnStore } from '../store';
 
 /**
  * 所有通用节点的属性（每个节点都有的）
@@ -35,30 +36,6 @@ export const CommonGroupProperties: GroupProperties = {
   properties: { ...commonProperties },
 };
 
-/**
- * 用户任务属性配置
- */
-export const BpmnUserGroupProperties: GroupProperties = {
-  name: '人员设置',
-  icon: 'el-icon-user-solid',
-  properties: {
-    assignee: {
-      component: ElInput,
-      placeholder: '处理人',
-      vSlots: {
-        prepend: (): JSX.Element => <div>处理人</div>,
-      },
-    },
-    candidateUsers: {
-      component: ElInput,
-      placeholder: '候选人',
-      vSlots: {
-        prepend: (): JSX.Element => <div>候选人</div>,
-      },
-    },
-  },
-};
-
 interface Documentation {
   text: string;
 }
@@ -72,6 +49,9 @@ export const DocumentGroupProperties: GroupProperties = {
       type: 'textarea',
       getValue: (obj: { documentation: Array<Documentation> }): string => {
         return obj['documentation']?.[0]?.['text'];
+      },
+      setValue(businessObject: ModdleElement, key: string, value: unknown): void {
+        BpmnStore.createElement('bpmn:Documentation', 'documentation', { text: value });
       },
     },
   },
@@ -207,8 +187,7 @@ export const getElementTypeListenerProperties = function (options: {
           type: [{ required: true, message: '类型不能为空' }],
           content: [{ required: true, message: '执行内容不能为空' }],
         },
-        // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-        getValue: (businessObject: any): Array<any> => {
+        getValue: (businessObject: ModdleElement): Array<any> => {
           return businessObject?.extensionElements?.values
             ?.filter((item: ModdleElement) => item.$type === 'activiti:ExecutionListener')
             ?.map((item: ModdleElement) => {
@@ -223,6 +202,19 @@ export const getElementTypeListenerProperties = function (options: {
                 content: item[type],
               };
             });
+        },
+        setValue(businessObject: ModdleElement, key: string, value: []): void {
+          const bpmnContext = BpmnStore;
+          const moddle = bpmnContext.getModeler().get('moddle');
+          bpmnContext.updateExtensionElements(
+            'activiti:ExecutionListener',
+            value.map((attr: { event: string; type: string; content: string }) => {
+              return moddle.create(`activiti:ExecutionListener`, {
+                event: attr.event,
+                [attr.type]: attr.content,
+              });
+            }),
+          );
         },
       },
     },
@@ -259,14 +251,23 @@ export const ExtensionGroupProperties: GroupProperties = {
         name: [{ required: true, message: '属性名不能为空' }],
         value: [{ required: true, message: '属性值不能为空' }],
       },
-      // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-      getValue: (businessObject: any): Array<any> => {
+      getValue: (businessObject: ModdleElement): Array<any> => {
         return businessObject?.extensionElements?.values
           ?.filter((item: PropertyElement) => item.$type === 'activiti:Properties')[0]
           ?.values.map((item: PropertyElement) => ({
             name: item.name,
             value: item.value,
           }));
+      },
+      setValue(businessObject: ModdleElement, key: string, value: []): void {
+        const bpmnContext = BpmnStore;
+        const moddle = bpmnContext.getModeler().get('moddle');
+        const properties = moddle.create(`activiti:Properties`, {
+          values: value.map((attr: { name: string; value: unknown }) => {
+            return moddle.create(`activiti:Property`, { name: attr.name, value: attr.value });
+          }),
+        });
+        bpmnContext.updateExtensionElements('activiti:Properties', properties);
       },
     },
   },

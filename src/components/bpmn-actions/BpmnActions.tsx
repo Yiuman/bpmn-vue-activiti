@@ -1,6 +1,6 @@
 import { defineComponent, ref, nextTick } from 'vue';
 import ButtonRender, { ButtonRenderProps } from '../../components/button-render';
-import { useBpmnInject } from '../../bpmn/store';
+import { BpmnStore } from '../../bpmn/store';
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/xml/xml.js';
 import 'codemirror/addon/hint/xml-hint.js';
@@ -12,7 +12,6 @@ import './bpmn-actions.css';
 export default defineComponent({
   name: 'BpmnActions',
   setup() {
-    const bpmnContext = useBpmnInject();
     //放大缩小
     const zoom = ref(1);
     //预览xml的抽屉控制器
@@ -20,11 +19,39 @@ export default defineComponent({
     //取到的xml
     const xml = ref('');
 
+    return {
+      zoom,
+      previewActive,
+      xml,
+    };
+  },
+  render() {
+    const bpmnContext = BpmnStore;
     //codemirror编辑器
     let coder: CodeMirror.EditorFromTextArea;
+
+    const importFile = function (event: Event) {
+      const eventTarget = event.target as HTMLInputElement;
+      if (eventTarget.files) {
+        const file = eventTarget.files[0];
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function () {
+          if (this.result) {
+            bpmnContext.importXML(this.result as string);
+          }
+        };
+      }
+    };
     const buttonRenderProps: ButtonRenderProps = {
       buttons: [
-        { label: '导入', icon: 'icon-shangchuan' },
+        {
+          label: '导入',
+          icon: 'icon-shangchuan',
+          action: () => {
+            document.getElementById('bpmn-upload-element')?.click();
+          },
+        },
         {
           label: '导出SVG',
           icon: 'icon-zu920',
@@ -57,23 +84,23 @@ export default defineComponent({
           label: '放大',
           icon: 'icon-fangda',
           action: () => {
-            zoom.value = Math.floor(zoom.value * 100 + 0.1 * 100) / 100;
-            bpmnContext.getModeler().get('canvas').zoom(zoom.value);
+            this.zoom = Math.floor(this.zoom * 100 + 0.1 * 100) / 100;
+            bpmnContext.getModeler().get('canvas').zoom(this.zoom);
           },
         },
         {
           label: '缩小',
           icon: 'icon-suoxiao',
           action: () => {
-            zoom.value = Math.floor(zoom.value * 100 - 0.1 * 100) / 100;
-            bpmnContext.getModeler().get('canvas').zoom(zoom.value);
+            this.zoom = Math.floor(this.zoom * 100 - 0.1 * 100) / 100;
+            bpmnContext.getModeler().get('canvas').zoom(this.zoom);
           },
         },
         {
           label: '还原并居中',
           icon: 'icon-quxiaoquanping',
           action: () => {
-            zoom.value = 1;
+            this.zoom = 1;
             bpmnContext.getModeler().get('canvas').zoom('fit-viewport', 'auto');
           },
         },
@@ -84,8 +111,8 @@ export default defineComponent({
             bpmnContext
               .getXML()
               .then((response) => {
-                xml.value = response.xml;
-                previewActive.value = true;
+                this.xml = response.xml;
+                this.previewActive = true;
 
                 nextTick(() => {
                   if (!coder) {
@@ -102,7 +129,7 @@ export default defineComponent({
                     );
                     coder.setSize('100%', '100%');
                   } else {
-                    coder.setValue(xml.value);
+                    coder.setValue(this.xml);
                   }
                 });
               })
@@ -127,13 +154,20 @@ export default defineComponent({
         // },
       ],
     };
-
-    return () => (
+    return (
       <div class="bpmn-actions">
         <ButtonRender {...buttonRenderProps} />
-        <el-drawer size="35%" direction="ltr" withHeader={false} v-model={previewActive.value}>
-          <textarea id="xml-highlight-container" v-model={xml.value} />
+        <el-drawer size="35%" direction="ltr" withHeader={false} v-model={this.previewActive}>
+          <textarea id="xml-highlight-container" v-model={this.xml} />
         </el-drawer>
+        <input
+          type="file"
+          id="bpmn-upload-element"
+          ref="refFile"
+          style="display: none"
+          accept=".xml, .bpmn"
+          onChange={importFile}
+        />
       </div>
     );
   },

@@ -61,9 +61,12 @@ export default defineComponent({
               () => {
                 // state.handingModel[bindData.bindKey] = bindData.value;
                 context.emit('update:modelValue', state.handingModel);
-                context.emit('fieldChange', bindData.bindKey, bindData.value);
+
+                //如果有setValue还是则直接使用独立的setValue
                 if (bindData.setValue) {
-                  bindData.setValue(props.modelValue, bindData.bindKey, bindData.value);
+                  bindData.setValue(props.modelValue.target, bindData.bindKey, bindData.value);
+                } else {
+                  context.emit('fieldChange', bindData.bindKey, bindData.value);
                 }
               },
             );

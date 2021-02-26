@@ -8,12 +8,12 @@ import { defineComponent, onMounted } from 'vue';
 import createDefaultBpmnXml from '../../bpmn/defaultBpmnXml';
 import activitiModdel from '../../bpmn/resources/activiti-moddel.json';
 import translate from '../../bpmn/i18n';
-import { useBpmnInject } from '../../bpmn/store';
+import { BpmnStore } from '../../bpmn/store';
 
 export default defineComponent({
   name: 'Modeler',
   setup() {
-    const bpmnContext = useBpmnInject();
+    const bpmnContext = BpmnStore;
     onMounted(() => {
       bpmnContext.initModeler({
         container: '#modeler-container',
