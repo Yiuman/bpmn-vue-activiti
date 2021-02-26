@@ -68,7 +68,7 @@ export default defineComponent({
     const sublistState: SubListState<any> = reactive({
       data: props.modelValue ? JSON.parse(JSON.stringify(props.modelValue)) : [],
       editing: false,
-      editItem: null,
+      editItem: {},
       editIndex: undefined,
       isNew: false,
       sublistForm: null,
@@ -119,7 +119,7 @@ export default defineComponent({
   render() {
     const props = this.$props;
     const sublistState = this.sublistState;
-    const tableProps = JSON.parse(JSON.stringify(props.tableProps));
+    const tableProps = deepCopy(props.tableProps);
 
     const formProps = {
       size: 'mini',
@@ -131,36 +131,39 @@ export default defineComponent({
     };
     return (
       <div class="sublist-div">
-        <ElForm ref="form" {...formProps}>
-          <ElTable {...tableProps} data={sublistState.data}>
-            {props.columns.map((column) => {
-              const rawColum = toRaw(column);
-              if (sublistState.editing && rawColum.type !== 'index') {
-                const editComponentBuilder = rawColum.editComponent || getDefaultEditComponent();
-                const slots = {
-                  default: (scope: any) => {
-                    //获取列的像是方式，如果是正在编辑的行，则使用编辑组件，
-                    const cellValue = scope.row[scope.column.property];
-                    const getRowColumnValue = () => {
-                      return scope.column.formatter
-                        ? scope.column.formatter(scope.row, scope.column, cellValue, scope.$index)
-                        : cellValue;
-                    };
+        {sublistState.data ? (
+          <ElForm ref="form" {...formProps}>
+            <ElTable {...tableProps} data={sublistState.data}>
+              {props.columns.map((column) => {
+                const rawColum = toRaw(column);
+                if (sublistState.editing && rawColum.type !== 'index') {
+                  const editComponentBuilder = rawColum.editComponent || getDefaultEditComponent();
+                  const slots = {
+                    default: (scope: any) => {
+                      //获取列的像是方式，如果是正在编辑的行，则使用编辑组件，
+                      const cellValue = scope.row[scope.column.property];
+                      const getRowColumnValue = () => {
+                        return scope.column.formatter
+                          ? scope.column.formatter(scope.row, scope.column, cellValue, scope.$index)
+                          : cellValue;
+                      };
 
-                    return sublistState.editIndex === scope.$index
-                      ? editComponentBuilder(scope, sublistState)
-                      : getRowColumnValue();
-                  },
-                };
-                return <ElTableColumn v-slots={slots} {...rawColum} />;
-              } else {
-                // <ElTableColumn {...newColumn} />;
-                return <ElTableColumn {...rawColum} />;
-              }
-            })}
-            <ElTableColumn {...this.actionColumnProps} v-slots={this.actionColumnProps.vSlots} />
-          </ElTable>
-        </ElForm>
+                      return sublistState.editIndex === scope.$index
+                        ? editComponentBuilder(scope, sublistState)
+                        : getRowColumnValue();
+                    },
+                  };
+                  return <ElTableColumn v-slots={slots} {...rawColum} />;
+                } else {
+                  return <ElTableColumn {...rawColum} />;
+                }
+              })}
+              <ElTableColumn {...this.actionColumnProps} v-slots={this.actionColumnProps.vSlots} />
+            </ElTable>
+          </ElForm>
+        ) : (
+          ''
+        )}
 
         {/*新增按钮*/}
         {!sublistState.editing ? (
@@ -197,7 +200,7 @@ const buildActionColumnProps = (state: SubListState<any>, ctx: SetupContext<any>
     state.sublistForm.validate((valid: boolean): void | boolean => {
       if (valid) {
         if (typeof state?.editIndex === 'number') {
-          state.data.splice(state?.editIndex, 1, deepCopy(state.editItem));
+          state.data.splice(state?.editIndex, 1, deepCopy(toRaw(state.editItem)));
         }
         state.editIndex = undefined;
         state.editItem = undefined;

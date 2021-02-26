@@ -40,8 +40,8 @@ export default defineComponent({
       state.flatFieldDefine = flatObject(props.fieldDefine, {});
     });
 
-    const bindTransformer = props.bindTransformer || defaultTransformer;
     //绑定转换函数赋值，然props有则用props的否则用默认的
+    const bindTransformer = props.bindTransformer || defaultTransformer;
     const dataBindTransformer = function (key: string, value: any) {
       return bindTransformer(state.handingModel, key, value);
     };
@@ -50,23 +50,24 @@ export default defineComponent({
       <div class="dynamic-binder">
         {Object.keys(state.flatFieldDefine).map((key) => {
           const define = state.flatFieldDefine[key];
-          const bindData = dataBindTransformer(key, define);
 
-          //组件不能是代理对象，这里直接用目标对象
-          const Component = toRaw(define.component);
-
-          watch(
-            () => bindData.value,
-            () => {
-              state.handingModel[bindData.bindKey] = bindData.value;
-              context.emit('update:modelValue', state.handingModel);
-              context.emit('fieldChange', bindData.bindKey, bindData.value);
-              if (bindData.setValue) {
-                bindData.setValue(props.modelValue, bindData.bindKey, bindData.value);
-              }
-            },
-          );
           if (define && predicate(define, props.modelValue)) {
+            const bindData = dataBindTransformer(key, define);
+            //组件不能是代理对象，这里直接用目标对象
+            const Component = toRaw(define.component);
+
+            watch(
+              () => bindData.value,
+              () => {
+                // state.handingModel[bindData.bindKey] = bindData.value;
+                context.emit('update:modelValue', state.handingModel);
+                context.emit('fieldChange', bindData.bindKey, bindData.value);
+                if (bindData.setValue) {
+                  bindData.setValue(props.modelValue, bindData.bindKey, bindData.value);
+                }
+              },
+            );
+
             return (
               <Component
                 {...bindData}
@@ -122,6 +123,7 @@ function flatObject(source: FieldDefine, target: FieldDefine, prefix = ''): Fiel
  * 1.若属性为string,则使用脚本处理器执行，如 predicate='obj.a ===1' 则会传入当前对象进行判断；
  * 2.若属性为function，则直接传入目标对象直接执行
  * @param fieldDefine 断言的对象
+ * @param modelValue 模式值
  */
 function predicate(fieldDefine: FieldDefine, modelValue: any): boolean {
   const bindDefinePredicate = fieldDefine.predicate;

@@ -174,10 +174,6 @@ export const getElementTypeListenerProperties = function (options: {
             align: 'center',
             // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
             formatter: (row: any, column: any) => {
-              console.warn(
-                '执行类型formatter',
-                TYPE_OPTIONS.filter((item) => item.value === row[column.property])[0].label,
-              );
               return TYPE_OPTIONS.filter((item) => item.value === row[column.property])[0].label;
             },
             // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

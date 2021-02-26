@@ -60,7 +60,6 @@ const BaseProperties = {
         prepend: (): JSX.Element => <div>条件表达式</div>,
       },
       predicate: (businessObject: ModdleElement): boolean => {
-        console.warn('获取顺序流的类型', businessObject, getSequenceFlowType(businessObject));
         return 'condition' === getSequenceFlowType(businessObject);
       },
       getValue(businessObject: ModdleElement): string {

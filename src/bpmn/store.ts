@@ -13,6 +13,21 @@ export const useBpmnProvider = (): void => {
     activeBindDefine: null,
     isActive: false,
   });
+
+  //刷新状态
+  function refreshState(elementRegistry: any, elementAction: any): void {
+    if (!bpmnState || !elementAction) {
+      return;
+    }
+    bpmnState.activeElement = elementAction;
+    const shape = elementRegistry.get(elementAction.element.id);
+    bpmnState.businessObject = shape ? shape.businessObject : {};
+    bpmnState.isActive = true;
+    bpmnState.activeBindDefine = shape
+      ? BpmnGroupPropertiesConfig[elementAction.element.type]
+      : null;
+  }
+
   const context: BpmnContext = {
     modeler: null,
     state: bpmnState,
@@ -22,32 +37,25 @@ export const useBpmnProvider = (): void => {
     initModeler(options) {
       this.modeler = new Modeler(options);
       const elementRegistry = this.modeler.get('elementRegistry');
-
-      //刷新状态
-      function refreshState(elementAction: any): void {
-        if (!bpmnState || !elementAction) {
-          return;
-        }
-        bpmnState.activeElement = elementAction;
-        const shape = elementRegistry.get(elementAction.element.id);
-        bpmnState.businessObject = shape ? shape.businessObject : {};
-        bpmnState.isActive = true;
-        bpmnState.activeBindDefine = shape
-          ? BpmnGroupPropertiesConfig[elementAction.element.type]
-          : null;
-      }
-
-      this.addEventListener('element.click', function (elementAction) {
-        refreshState(elementAction);
-      });
-      this.addEventListener('element.changed', function (elementAction: any) {
-        // 这里是处理修改shape中的label后导致的不及时更新问题
-        // 现将业务对象至为空对象，视图更新后，再重新进行渲染
-        bpmnState.businessObject = {};
-        nextTick(() => {
-          refreshState(elementAction);
+      ['element.click', 'shape.changed'].forEach((event) => {
+        context.addEventListener(event, function (elementAction) {
+          if (!bpmnState.activeElement || bpmnState.activeElement.id !== elementAction.element.id) {
+            bpmnState.businessObject = null;
+            nextTick(() => {
+              refreshState(elementRegistry, elementAction);
+            });
+          }
         });
       });
+      this;
+      // this.addEventListener('element.changed', function (elementAction: any) {
+      // 这里是处理修改shape中的label后导致的不及时更新问题
+      // 现将业务对象至为空对象，视图更新后，再重新进行渲染
+      // bpmnState.businessObject = {};
+      // nextTick(() => {
+      //   refreshState(context.modeler.get('elementRegistry'), elementAction);
+      // });
+      // });
     },
     getModeler() {
       return this.modeler;
@@ -129,6 +137,11 @@ export const useBpmnProvider = (): void => {
         values: otherExtensions.concat(value instanceof Array ? value : [value]),
       });
       this.getModeling().updateProperties(element, { extensionElements: extensions });
+
+      bpmnState.businessObject = {};
+      nextTick(() => {
+        refreshState(this.getModeler().get('elementRegistry'), toRaw(this.getActiveElement()));
+      });
     },
   };
 
