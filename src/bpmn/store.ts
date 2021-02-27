@@ -43,7 +43,6 @@ export const BpmnStore: BpmnContext = {
         }
       });
     });
-    this;
     // this.addEventListener('element.changed', function (elementAction: any) {
     // 这里是处理修改shape中的label后导致的不及时更新问题
     // 现将业务对象至为空对象，视图更新后，再重新进行渲染
@@ -66,9 +65,10 @@ export const BpmnStore: BpmnContext = {
   getBpmnFactory() {
     return this.modeler.get('bpmnFactory');
   },
-  createElement(nodeName, modelName, value) {
+  createElement(nodeName, modelName, value, multiple) {
+    const newElement = this.getBpmnFactory().create(nodeName, value);
     this.getModeling().updateProperties(this.getShape(), {
-      [modelName]: [this.getBpmnFactory().create(nodeName, value)],
+      [modelName]: multiple ? [newElement] : newElement,
     });
   },
   importXML(string) {

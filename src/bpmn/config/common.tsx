@@ -51,7 +51,7 @@ export const DocumentGroupProperties: GroupProperties = {
         return obj['documentation']?.[0]?.['text'];
       },
       setValue(businessObject: ModdleElement, key: string, value: unknown): void {
-        BpmnStore.createElement('bpmn:Documentation', 'documentation', { text: value });
+        BpmnStore.createElement('bpmn:Documentation', 'documentation', { text: value }, true);
       },
     },
   },

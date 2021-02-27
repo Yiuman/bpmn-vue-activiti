@@ -113,8 +113,14 @@ export interface BpmnContext {
    * @param nodeName 节点名称
    * @param modelName 模型名称
    * @param value 几点值
+   * @param multiple 是否是多节点
    */
-  createElement(nodeName: string, modelName: string, value: { [key: string]: any }): void;
+  createElement(
+    nodeName: string,
+    modelName: string,
+    value?: { [key: string]: any } | never,
+    multiple?: boolean,
+  ): void;
 
   /**
    * 添加设计器事件监听

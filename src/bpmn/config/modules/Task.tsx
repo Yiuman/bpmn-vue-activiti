@@ -9,6 +9,7 @@ import { GroupProperties } from '../index';
 import PrefixLabelSelect from '../../../components/prefix-label-select';
 import { ElOption } from 'element-plus';
 import { ModdleElement } from '../../type';
+import { BpmnStore } from '../../store';
 
 const TASK_EVENT_OPTIONS = [
   { label: '创建', value: 'create' },
@@ -85,6 +86,7 @@ const BaseTaskProperties = {
         },
       },
       getValue(businessObject: ModdleElement): string {
+        console.warn('businessObject', businessObject);
         const loopCharacteristics = businessObject.loopCharacteristics;
         if (!loopCharacteristics) {
           return 'Null';
@@ -94,6 +96,29 @@ const BaseTaskProperties = {
           return loopCharacteristics.isSequential ? 'Sequential' : 'Parallel';
         } else {
           return 'StandardLoop';
+        }
+      },
+      setValue(businessObject: ModdleElement, key: string, value: string): void {
+        const shape = BpmnStore.getShape();
+        const modeling = BpmnStore.getModeling();
+        switch (value) {
+          case 'Null':
+            modeling.updateProperties(shape, {
+              loopCharacteristics: null,
+            });
+            // delete businessObject.loopCharacteristics;
+            break;
+          case 'StandardLoop':
+            BpmnStore.createElement('bpmn:StandardLoopCharacteristics', 'loopCharacteristics');
+            break;
+          default:
+            BpmnStore.createElement(
+              'bpmn:MultiInstanceLoopCharacteristics',
+              'loopCharacteristics',
+              {
+                isSequential: value === 'Sequential',
+              },
+            );
         }
       },
     },
@@ -113,7 +138,7 @@ export default {
   'bpmn:Task': CommonGroupPropertiesArray,
   //用户任务
   'bpmn:UserTask': [
-    CommonGroupProperties,
+    BaseTaskProperties,
     BpmnUserGroupProperties,
     TaskListenerProperties,
     FormGroupProperties,
