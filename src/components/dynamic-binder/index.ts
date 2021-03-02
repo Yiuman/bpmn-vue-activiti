@@ -10,6 +10,7 @@ export interface FieldDefine extends Map {
   component?: string | Component | JSX.Element;
   //获取value的值,根据绑定的对象获取对象的值
   getValue?: (sourceObject: any) => any;
+  setValue?: (sourceObject: any, key: string, value: any) => void | (() => void);
 }
 
 export interface Map {

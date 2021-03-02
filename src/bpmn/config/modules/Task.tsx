@@ -7,7 +7,7 @@ import {
 } from '../common';
 import { GroupProperties } from '../index';
 import PrefixLabelSelect from '../../../components/prefix-label-select';
-import { ElOption } from 'element-plus';
+import { ElInput, ElOption } from 'element-plus';
 import { ModdleElement } from '../../type';
 import { BpmnStore } from '../../store';
 
@@ -36,6 +36,9 @@ export const BpmnUserGroupProperties: GroupProperties = {
   name: '人员设置',
   icon: 'el-icon-user-solid',
   properties: {
+    /**
+     * 处理人属性
+     */
     assignee: {
       component: PrefixLabelSelect,
       prefixTitle: '处理人',
@@ -47,6 +50,9 @@ export const BpmnUserGroupProperties: GroupProperties = {
         },
       },
     },
+    /**
+     * 候选人属性
+     */
     candidateUsers: {
       component: PrefixLabelSelect,
       prefixTitle: '候选人',
@@ -57,6 +63,76 @@ export const BpmnUserGroupProperties: GroupProperties = {
             return <ElOption {...item} />;
           });
         },
+      },
+    },
+    /**
+     * 循环基数
+     */
+    loopCardinality: {
+      component: ElInput,
+      placeholder: '循环基数',
+      type: 'number',
+      vSlots: {
+        prepend: (): JSX.Element => <div>循环基数</div>,
+      },
+      predicate(businessObject: ModdleElement): boolean {
+        return businessObject.loopCharacteristics;
+      },
+      getValue(businessObject: ModdleElement): string {
+        const loopCharacteristics = businessObject.loopCharacteristics;
+        if (!loopCharacteristics) {
+          return '';
+        }
+        return loopCharacteristics.loopCardinality?.body;
+      },
+      setValue(businessObject: ModdleElement, key: string, value: string): void {
+        const bpmnContext = BpmnStore;
+        const moddle = bpmnContext.getModeler().get('moddle');
+        const loopCharacteristics = businessObject.loopCharacteristics;
+        loopCharacteristics.loopCardinality = moddle.create('bpmn:FormalExpression', {
+          body: value,
+        });
+        bpmnContext.getModeling().updateProperties(bpmnContext.getShape(), {
+          loopCharacteristics: loopCharacteristics,
+        });
+      },
+    },
+    /**
+     * 多实例完成条件
+     * nr是number单词缩写
+     * 1.nrOfInstances  实例总数。
+     * 2.nrOfCompletedInstances  已经完成的实例个数
+     * 3.loopCounter 已经循环的次数。
+     * 4.nrOfActiveInstances 当前还没有完成的实例
+     */
+    completionCondition: {
+      component: ElInput,
+
+      placeholder:
+        '如：${nrOfCompletedInstances/nrOfInstances >= 0.25} 表示完成数大于等于4分1时任务完成',
+      vSlots: {
+        prepend: (): JSX.Element => <div>完成条件</div>,
+      },
+      predicate(businessObject: ModdleElement): boolean {
+        return businessObject.loopCharacteristics;
+      },
+      getValue(businessObject: ModdleElement): string {
+        const loopCharacteristics = businessObject.loopCharacteristics;
+        if (!loopCharacteristics) {
+          return '';
+        }
+        return loopCharacteristics.completionCondition?.body;
+      },
+      setValue(businessObject: ModdleElement, key: string, value: string): void {
+        const bpmnContext = BpmnStore;
+        const moddle = bpmnContext.getModeler().get('moddle');
+        const loopCharacteristics = businessObject.loopCharacteristics;
+        loopCharacteristics.completionCondition = moddle.create('bpmn:FormalExpression', {
+          body: value,
+        });
+        bpmnContext.getModeling().updateProperties(bpmnContext.getShape(), {
+          loopCharacteristics: loopCharacteristics,
+        });
       },
     },
   },
@@ -86,7 +162,6 @@ const BaseTaskProperties = {
         },
       },
       getValue(businessObject: ModdleElement): string {
-        console.warn('businessObject', businessObject);
         const loopCharacteristics = businessObject.loopCharacteristics;
         if (!loopCharacteristics) {
           return 'Null';
@@ -98,7 +173,7 @@ const BaseTaskProperties = {
           return 'StandardLoop';
         }
       },
-      setValue(businessObject: ModdleElement, key: string, value: string): void {
+      setValue(businessObject: ModdleElement, key: string, value: string): () => void {
         const shape = BpmnStore.getShape();
         const modeling = BpmnStore.getModeling();
         switch (value) {
@@ -120,6 +195,7 @@ const BaseTaskProperties = {
               },
             );
         }
+        return () => BpmnStore.refresh();
       },
     },
   },

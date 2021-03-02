@@ -51,7 +51,7 @@ export default defineComponent({
         {Object.keys(state.flatFieldDefine).map((key) => {
           const define = state.flatFieldDefine[key];
 
-          if (define && predicate(define, props.modelValue)) {
+          if (define && predicate(define, toRaw(props.modelValue))) {
             const bindData = dataBindTransformer(key, define);
             //组件不能是代理对象，这里直接用目标对象
             const Component = toRaw(define.component);
@@ -64,7 +64,15 @@ export default defineComponent({
 
                 //如果有setValue还是则直接使用独立的setValue
                 if (bindData.setValue) {
-                  bindData.setValue(props.modelValue.target, bindData.bindKey, bindData.value);
+                  //setValue有返回值，值进行赋值后执行
+                  const setValueCallBack = bindData.setValue(
+                    toRaw(props.modelValue),
+                    bindData.bindKey,
+                    bindData.value,
+                  );
+                  if (setValueCallBack) {
+                    setValueCallBack();
+                  }
                 } else {
                   context.emit('fieldChange', bindData.bindKey, bindData.value);
                 }

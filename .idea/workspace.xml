@@ -4,22 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bpmn/config/TypeNameMapping.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Other.tsx" afterDir="false" />
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="添加Docker部署文件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Gateway.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Gateway.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Process.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Process.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/modeler/Modeler.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modeler/Modeler.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/panel/panel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/panel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/script-helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/script-helper.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +30,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="JsFlowSettings">
-    <service-enabled>true</service-enabled>
-    <exe-path />
-    <other-services-enabled>true</other-services-enabled>
-    <auto-save>true</auto-save>
-  </component>
   <component name="ProjectId" id="1nQ0xj4XoIWEBlxhJ1MDIuUn7Cl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -73,7 +53,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/depoly" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/depoly" />
+      <recent name="$PROJECT_DIR$/src/components/sublist" />
       <recent name="$PROJECT_DIR$/src/bpmn/config/modules" />
       <recent name="$PROJECT_DIR$/src/bpmn/config" />
     </key>
@@ -129,7 +115,14 @@
       <workItem from="1612344021633" duration="920000" />
       <workItem from="1612490092409" duration="1024000" />
       <workItem from="1612491304745" duration="898000" />
-      <workItem from="1612511319567" duration="10268000" />
+      <workItem from="1612511319567" duration="21710000" />
+      <workItem from="1612663829726" duration="2471000" />
+      <workItem from="1612666920472" duration="44932000" />
+      <workItem from="1613572832503" duration="29000" />
+      <workItem from="1613984504750" duration="16142000" />
+      <workItem from="1614129506617" duration="37924000" />
+      <workItem from="1614237177073" duration="38009000" />
+      <workItem from="1614406766217" duration="11623000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -138,15 +131,143 @@
       <option name="project" value="LOCAL" />
       <updated>1612262300163</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="添加节点属性配置的的节点名称、业务对象深层赋值待解决">
+      <created>1612522576536</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612522576536</updated>
+    </task>
+    <task id="LOCAL-00003" summary="增加Sublist组件，用于添加数组对象（实现中）">
+      <created>1612688044538</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1612688044538</updated>
+    </task>
+    <task id="LOCAL-00004" summary="完成SubList组件">
+      <created>1612808936259</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1612808936259</updated>
+    </task>
+    <task id="LOCAL-00005" summary="代码重构">
+      <created>1612810336159</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1612810336159</updated>
+    </task>
+    <task id="LOCAL-00006" summary="代码重构">
+      <created>1612810349580</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1612810349580</updated>
+    </task>
+    <task id="LOCAL-00007" summary="代码重构">
+      <created>1612810558231</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1612810558231</updated>
+    </task>
+    <task id="LOCAL-00008" summary="SubList添加表单校验配置、完成扩展属性配置">
+      <created>1612873378934</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1612873378934</updated>
+    </task>
+    <task id="LOCAL-00009" summary="添加Docker部署文件">
+      <created>1613986676940</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1613986676940</updated>
+    </task>
+    <task id="LOCAL-00010" summary="添加fork me on github">
+      <created>1613988468183</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1613988468183</updated>
+    </task>
+    <task id="LOCAL-00011" summary="部分代码重构、修复已知bug、完成流程监听器配置">
+      <created>1614157940803</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1614157940803</updated>
+    </task>
+    <task id="LOCAL-00012" summary="修复已知BUG、完善`顺序流`的配置、`任务`添加监听器配置">
+      <created>1614248001385</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1614248001386</updated>
+    </task>
+    <task id="LOCAL-00013" summary="修复因businessObject更新时导致SubList为部分列数据暂时未空的问题">
+      <created>1614308900450</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1614308900450</updated>
+    </task>
+    <task id="LOCAL-00014" summary="修复已知BUG，重构优化代码">
+      <created>1614332131330</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1614332131330</updated>
+    </task>
+    <task id="LOCAL-00015" summary="完善BPMNSTORE，添加用户回路特性配置">
+      <created>1614407101585</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1614407101585</updated>
+    </task>
+    <task id="LOCAL-00016" summary="添加readme说明">
+      <created>1614607011971</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1614607011971</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加节点可配置的属性、完善动态数据绑定组件获取value的方式" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加节点可配置的属性、完善动态数据绑定组件获取value的方式" />
+    <MESSAGE value="添加节点属性配置的的节点名称、业务对象深层赋值待解决" />
+    <MESSAGE value="增加Sublist组件，用于添加数组对象（实现中）" />
+    <MESSAGE value="完成SubList组件" />
+    <MESSAGE value="代码重构" />
+    <MESSAGE value="SubList添加表单校验配置、完成扩展属性配置" />
+    <MESSAGE value="添加Docker部署文件" />
+    <MESSAGE value="添加fork me on github" />
+    <MESSAGE value="部分代码重构、修复已知bug、完成流程监听器配置" />
+    <MESSAGE value="修复已知BUG、完善`顺序流`的配置、`任务`添加监听器配置" />
+    <MESSAGE value="修复因businessObject更新时导致SubList为部分列数据暂时未空的问题" />
+    <MESSAGE value="修复已知BUG，重构优化代码" />
+    <MESSAGE value="完善BPMNSTORE，添加用户回路特性配置" />
+    <MESSAGE value="添加readme说明" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加readme说明" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

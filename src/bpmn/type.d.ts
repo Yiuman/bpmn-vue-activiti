@@ -49,6 +49,8 @@ export interface BpmnContext {
    */
   getState(): UnwrapRef<BpmnState>;
 
+  refresh: () => void;
+
   /**
    * 初始化流程设计器
    * @param options 流程设计器参数

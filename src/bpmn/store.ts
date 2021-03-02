@@ -32,10 +32,12 @@ export const BpmnStore: BpmnContext = {
   initModeler(options) {
     this.modeler = new Modeler(options);
     const elementRegistry = this.modeler.get('elementRegistry');
-    //添加click、shapeAdd事件，用于变更当前的业务对象，刷新属性配置栏
+    //添加click、shapeAdd事件，属性更新后的事件，用于变更当前的业务对象，刷新属性配置栏
     ['element.click', 'shape.added'].forEach((event) => {
       BpmnStore.addEventListener(event, function (elementAction) {
-        if (!bpmnState.activeElement || bpmnState.activeElement.id !== elementAction.element.id) {
+        console.warn('elementAction', elementAction);
+        const element = elementAction.element || elementAction.context.element;
+        if (element && (!bpmnState.activeElement || bpmnState.activeElement.id !== element.id)) {
           bpmnState.businessObject = null;
           nextTick(() => {
             refreshState(elementRegistry, elementAction);
@@ -54,6 +56,12 @@ export const BpmnStore: BpmnContext = {
   },
   getModeler() {
     return this.modeler;
+  },
+  refresh() {
+    bpmnState.businessObject = null;
+    nextTick(() => {
+      refreshState(this.modeler.get('elementRegistry'), bpmnState.activeElement);
+    });
   },
   getShape() {
     return this.getShapeById(this.getState().activeElement.element.id);
