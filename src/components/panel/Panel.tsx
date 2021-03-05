@@ -74,7 +74,7 @@ export default defineComponent({
             </div>
             <div class="bpmn-panel" v-show={!panelState.shrinkageOff}>
               <div class="title">{bpmnContext.getActiveElementName()}</div>
-              <ElCollapse v-model={panelState.elCollapses}>
+              <ElCollapse class="bpmn-panel-collapse" v-model={panelState.elCollapses}>
                 {contextState.activeBindDefine.map((groupItem) => {
                   return (
                     <ElCollapseItem name={groupItem.name} v-slots={getSlotObject(groupItem)} />
