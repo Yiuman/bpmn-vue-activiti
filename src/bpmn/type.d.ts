@@ -24,6 +24,7 @@ export interface BpmnState {
 }
 
 export interface ModdleElement {
+  id: string;s
   $type: string;
   value?: [ModdleElement];
   $attrs: { [key: string]: any };

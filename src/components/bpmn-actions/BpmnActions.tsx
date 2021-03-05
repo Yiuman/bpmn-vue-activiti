@@ -8,6 +8,7 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 
 import './bpmn-actions.css';
+import { ModdleElement } from '../../bpmn/type';
 
 export default defineComponent({
   name: 'BpmnActions',
@@ -56,10 +57,14 @@ export default defineComponent({
           label: '导出SVG',
           icon: 'icon-zu920',
           action: () => {
+            const rootElement: ModdleElement = bpmnContext
+              .getModeler()
+              .get('canvas')
+              .getRootElement();
             bpmnContext
               .getSVG()
               .then((response) => {
-                download(response.svg, 'svg', 'svg');
+                download(response.svg, rootElement.id || 'process', 'svg');
               })
               .catch((err: unknown) => {
                 console.warn(err);
@@ -70,10 +75,14 @@ export default defineComponent({
           label: '导出XML',
           icon: 'icon-zu1359',
           action: () => {
+            const rootElement: ModdleElement = bpmnContext
+              .getModeler()
+              .get('canvas')
+              .getRootElement();
             bpmnContext
               .getXML()
               .then((response: { xml: string }) => {
-                download(response.xml, 'xml', 'xml');
+                download(response.xml, rootElement.id || 'process', 'bpmn');
               })
               .catch((err: unknown) => {
                 console.warn(err);
@@ -108,6 +117,7 @@ export default defineComponent({
           label: '预览',
           icon: 'icon-xianshi',
           action: () => {
+            console.warn();
             bpmnContext
               .getXML()
               .then((response) => {
@@ -175,7 +185,6 @@ export default defineComponent({
 
 //文本下载
 const download = (data: string, filename: string, type: string): void => {
-  console.warn(data);
   const blob = new Blob([data]);
   const tempLink = document.createElement('a'); // 创建a标签
   const href = window.URL.createObjectURL(blob); // 创建下载的链接
