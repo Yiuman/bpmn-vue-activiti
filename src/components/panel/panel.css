@@ -35,7 +35,7 @@
 
 .bpmn-panel-collapse {
     max-height: calc(100% - 50px);
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 .bpmn-panel-shrinkage {
