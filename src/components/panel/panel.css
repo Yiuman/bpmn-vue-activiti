@@ -34,8 +34,10 @@
 }
 
 .bpmn-panel-collapse {
-    max-height: calc(100% - 50px);
+    max-height: calc(100% - 60px);
     overflow-y: auto;
+    padding: 5px;
+    /* padding: 10px; */
 }
 
 .bpmn-panel-shrinkage {
