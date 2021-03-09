@@ -6,7 +6,6 @@
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
     width: 45%;
     height: 100%;
-    /* margin: 10px 0; */
 }
 
 .bpmn-panel .dynamic-binder {
@@ -47,5 +46,9 @@
     right: 10px;
     font-size: 20px;
     cursor: pointer;
+}
+
+.el-collapse{
+    border-bottom: none !important;
 }
 
