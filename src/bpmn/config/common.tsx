@@ -124,11 +124,9 @@ export const getElementTypeListenerProperties = function (options: {
             prop: 'event',
             label: '事件',
             align: 'center',
-            // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-            formatter: (row: any, column: any) => {
+            formatter: (row: any, column: any): string => {
               return eventOptions.filter((item) => item.value === row[column.property])[0].label;
             },
-            // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
             editComponent: function (scope: any, state: SubListState<any>): JSX.Element {
               return (
                 <ElFormItem
@@ -152,11 +150,9 @@ export const getElementTypeListenerProperties = function (options: {
             prop: 'type',
             label: '执行类型',
             align: 'center',
-            // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
             formatter: (row: any, column: any) => {
               return TYPE_OPTIONS.filter((item) => item.value === row[column.property])[0].label;
             },
-            // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
             editComponent: function (scope: any, state: SubListState<any>): JSX.Element {
               return (
                 <ElFormItem

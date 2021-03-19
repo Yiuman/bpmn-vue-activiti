@@ -1,6 +1,7 @@
 import { defineComponent, PropType } from 'vue';
 import { Button, ButtonRenderProps } from './index';
 import { ElButton, ElTooltip } from 'element-plus';
+
 export default defineComponent({
   name: 'ButtonRender',
 
@@ -46,16 +47,17 @@ export default defineComponent({
               offset: 10,
               'open-delay': 300,
             };
+
             return (
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              //@ts-ignore
-              <ElTooltip class="render-icon-tooltip" {...tooltipProps} placement="top">
+              // @ts-ignore
+              <ElTooltip class="render-icon-tooltip" {...tooltipProps}>
                 <div
                   class="render-icon"
                   onClick={() => (item.action ? item.action() : globalClick(item))}
                 >
                   <svg class="icon" aria-hidden="true">
-                    <use xlinkHref={`#${item.icon}`}/>
+                    <use xlinkHref={`#${item.icon}`} />
                   </svg>
                 </div>
               </ElTooltip>

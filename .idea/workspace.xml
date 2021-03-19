@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="添加Docker部署文件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/button-render/ButtonRender.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/button-render/ButtonRender.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,6 +125,8 @@
       <workItem from="1614129506617" duration="37924000" />
       <workItem from="1614237177073" duration="38009000" />
       <workItem from="1614406766217" duration="11623000" />
+      <workItem from="1616036503785" duration="1100000" />
+      <workItem from="1616142349649" duration="649000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
