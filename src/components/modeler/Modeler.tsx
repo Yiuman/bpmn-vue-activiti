@@ -17,10 +17,6 @@ export default defineComponent({
     onMounted(() => {
       bpmnContext.initModeler({
         container: '#modeler-container',
-        //添加控制板
-        propertiesPanel: {
-          parent: '#properties-panel',
-        },
         additionalModules: [
           //添加翻译
           { translate: ['value', translate('zh')] },
