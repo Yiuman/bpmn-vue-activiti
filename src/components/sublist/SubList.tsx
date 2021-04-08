@@ -131,7 +131,7 @@ export default defineComponent({
     };
     return (
       <div class="sublist-div">
-        {sublistState.data ? (
+        {sublistState.data && (
           <ElForm ref="form" {...formProps}>
             <ElTable {...tableProps} data={sublistState.data}>
               {props.columns.map((column) => {
@@ -161,17 +161,13 @@ export default defineComponent({
               <ElTableColumn {...this.actionColumnProps} v-slots={this.actionColumnProps.vSlots} />
             </ElTable>
           </ElForm>
-        ) : (
-          ''
         )}
 
         {/*新增按钮*/}
-        {!sublistState.editing ? (
+        {!sublistState.editing && (
           <div class="sublist-add" onClick={() => this.addData()}>
             {props.addTitle}
           </div>
-        ) : (
-          ''
         )}
       </div>
     );
@@ -222,6 +218,10 @@ const buildActionColumnProps = (state: SubListState<any>, ctx: SetupContext<any>
     state.editIndex = undefined;
   }
 
+  function isReadonly(): string {
+    return state.editing ? 'readonly' : '';
+  }
+
   return {
     align: 'center',
     label: '操作',
@@ -241,7 +241,7 @@ const buildActionColumnProps = (state: SubListState<any>, ctx: SetupContext<any>
           ) : (
             <div>
               <span
-                class={`${state.editing ? 'readonly' : ''} sublist-edit sublist-btn`}
+                class={`${isReadonly()} sublist-edit sublist-btn`}
                 onClick={() => {
                   if (!state.editing) {
                     actionEdit(scope);
@@ -250,9 +250,9 @@ const buildActionColumnProps = (state: SubListState<any>, ctx: SetupContext<any>
               >
                 编辑
               </span>
-              <span class={`${state.editing ? 'readonly' : ''} `}>|</span>
+              <span class={`${isReadonly()} `}>|</span>
               <span
-                class={`${state.editing ? 'readonly' : ''} sublist-delete sublist-btn`}
+                class={`${isReadonly()} sublist-delete sublist-btn`}
                 onClick={() => {
                   if (!state.editing) {
                     actionRemove(scope.$index);

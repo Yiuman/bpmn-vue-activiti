@@ -18,7 +18,7 @@ const PrefixLabelSelect = defineComponent({
     });
     return () => (
       <div class="prefix-label-select-container">
-        {props.prefixTitle ? <div class="prefix-title ">{props.prefixTitle}</div> : ''}
+        {props.prefixTitle && <div class="prefix-title ">{props.prefixTitle}</div>}
         <ElSelect
           class="prefix-label-select"
           v-model={computedModelValue.value}

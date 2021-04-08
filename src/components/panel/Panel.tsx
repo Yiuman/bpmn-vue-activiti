@@ -44,7 +44,7 @@ export default defineComponent({
       return {
         title: () => (
           <div class="group-title-block">
-            {groupItem.icon ? <i class={groupItem.icon} /> : ''}
+            {groupItem.icon && <i class={groupItem.icon} />}
             {groupItem.name}
           </div>
         ),
@@ -60,7 +60,7 @@ export default defineComponent({
 
     return () => (
       <>
-        {contextState.isActive && contextState.businessObject && contextState.activeBindDefine ? (
+        {contextState.isActive && contextState.businessObject && contextState.activeBindDefine && (
           <>
             <div
               class="bpmn-panel-shrinkage"
@@ -83,8 +83,6 @@ export default defineComponent({
               </ElCollapse>
             </div>
           </>
-        ) : (
-          ''
         )}
       </>
     );

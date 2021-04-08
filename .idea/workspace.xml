@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/modeler/Modeler.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modeler/Modeler.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/sublist/SubList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sublist/SubList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +128,15 @@
       <workItem from="1614406766217" duration="11623000" />
       <workItem from="1616036503785" duration="1100000" />
       <workItem from="1616142349649" duration="1533000" />
-      <workItem from="1616665591764" duration="172000" />
+      <workItem from="1616665591764" duration="236000" />
+      <workItem from="1616825172608" duration="623000" />
+      <workItem from="1617349132040" duration="1110000" />
+      <workItem from="1617692885572" duration="90000" />
+      <workItem from="1617693534335" duration="675000" />
+      <workItem from="1617694636805" duration="87000" />
+      <workItem from="1617695465394" duration="1822000" />
+      <workItem from="1617698972525" duration="2662000" />
+      <workItem from="1617774111776" duration="2793000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -247,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616143239420</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="去除modeler无用引入">
+      <created>1616665803190</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1616665803190</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,7 +296,8 @@
     <MESSAGE value="完善BPMNSTORE，添加用户回路特性配置" />
     <MESSAGE value="添加readme说明" />
     <MESSAGE value="去除无用警告" />
-    <option name="LAST_COMMIT_MESSAGE" value="去除无用警告" />
+    <MESSAGE value="去除modeler无用引入" />
+    <option name="LAST_COMMIT_MESSAGE" value="去除modeler无用引入" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
