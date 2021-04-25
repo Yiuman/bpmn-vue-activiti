@@ -39,7 +39,7 @@ export const BpmnStore: BpmnContext = {
         const element = elementAction.element || elementAction.context.element;
         if (element && (!bpmnState.activeElement || bpmnState.activeElement.id !== element.id)) {
           bpmnState.businessObject = null;
-          nextTick(() => {
+          nextTick().then(() => {
             refreshState(elementRegistry, elementAction);
           });
         }
@@ -59,9 +59,12 @@ export const BpmnStore: BpmnContext = {
   },
   refresh() {
     bpmnState.businessObject = null;
-    nextTick(() => {
+    nextTick().then(() => {
       refreshState(this.modeler.get('elementRegistry'), bpmnState.activeElement);
     });
+    // nextTick(() => {
+    //
+    // });
   },
   getShape() {
     return this.getShapeById(this.getState().activeElement.element.id);

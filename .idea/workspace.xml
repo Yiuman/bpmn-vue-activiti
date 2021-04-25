@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="nextick">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sublist/SubList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sublist/SubList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +49,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -136,7 +135,9 @@
       <workItem from="1617694636805" duration="87000" />
       <workItem from="1617695465394" duration="1822000" />
       <workItem from="1617698972525" duration="2662000" />
-      <workItem from="1617774111776" duration="2793000" />
+      <workItem from="1617774111776" duration="6530000" />
+      <workItem from="1618277256237" duration="1248000" />
+      <workItem from="1619360513883" duration="312000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -264,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616665803190</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="jsx由三目改为&amp;&amp;表达式">
+      <created>1617853397813</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1617853397814</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,7 +305,8 @@
     <MESSAGE value="添加readme说明" />
     <MESSAGE value="去除无用警告" />
     <MESSAGE value="去除modeler无用引入" />
-    <option name="LAST_COMMIT_MESSAGE" value="去除modeler无用引入" />
+    <MESSAGE value="jsx由三目改为&amp;&amp;表达式" />
+    <option name="LAST_COMMIT_MESSAGE" value="jsx由三目改为&amp;&amp;表达式" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
