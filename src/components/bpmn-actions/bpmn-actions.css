@@ -33,7 +33,6 @@
 }
 
 .CodeMirror {
-  font-family: monospace;
   height: 100%;
   font-family: Monaco, Menlo, Consolas, 'COURIER NEW', monospace;
   font-size: 12px;

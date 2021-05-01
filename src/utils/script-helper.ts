@@ -1,11 +1,8 @@
 const ScriptHelper = {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  execute(scriptStr: string, options: any): any {
-    // eslint-disable-next-line no-new-func
+  execute(scriptStr: string, options: unknown): unknown {
     return Function('"use strict";return (' + scriptStr + ')')()(options);
   },
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  executeEl(callObject: any, logicStr: string): any {
+  executeEl(callObject: unknown, logicStr: string): unknown {
     return Function('"use strict";return (function(){ return ' + logicStr + '})')().call(
       callObject,
     );

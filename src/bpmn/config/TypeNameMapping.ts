@@ -1,4 +1,6 @@
 //流程类型名称匹配
+import { ModdleElement } from '../type';
+
 export const ProcessNameMapping = {
   //流程
   'bpmn:Process': '流程',
@@ -18,8 +20,7 @@ export const EventNameMapping = {
 
 //流名称匹配
 export const FlowNameMapping = {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  'bpmn:SequenceFlow': (businessObject: any) => {
+  'bpmn:SequenceFlow': (businessObject: ModdleElement) => {
     const defaultName = '顺序流';
     if (businessObject.conditionExpression) {
       return '条件' + defaultName;
@@ -92,8 +93,7 @@ export const NameMapping: { [key: string]: ((obj: any) => string) | string } = {
  * 根据流程类型节点业务对象解析业务对象节点类型的名称
  * @param businessObject 节点的业务流程对象
  */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const resolveTypeName = (businessObject: any): string => {
+export const resolveTypeName = (businessObject: ModdleElement): string => {
   const eventDefinitions = businessObject.eventDefinitions;
   const nameMappingElement = NameMapping[businessObject.$type];
   if (typeof nameMappingElement === 'function') {

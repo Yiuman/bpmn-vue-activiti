@@ -14,7 +14,7 @@ export default defineComponent({
 
     //动态数据绑定器的字段变化后更新到xml，视图刷新
     //需要注意，如果字段定义里边属性定义了`setValue`方法，则不会进这里了
-    function onFieldChange(key: string, value: any): void {
+    function onFieldChange(key: string, value: unknown): void {
       const shape = bpmnContext.getShape();
       bpmnContext.getModeling().updateProperties(shape, { [key]: value });
     }

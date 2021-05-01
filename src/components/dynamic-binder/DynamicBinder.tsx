@@ -11,7 +11,7 @@ export default defineComponent({
   props: {
     //传进来的源对象，这里需要通过动态组件修改源对象的值进行数据动态绑定
     modelValue: {
-      type: Object as PropType<any>,
+      type: Object as PropType<unknown>,
       default: () => Object.assign({}),
       required: true,
     },
@@ -42,7 +42,7 @@ export default defineComponent({
 
     //绑定转换函数赋值，然props有则用props的否则用默认的
     const bindTransformer = props.bindTransformer || defaultTransformer;
-    const dataBindTransformer = function (key: string, value: any) {
+    const dataBindTransformer = function (key: string, value: unknown) {
       return bindTransformer(state.handingModel, key, value);
     };
 
@@ -136,11 +136,11 @@ function flatObject(source: FieldDefine, target: FieldDefine, prefix = ''): Fiel
  * @param fieldDefine 断言的对象
  * @param modelValue 模式值
  */
-function predicate(fieldDefine: FieldDefine, modelValue: any): boolean {
+function predicate(fieldDefine: FieldDefine, modelValue: unknown): boolean {
   const bindDefinePredicate = fieldDefine.predicate;
   if (bindDefinePredicate) {
     if (typeof bindDefinePredicate === 'string') {
-      return ScriptHelper.executeEl(modelValue, bindDefinePredicate);
+      return ScriptHelper.executeEl(modelValue, bindDefinePredicate) as boolean;
     }
 
     if (typeof bindDefinePredicate === 'function') {
@@ -156,7 +156,7 @@ function predicate(fieldDefine: FieldDefine, modelValue: any): boolean {
  * @param bindKey 绑定数据的Key
  * @param bindDefine 绑定定义
  */
-function defaultTransformer(sourceModel: any, bindKey: string, bindDefine: FieldDefine): any {
+function defaultTransformer(sourceModel: unknown, bindKey: string, bindDefine: FieldDefine): unknown {
   return reactive({
     bindKey,
     ...bindDefine,
