@@ -16,6 +16,14 @@ const commonProperties: PropertiesMap<FieldDefine> = {
     vSlots: {
       prepend: (): JSX.Element => <div>节点ID</div>,
     },
+    setValue(sourceObject: ModdleElement, key: string, value: string) {
+      const isNotNull = value;
+      const latestValue = value || ' ';
+      const shape = BpmnStore.getShape();
+      BpmnStore.getModeling().updateProperties(shape, {
+        [key]: isNotNull ? latestValue.trim() : latestValue,
+      });
+    },
   },
   name: {
     component: ElInput,
