@@ -156,7 +156,11 @@ function predicate(fieldDefine: FieldDefine, modelValue: unknown): boolean {
  * @param bindKey 绑定数据的Key
  * @param bindDefine 绑定定义
  */
-function defaultTransformer(sourceModel: unknown, bindKey: string, bindDefine: FieldDefine): unknown {
+function defaultTransformer(
+  sourceModel: unknown,
+  bindKey: string,
+  bindDefine: FieldDefine,
+): unknown {
   return reactive({
     bindKey,
     ...bindDefine,
