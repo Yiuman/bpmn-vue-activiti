@@ -109,6 +109,9 @@ const TYPE_OPTIONS = [
  * 获取节点类型的监听器属性配置组
  * @param options 参数
  */
+import { TaskNameMapping } from './TypeNameMapping';
+
+const taskTags = Object.keys(TaskNameMapping);
 export const getElementTypeListenerProperties = function (options: {
   name: string;
   icon?: string;
@@ -192,8 +195,11 @@ export const getElementTypeListenerProperties = function (options: {
           content: [{ required: true, message: '执行内容不能为空' }],
         },
         getValue: (businessObject: ModdleElement): Array<any> => {
+          const listenerTagName = taskTags.includes(businessObject.$type)
+            ? 'activiti:TaskListener'
+            : 'activiti:ExecutionListener';
           return businessObject?.extensionElements?.values
-            ?.filter((item: ModdleElement) => item.$type === 'activiti:ExecutionListener')
+            ?.filter((item: ModdleElement) => item.$type === listenerTagName)
             ?.map((item: ModdleElement) => {
               const type = item.expression
                 ? 'expression'
@@ -209,11 +215,16 @@ export const getElementTypeListenerProperties = function (options: {
         },
         setValue(businessObject: ModdleElement, key: string, value: []): void {
           const bpmnContext = BpmnStore;
+          console.warn('activeBusinessObject', businessObject);
           const moddle = bpmnContext.getModeler().get('moddle');
+          //判断当前活动的模型类型，使用不同类型的标签监听器
+          const listenerTagName = taskTags.includes(businessObject.$type)
+            ? 'activiti:TaskListener'
+            : 'activiti:ExecutionListener';
           bpmnContext.updateExtensionElements(
-            'activiti:ExecutionListener',
+            listenerTagName,
             value.map((attr: { event: string; type: string; content: string }) => {
-              return moddle.create(`activiti:ExecutionListener`, {
+              return moddle.create(listenerTagName, {
                 event: attr.event,
                 [attr.type]: attr.content,
               });

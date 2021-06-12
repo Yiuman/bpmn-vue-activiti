@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="fix:完善ts类型约束">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/TypeNameMapping.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/TypeNameMapping.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/bpmn-actions/bpmn-actions.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/bpmn-actions/bpmn-actions.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dynamic-binder/DynamicBinder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dynamic-binder/DynamicBinder.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/script-helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/script-helper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/resources/AskLeave.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/resources/AskLeave.bpmn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +52,7 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -143,7 +141,25 @@
       <workItem from="1618277256237" duration="1248000" />
       <workItem from="1619360513883" duration="420000" />
       <workItem from="1619488102490" duration="894000" />
-      <workItem from="1619664093799" duration="8957000" />
+      <workItem from="1619664093799" duration="9610000" />
+      <workItem from="1620138223413" duration="597000" />
+      <workItem from="1620287773809" duration="598000" />
+      <workItem from="1620435693174" duration="3585000" />
+      <workItem from="1620485754907" duration="604000" />
+      <workItem from="1620701308422" duration="1245000" />
+      <workItem from="1620704899894" duration="9000" />
+      <workItem from="1620886372733" duration="371000" />
+      <workItem from="1620886764423" duration="439000" />
+      <workItem from="1620889656956" duration="388000" />
+      <workItem from="1621236835380" duration="834000" />
+      <workItem from="1621387447212" duration="36000" />
+      <workItem from="1621391254767" duration="3044000" />
+      <workItem from="1621928671342" duration="2180000" />
+      <workItem from="1622021821283" duration="320000" />
+      <workItem from="1622538285395" duration="11000" />
+      <workItem from="1622712380807" duration="2528000" />
+      <workItem from="1622902018488" duration="17000" />
+      <workItem from="1623494206770" duration="2220000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -285,7 +301,28 @@
       <option name="project" value="LOCAL" />
       <updated>1619360843718</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix:完善ts类型约束">
+      <created>1619856663177</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1619856663178</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix: 解决节点ID为空是bpmn-js报错的问题（导致绑定ID输入框不能删除最后一个字符的问题）&#10;&#10;Closes #2">
+      <created>1620701944471</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1620701944471</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fix:修复报红">
+      <created>1622021879752</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1622021879752</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,7 +357,10 @@
     <MESSAGE value="去除modeler无用引入" />
     <MESSAGE value="jsx由三目改为&amp;&amp;表达式" />
     <MESSAGE value="nextTick改为promise方式调用" />
-    <option name="LAST_COMMIT_MESSAGE" value="nextTick改为promise方式调用" />
+    <MESSAGE value="fix:完善ts类型约束" />
+    <MESSAGE value="fix: 解决节点ID为空是bpmn-js报错的问题（导致绑定ID输入框不能删除最后一个字符的问题）&#10;&#10;Closes #2" />
+    <MESSAGE value="fix:修复报红" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix:修复报红" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
