@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="fix:完善ts类型约束">
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/resources/AskLeave.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/resources/AskLeave.bpmn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/bpmn-actions/BpmnActions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/bpmn-actions/BpmnActions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modeler/Modeler.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modeler/Modeler.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/sublist/SubList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sublist/SubList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/sublist/type.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sublist/type.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shim.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shim.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +168,8 @@
       <workItem from="1622538285395" duration="11000" />
       <workItem from="1622712380807" duration="2528000" />
       <workItem from="1622902018488" duration="17000" />
-      <workItem from="1623494206770" duration="2220000" />
+      <workItem from="1623494206770" duration="2792000" />
+      <workItem from="1623728254912" duration="2600000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -322,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622021879752</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fix: 修正任务监听器标签类型使用错误的问提&#10;&#10;Closes #3">
+      <created>1623497087132</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1623497087132</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +377,8 @@
     <MESSAGE value="fix:完善ts类型约束" />
     <MESSAGE value="fix: 解决节点ID为空是bpmn-js报错的问题（导致绑定ID输入框不能删除最后一个字符的问题）&#10;&#10;Closes #2" />
     <MESSAGE value="fix:修复报红" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix:修复报红" />
+    <MESSAGE value="fix: 修正任务监听器标签类型使用错误的问提&#10;&#10;Closes #3" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 修正任务监听器标签类型使用错误的问提&#10;&#10;Closes #3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

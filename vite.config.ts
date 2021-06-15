@@ -1,5 +1,6 @@
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import {resolve} from "path";
 
 //直接获取文件的text
 function rawTransform(
@@ -31,4 +32,12 @@ export default {
     ],
   },
   plugins: [vue(), rawTransform([/\.bpmn$/]), vueJsx()],
+  resolve: {
+    alias: [
+      {
+        find: '@',
+        replacement: resolve(__dirname, './src'),
+      },
+    ],
+  },
 };

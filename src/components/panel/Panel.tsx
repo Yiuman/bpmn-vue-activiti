@@ -1,8 +1,8 @@
 import { defineComponent, reactive, watch } from 'vue';
-import { BpmnStore } from '../../bpmn/store';
+import { BpmnStore } from '@/bpmn/store';
 import DynamicBinder from '../../components/dynamic-binder';
 import { ElCollapse, ElCollapseItem } from 'element-plus';
-import { GroupProperties } from '../../bpmn/config';
+import { GroupProperties } from '@/bpmn/config';
 
 import './panel.css';
 

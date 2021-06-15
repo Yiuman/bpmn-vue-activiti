@@ -1,6 +1,6 @@
 import { defineComponent, ref, nextTick } from 'vue';
 import ButtonRender, { ButtonRenderProps } from '../../components/button-render';
-import { BpmnStore } from '../../bpmn/store';
+import { BpmnStore } from '@/bpmn/store';
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/xml/xml.js';
 import 'codemirror/addon/hint/xml-hint.js';
@@ -8,7 +8,7 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 
 import './bpmn-actions.css';
-import { ModdleElement } from '../../bpmn/type';
+import { ModdleElement } from '@/bpmn/type';
 
 export default defineComponent({
   name: 'BpmnActions',

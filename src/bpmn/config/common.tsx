@@ -1,8 +1,8 @@
 import { ElFormItem, ElInput, ElOption, ElSelect } from 'element-plus';
-import { FieldDefine } from '../../components/dynamic-binder';
+import { FieldDefine } from '@/components/dynamic-binder';
 import { PropertiesMap, GroupProperties } from './index';
 import SubList from '../../components/sublist/SubList';
-import { SubListState } from '../../components/sublist/type';
+import { SubListState } from '@/components/sublist/type';
 import { ModdleElement } from '../type';
 import { BpmnStore } from '../store';
 
