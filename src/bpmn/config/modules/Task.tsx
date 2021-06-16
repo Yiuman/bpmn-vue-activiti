@@ -6,7 +6,7 @@ import {
   getElementTypeListenerProperties,
 } from '../common';
 import { GroupProperties } from '../index';
-import PrefixLabelSelect from '../../../components/prefix-label-select';
+import PrefixLabelSelect from '@/components/prefix-label-select';
 import { ElInput, ElOption } from 'element-plus';
 import { ModdleElement } from '../../type';
 import { BpmnStore } from '../../store';
@@ -29,6 +29,7 @@ const USER_OPTIONS = [
   { label: '李四', value: '2' },
   { label: '王五', value: '3' },
 ];
+
 /**
  * 用户任务属性配置
  */
@@ -42,6 +43,8 @@ export const BpmnUserGroupProperties: GroupProperties = {
     assignee: {
       component: PrefixLabelSelect,
       prefixTitle: '处理人',
+      allowCreate: true,
+      filterable: true,
       vSlots: {
         default: (): JSX.Element => {
           return USER_OPTIONS.map((item) => {
