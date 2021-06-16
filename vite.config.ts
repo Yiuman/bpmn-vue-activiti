@@ -1,6 +1,6 @@
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import {resolve} from "path";
+import { resolve } from 'path';
 
 //直接获取文件的text
 function rawTransform(
@@ -18,6 +18,7 @@ function rawTransform(
     },
   };
 }
+
 export default {
   optimizeDeps: {
     //声明深度路径模块
