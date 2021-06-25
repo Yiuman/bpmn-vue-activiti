@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/prefix-label-autocomplete/PrefixAutoComplete.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/prefix-label-autocomplete/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,6 +162,11 @@
       <workItem from="1622902018488" duration="17000" />
       <workItem from="1623494206770" duration="2792000" />
       <workItem from="1623728254912" duration="9576000" />
+      <workItem from="1623805370160" duration="3506000" />
+      <workItem from="1623895550835" duration="583000" />
+      <workItem from="1624254020287" duration="22000" />
+      <workItem from="1624255126378" duration="614000" />
+      <workItem from="1624590006934" duration="3366000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -339,7 +343,21 @@
       <option name="project" value="LOCAL" />
       <updated>1623740934345</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="feat: 增加带前缀的autocomplete组件">
+      <created>1623805501523</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1623805501523</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fix: 完善用户任务的处理人字段处理（下拉选择增加create机制）&#10;&#10;Closes #4">
+      <created>1623805622278</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1623805622278</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +397,9 @@
     <MESSAGE value="fix:修复报红" />
     <MESSAGE value="fix: 修正任务监听器标签类型使用错误的问提&#10;&#10;Closes #3" />
     <MESSAGE value="build: 完善项目配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="build: 完善项目配置" />
+    <MESSAGE value="feat: 增加带前缀的autocomplete组件" />
+    <MESSAGE value="fix: 完善用户任务的处理人字段处理（下拉选择增加create机制）&#10;&#10;Closes #4" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 完善用户任务的处理人字段处理（下拉选择增加create机制）&#10;&#10;Closes #4" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

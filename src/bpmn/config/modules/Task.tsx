@@ -59,7 +59,9 @@ export const BpmnUserGroupProperties: GroupProperties = {
     candidateUsers: {
       component: PrefixLabelSelect,
       prefixTitle: '候选人',
+      filterable: true,
       multiple: true,
+      allowCreate: true,
       vSlots: {
         default: (): JSX.Element => {
           return USER_OPTIONS.map((item) => {
