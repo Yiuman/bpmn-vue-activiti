@@ -1,4 +1,4 @@
-import { FieldDefine } from '../../components/dynamic-binder';
+import { FieldDefine } from '@/components/dynamic-binder';
 
 /**
  * 属性Map接口

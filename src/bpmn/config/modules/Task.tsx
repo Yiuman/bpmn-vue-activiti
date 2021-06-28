@@ -47,9 +47,13 @@ export const BpmnUserGroupProperties: GroupProperties = {
       filterable: true,
       vSlots: {
         default: (): JSX.Element => {
-          return USER_OPTIONS.map((item) => {
-            return <ElOption {...item} />;
-          });
+          return (
+            <>
+              {USER_OPTIONS.map((item) => {
+                return <ElOption {...item} />;
+              })}
+            </>
+          );
         },
       },
     },
@@ -64,9 +68,13 @@ export const BpmnUserGroupProperties: GroupProperties = {
       allowCreate: true,
       vSlots: {
         default: (): JSX.Element => {
-          return USER_OPTIONS.map((item) => {
-            return <ElOption {...item} />;
-          });
+          return (
+            <>
+              {USER_OPTIONS.map((item) => {
+                return <ElOption {...item} />;
+              })}
+            </>
+          );
         },
       },
     },
@@ -161,9 +169,13 @@ const BaseTaskProperties = {
       prefixTitle: '回路特性',
       vSlots: {
         default: (): JSX.Element => {
-          return LOOP_OPTIONS.map((item) => {
-            return <ElOption {...item} />;
-          });
+          return (
+            <>
+              {LOOP_OPTIONS.map((item) => {
+                return <ElOption {...item} />;
+              })}
+            </>
+          );
         },
       },
       getValue(businessObject: ModdleElement): string {

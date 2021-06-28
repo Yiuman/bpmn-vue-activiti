@@ -287,3 +287,68 @@ export const ExtensionGroupProperties: GroupProperties = {
     },
   },
 };
+
+interface FromPropertyElement {
+  $type: string;
+  id: string;
+  type: string;
+  $attrs: FromPropertyAttrsElement;
+}
+
+interface FromPropertyAttrsElement {
+  name: string;
+}
+
+export const FormProperties: GroupProperties = {
+  name: '表单属性',
+  icon: 'el-icon-document-add',
+  properties: {
+    'extensionElements.formProperty': {
+      component: SubList,
+      columns: [
+        {
+          prop: 'id',
+          label: '编码',
+          align: 'center',
+        },
+        {
+          prop: 'type',
+          label: '类型',
+          align: 'center',
+        },
+        {
+          prop: 'name',
+          label: '名称',
+          align: 'center',
+        },
+      ],
+      rules: {
+        id: [{ required: true, message: '编码不能为空' }],
+        type: [{ required: true, message: '类型不能为空' }],
+        name: [{ required: true, message: '名称不能为空' }],
+      },
+      getValue: (businessObject: ModdleElement): Array<FromPropertyElement> => {
+        return businessObject?.extensionElements?.values
+          ?.filter((item: FromPropertyElement) => item.$type === 'activiti:FormProperty')
+          .map((elem: FromPropertyElement) => {
+            console.warn('elem', elem);
+            return { id: elem?.id, type: elem.type, name: elem?.$attrs?.name };
+          });
+      },
+      setValue(businessObject: ModdleElement, key: string, value: []): void {
+        const bpmnContext = BpmnStore;
+        const moddle = bpmnContext.getModeler().get('moddle');
+        //表单数据值对象
+        const formProperties = value.map((attr: { id: string; type: string; name: string }) => {
+          return moddle.create('activiti:FormProperty', {
+            id: attr.id,
+            name: attr.name,
+            type: attr.type,
+          });
+        });
+
+        bpmnContext.updateExtensionElements('activiti:FormProperty', formProperties);
+      },
+    },
+  },
+};

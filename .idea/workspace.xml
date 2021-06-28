@@ -6,9 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/iconfont.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/iconfont.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Event.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Event.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/prfix-label-autocomplete" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -58,6 +63,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/components/prfix-label-autocomplete" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/depoly" />
@@ -166,7 +172,8 @@
       <workItem from="1623895550835" duration="583000" />
       <workItem from="1624254020287" duration="22000" />
       <workItem from="1624255126378" duration="614000" />
-      <workItem from="1624590006934" duration="3366000" />
+      <workItem from="1624590006934" duration="3736000" />
+      <workItem from="1624892911918" duration="3802000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -357,7 +364,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623805622278</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="fix: 候选人组件增加输入操作（el-select的allowCreate）&#10;&#10;Closes #8">
+      <created>1624635524174</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1624635524174</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +388,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加节点可配置的属性、完善动态数据绑定组件获取value的方式" />
     <MESSAGE value="添加节点属性配置的的节点名称、业务对象深层赋值待解决" />
     <MESSAGE value="增加Sublist组件，用于添加数组对象（实现中）" />
     <MESSAGE value="完成SubList组件" />
@@ -399,7 +412,8 @@
     <MESSAGE value="build: 完善项目配置" />
     <MESSAGE value="feat: 增加带前缀的autocomplete组件" />
     <MESSAGE value="fix: 完善用户任务的处理人字段处理（下拉选择增加create机制）&#10;&#10;Closes #4" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 完善用户任务的处理人字段处理（下拉选择增加create机制）&#10;&#10;Closes #4" />
+    <MESSAGE value="fix: 候选人组件增加输入操作（el-select的allowCreate）&#10;&#10;Closes #8" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 候选人组件增加输入操作（el-select的allowCreate）&#10;&#10;Closes #8" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
