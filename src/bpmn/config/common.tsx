@@ -65,23 +65,6 @@ export const DocumentGroupProperties: GroupProperties = {
   },
 };
 
-/**
- * （基础信息）表单
- */
-export const FormGroupProperties: GroupProperties = {
-  name: '表单信息',
-  icon: 'el-icon-edit',
-  properties: {
-    formKey: {
-      component: ElInput,
-      placeholder: '表单key',
-      vSlots: {
-        prepend: (): JSX.Element => <div>表单key</div>,
-      },
-    },
-  },
-};
-
 interface PropertyElement {
   $type: string;
   name: string;
@@ -299,10 +282,20 @@ interface FromPropertyAttrsElement {
   name: string;
 }
 
-export const FormProperties: GroupProperties = {
-  name: '表单属性',
-  icon: 'el-icon-document-add',
+/**
+ * （基础信息）表单
+ */
+export const FormGroupProperties: GroupProperties = {
+  name: '表单信息',
+  icon: 'el-icon-edit',
   properties: {
+    formKey: {
+      component: ElInput,
+      placeholder: '表单key',
+      vSlots: {
+        prepend: (): JSX.Element => <div>表单key</div>,
+      },
+    },
     'extensionElements.formProperty': {
       component: SubList,
       columns: [
@@ -352,3 +345,9 @@ export const FormProperties: GroupProperties = {
     },
   },
 };
+
+// export const FormProperties: GroupProperties = {
+//   name: '表单属性',
+//   icon: 'el-icon-document-add',
+//   properties: {},
+// };

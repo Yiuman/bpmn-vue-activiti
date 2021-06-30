@@ -24,7 +24,6 @@ export default {
     //声明深度路径模块
     include: [
       'bpmn-js/lib/Modeler',
-      '@ant-design/icons-vue',
       'highlight.js',
       'codemirror',
       'codemirror/mode/xml/xml.js',

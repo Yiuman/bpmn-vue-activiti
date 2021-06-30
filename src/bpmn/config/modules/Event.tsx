@@ -2,7 +2,7 @@ import {
   CommonGroupProperties,
   ExtensionGroupProperties,
   DocumentGroupProperties,
-  FormProperties,
+  FormGroupProperties,
 } from '../common';
 
 const CommonGroupPropertiesArray = [
@@ -15,7 +15,7 @@ export default {
   //开始事件、消息开始事件、定时开始事件、条件开始事件（这些都属于开始事件bpmn:StartEvent）
   'bpmn:StartEvent': [
     CommonGroupProperties,
-    FormProperties,
+    FormGroupProperties,
     ExtensionGroupProperties,
     DocumentGroupProperties,
   ],

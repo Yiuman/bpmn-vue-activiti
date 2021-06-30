@@ -30,6 +30,14 @@ const USER_OPTIONS = [
   { label: '王五', value: '3' },
 ];
 
+const UserOption: JSX.Element = (
+  <>
+    {USER_OPTIONS.map((item) => {
+      return <ElOption {...item} />;
+    })}
+  </>
+);
+
 /**
  * 用户任务属性配置
  */
@@ -46,15 +54,7 @@ export const BpmnUserGroupProperties: GroupProperties = {
       allowCreate: true,
       filterable: true,
       vSlots: {
-        default: (): JSX.Element => {
-          return (
-            <>
-              {USER_OPTIONS.map((item) => {
-                return <ElOption {...item} />;
-              })}
-            </>
-          );
-        },
+        default: (): JSX.Element => UserOption,
       },
     },
     /**
@@ -67,15 +67,7 @@ export const BpmnUserGroupProperties: GroupProperties = {
       multiple: true,
       allowCreate: true,
       vSlots: {
-        default: (): JSX.Element => {
-          return (
-            <>
-              {USER_OPTIONS.map((item) => {
-                return <ElOption {...item} />;
-              })}
-            </>
-          );
-        },
+        default: (): JSX.Element => UserOption,
       },
     },
     /**
@@ -157,6 +149,14 @@ const LOOP_OPTIONS = [
   { label: '时序多重事件', value: 'Sequential' },
   { label: '循环事件', value: 'StandardLoop' },
 ];
+
+const LoopOptions: JSX.Element = (
+  <>
+    {LOOP_OPTIONS.map((item) => {
+      return <ElOption {...item} />;
+    })}
+  </>
+);
 /**
  * 任务的基本属性配置
  */
@@ -168,15 +168,7 @@ const BaseTaskProperties = {
       component: PrefixLabelSelect,
       prefixTitle: '回路特性',
       vSlots: {
-        default: (): JSX.Element => {
-          return (
-            <>
-              {LOOP_OPTIONS.map((item) => {
-                return <ElOption {...item} />;
-              })}
-            </>
-          );
-        },
+        default: (): JSX.Element => LoopOptions,
       },
       getValue(businessObject: ModdleElement): string {
         const loopCharacteristics = businessObject.loopCharacteristics;

@@ -11,11 +11,12 @@ const PrefixLabelSelect = defineComponent({
     },
   },
   emits: ['update:modelValue'],
-  setup(props, ctx) {
+  setup(props, { emit, slots }) {
     const computedModelValue = computed({
       get: () => props.value,
-      set: (val) => ctx.emit('update:modelValue', val),
+      set: (val) => emit('update:modelValue', val),
     });
+
     return () => (
       <div class="prefix-label-select-container">
         {props.prefixTitle && <div class="prefix-title ">{props.prefixTitle}</div>}
@@ -23,7 +24,7 @@ const PrefixLabelSelect = defineComponent({
           class="prefix-label-select"
           v-model={computedModelValue.value}
           {...props}
-          v-slots={toRaw(ctx.slots)}
+          v-slots={slots}
         />
       </div>
     );
