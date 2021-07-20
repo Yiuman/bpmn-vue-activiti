@@ -44,11 +44,13 @@ const BaseProperties = {
         return businessObject?.sourceRef?.$type !== 'bpmn:StartEvent';
       },
       vSlots: {
-        default: (): JSX.Element => {
-          return FLOW_TYPE_OPTIONS.map((item) => {
-            return <ElOption {...item} />;
-          });
-        },
+        default: (): JSX.Element => (
+          <>
+            {FLOW_TYPE_OPTIONS.map((item) => {
+              return <ElOption {...item} />;
+            })}
+          </>
+        ),
       },
       getValue(businessObject: ModdleElement): string {
         return getSequenceFlowType(businessObject);

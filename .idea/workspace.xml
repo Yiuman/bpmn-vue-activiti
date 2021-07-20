@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Event.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Event.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +168,11 @@
       <workItem from="1624590006934" duration="3736000" />
       <workItem from="1624892911918" duration="11286000" />
       <workItem from="1624933946220" duration="1192000" />
-      <workItem from="1625065603449" duration="490000" />
+      <workItem from="1625065603449" duration="1133000" />
+      <workItem from="1626155650699" duration="57000" />
+      <workItem from="1626363794600" duration="1308000" />
+      <workItem from="1626428074267" duration="738000" />
+      <workItem from="1626684907120" duration="2890000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -380,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624897194968</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix: 表单属性配置迁移至表单信息模块，修正使用element-plus版本1.0.2-beta.53中样式异常的问题">
+      <created>1625066394302</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1625066394302</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,7 +401,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="增加Sublist组件，用于添加数组对象（实现中）" />
     <MESSAGE value="完成SubList组件" />
     <MESSAGE value="代码重构" />
     <MESSAGE value="SubList添加表单校验配置、完成扩展属性配置" />
@@ -422,7 +425,8 @@
     <MESSAGE value="fix: 完善用户任务的处理人字段处理（下拉选择增加create机制）&#10;&#10;Closes #4" />
     <MESSAGE value="fix: 候选人组件增加输入操作（el-select的allowCreate）&#10;&#10;Closes #8" />
     <MESSAGE value="fix: 添加表单属性配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 添加表单属性配置" />
+    <MESSAGE value="fix: 表单属性配置迁移至表单信息模块，修正使用element-plus版本1.0.2-beta.53中样式异常的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 表单属性配置迁移至表单信息模块，修正使用element-plus版本1.0.2-beta.53中样式异常的问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
