@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +172,16 @@
       <workItem from="1626155650699" duration="57000" />
       <workItem from="1626363794600" duration="1308000" />
       <workItem from="1626428074267" duration="738000" />
-      <workItem from="1626684907120" duration="2890000" />
+      <workItem from="1626684907120" duration="3199000" />
+      <workItem from="1626771130861" duration="2517000" />
+      <workItem from="1626830528094" duration="643000" />
+      <workItem from="1626833523495" duration="4082000" />
+      <workItem from="1626965968158" duration="1207000" />
+      <workItem from="1627137432521" duration="8000" />
+      <workItem from="1627282717711" duration="218000" />
+      <workItem from="1628579703474" duration="617000" />
+      <workItem from="1629028715256" duration="11000" />
+      <workItem from="1629386036572" duration="300000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -384,7 +393,21 @@
       <option name="project" value="LOCAL" />
       <updated>1625066394302</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="fix: 修复Flow类型属性配置的报错">
+      <created>1626750015663</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1626750015664</updated>
+    </task>
+    <task id="LOCAL-00032" summary="build: 升级依赖">
+      <created>1626830236961</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1626830236961</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,9 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="完成SubList组件" />
-    <MESSAGE value="代码重构" />
-    <MESSAGE value="SubList添加表单校验配置、完成扩展属性配置" />
     <MESSAGE value="添加Docker部署文件" />
     <MESSAGE value="添加fork me on github" />
     <MESSAGE value="部分代码重构、修复已知bug、完成流程监听器配置" />
@@ -426,7 +446,10 @@
     <MESSAGE value="fix: 候选人组件增加输入操作（el-select的allowCreate）&#10;&#10;Closes #8" />
     <MESSAGE value="fix: 添加表单属性配置" />
     <MESSAGE value="fix: 表单属性配置迁移至表单信息模块，修正使用element-plus版本1.0.2-beta.53中样式异常的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 表单属性配置迁移至表单信息模块，修正使用element-plus版本1.0.2-beta.53中样式异常的问题" />
+    <MESSAGE value="fix: 修复Flow节点属性配置的报错" />
+    <MESSAGE value="fix: 修复Flow类型属性配置的报错" />
+    <MESSAGE value="build: 升级依赖" />
+    <option name="LAST_COMMIT_MESSAGE" value="build: 升级依赖" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

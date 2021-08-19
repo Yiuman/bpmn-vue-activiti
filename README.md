@@ -7,6 +7,10 @@
 
 :kissing_smiling_eyes: 如果此项目对你有帮助，请记得给我一个小星星:star:
 
+后端activiti7集成，[请戳这里](https://github.com/Yiuman/citrus/tree/master/citrus-workflow)
+
+**友情链接：**蜜月大佬的vue2版本实现，[请戳这里](https://github.com/miyuesc/bpmn-process-designer)
+
 
 
 ## 项目特性
