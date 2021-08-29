@@ -35,7 +35,7 @@ export const BpmnStore: BpmnContext = {
     //添加click、shapeAdd事件，属性更新后的事件，用于变更当前的业务对象，刷新属性配置栏
     ['element.click', 'shape.added'].forEach((event) => {
       BpmnStore.addEventListener(event, function (elementAction) {
-        console.warn('elementAction', elementAction);
+        // console.warn('elementAction', elementAction);
         const element = elementAction.element || elementAction.context.element;
         if (element && (!bpmnState.activeElement || bpmnState.activeElement.id !== element.id)) {
           bpmnState.businessObject = null;

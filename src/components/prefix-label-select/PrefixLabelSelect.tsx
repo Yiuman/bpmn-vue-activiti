@@ -1,5 +1,5 @@
 import { ElSelect } from 'element-plus';
-import { defineComponent, PropType, computed, toRaw } from 'vue';
+import { defineComponent, PropType, computed } from 'vue';
 import './prefix-label-select.css';
 
 const PrefixLabelSelect = defineComponent({

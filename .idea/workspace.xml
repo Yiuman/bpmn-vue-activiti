@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="docs: 修正readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +185,7 @@
       <workItem from="1629028715256" duration="11000" />
       <workItem from="1629386036572" duration="1033000" />
       <workItem from="1629698798666" duration="218000" />
-      <workItem from="1630248829499" duration="519000" />
+      <workItem from="1630248829499" duration="2857000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -416,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629386371322</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="docs: 修正readme">
+      <created>1630249486984</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1630249486984</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -433,7 +442,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加fork me on github" />
     <MESSAGE value="部分代码重构、修复已知bug、完成流程监听器配置" />
     <MESSAGE value="修复已知BUG、完善`顺序流`的配置、`任务`添加监听器配置" />
     <MESSAGE value="修复因businessObject更新时导致SubList为部分列数据暂时未空的问题" />
@@ -458,7 +466,8 @@
     <MESSAGE value="fix: 修复Flow类型属性配置的报错" />
     <MESSAGE value="build: 升级依赖" />
     <MESSAGE value="docs: 添加后端链接地址，添加蜜月友链" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs: 添加后端链接地址，添加蜜月友链" />
+    <MESSAGE value="docs: 修正readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs: 修正readme" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
