@@ -9,7 +9,7 @@
 
 后端activiti7集成，[请戳这里](https://github.com/Yiuman/citrus/tree/master/citrus-workflow)
 
-**友情链接：**蜜月大佬的vue2版本实现，[请戳这里](https://github.com/miyuesc/bpmn-process-designer)
+**友情链接：** 蜜月大佬的vue2版本实现，[请戳这里](https://github.com/miyuesc/bpmn-process-designer)
 
 
 
