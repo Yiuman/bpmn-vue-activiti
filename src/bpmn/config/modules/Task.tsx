@@ -24,6 +24,17 @@ const TaskListenerProperties = getElementTypeListenerProperties({
   eventOptions: TASK_EVENT_OPTIONS,
 });
 
+const EVENT_OPTIONS = [
+  { label: 'start', value: 'start' },
+  { label: 'end', value: 'end' },
+];
+
+const ExecutionListenerProperties = getElementTypeListenerProperties({
+  name: '执行监听器',
+  eventOptions: EVENT_OPTIONS,
+  type: 'activiti:ExecutionListener',
+});
+
 const USER_OPTIONS = [
   { label: '张三', value: '1' },
   { label: '李四', value: '2' },
@@ -221,6 +232,7 @@ const CommonGroupPropertiesArray = [
   BaseTaskProperties,
   FormGroupProperties,
   TaskListenerProperties,
+  ExecutionListenerProperties,
   ExtensionGroupProperties,
   DocumentGroupProperties,
 ];
@@ -233,6 +245,7 @@ export default {
     BaseTaskProperties,
     BpmnUserGroupProperties,
     TaskListenerProperties,
+    ExecutionListenerProperties,
     FormGroupProperties,
     ExtensionGroupProperties,
     DocumentGroupProperties,

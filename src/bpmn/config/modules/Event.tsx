@@ -2,11 +2,23 @@ import {
   CommonGroupProperties,
   ExtensionGroupProperties,
   DocumentGroupProperties,
-  FormGroupProperties,
+  FormGroupProperties, getElementTypeListenerProperties,
 } from '../common';
+
+const EVENT_OPTIONS = [
+  { label: 'start', value: 'start' },
+  { label: 'end', value: 'end' },
+];
+
+const ExecutionListenerProperties = getElementTypeListenerProperties({
+  name: '执行监听器',
+  eventOptions: EVENT_OPTIONS,
+  type: 'activiti:ExecutionListener',
+});
 
 const CommonGroupPropertiesArray = [
   CommonGroupProperties,
+  ExecutionListenerProperties,
   ExtensionGroupProperties,
   DocumentGroupProperties,
 ];
@@ -16,6 +28,7 @@ export default {
   'bpmn:StartEvent': [
     CommonGroupProperties,
     FormGroupProperties,
+    ExecutionListenerProperties,
     ExtensionGroupProperties,
     DocumentGroupProperties,
   ],

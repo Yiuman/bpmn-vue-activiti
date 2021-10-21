@@ -100,6 +100,7 @@ export const getElementTypeListenerProperties = function (options: {
   icon?: string;
   //时间类型选项
   eventOptions?: Array<{ label: string; value: string }>;
+  type?: string;
 }): GroupProperties {
   const eventOptions = options.eventOptions || EVENT_OPTIONS;
   return {
@@ -123,20 +124,20 @@ export const getElementTypeListenerProperties = function (options: {
             },
             editComponent: function (scope: any, state: SubListState<any>): JSX.Element {
               return (
-                <ElFormItem
-                  size="mini"
-                  class="sublist-form-item"
-                  label={scope.column.name}
-                  prop={scope.column.property}
-                >
-                  <ElSelect v-model={state.editItem.event}>
-                    {eventOptions.map((option) => {
-                      return (
-                        <ElOption key={option.value} label={option.label} value={option.value} />
-                      );
-                    })}
-                  </ElSelect>
-                </ElFormItem>
+                  <ElFormItem
+                      size="mini"
+                      class="sublist-form-item"
+                      label={scope.column.name}
+                      prop={scope.column.property}
+                  >
+                    <ElSelect v-model={state.editItem.event}>
+                      {eventOptions.map((option) => {
+                        return (
+                            <ElOption key={option.value} label={option.label} value={option.value} />
+                        );
+                      })}
+                    </ElSelect>
+                  </ElFormItem>
               );
             },
           },
@@ -149,20 +150,20 @@ export const getElementTypeListenerProperties = function (options: {
             },
             editComponent: function (scope: any, state: SubListState<any>): JSX.Element {
               return (
-                <ElFormItem
-                  size="mini"
-                  class="sublist-form-item"
-                  label={scope.column.name}
-                  prop={scope.column.property}
-                >
-                  <ElSelect v-model={state.editItem.type}>
-                    {TYPE_OPTIONS.map((option) => {
-                      return (
-                        <ElOption key={option.value} label={option.label} value={option.value} />
-                      );
-                    })}
-                  </ElSelect>
-                </ElFormItem>
+                  <ElFormItem
+                      size="mini"
+                      class="sublist-form-item"
+                      label={scope.column.name}
+                      prop={scope.column.property}
+                  >
+                    <ElSelect v-model={state.editItem.type}>
+                      {TYPE_OPTIONS.map((option) => {
+                        return (
+                            <ElOption key={option.value} label={option.label} value={option.value} />
+                        );
+                      })}
+                    </ElSelect>
+                  </ElFormItem>
               );
             },
           },
@@ -178,40 +179,43 @@ export const getElementTypeListenerProperties = function (options: {
           content: [{ required: true, message: '执行内容不能为空' }],
         },
         getValue: (businessObject: ModdleElement): Array<any> => {
-          const listenerTagName = taskTags.includes(businessObject.$type)
-            ? 'activiti:TaskListener'
-            : 'activiti:ExecutionListener';
+          console.log(businessObject, businessObject.$type);
+          // const listenerTagName = taskTags.includes(businessObject.extensionElements.$type)
+          //     ? 'activiti:TaskListener'
+          //     : 'activiti:ExecutionListener';
+          const listenerTagName = options.type ? options.type : 'activiti:TaskListener';
           return businessObject?.extensionElements?.values
-            ?.filter((item: ModdleElement) => item.$type === listenerTagName)
-            ?.map((item: ModdleElement) => {
-              const type = item.expression
-                ? 'expression'
-                : item.delegateExpression
-                ? 'delegateExpression'
-                : 'class';
-              return {
-                event: item.event,
-                type: type,
-                content: item[type],
-              };
-            });
+              ?.filter((item: ModdleElement) => item.$type === listenerTagName)
+              ?.map((item: ModdleElement) => {
+                const type = item.expression
+                    ? 'expression'
+                    : item.delegateExpression
+                        ? 'delegateExpression'
+                        : 'class';
+                return {
+                  event: item.event,
+                  type: type,
+                  content: item[type],
+                };
+              });
         },
         setValue(businessObject: ModdleElement, key: string, value: []): void {
           const bpmnContext = BpmnStore;
           console.warn('activeBusinessObject', businessObject);
           const moddle = bpmnContext.getModeler().get('moddle');
           //判断当前活动的模型类型，使用不同类型的标签监听器
-          const listenerTagName = taskTags.includes(businessObject.$type)
-            ? 'activiti:TaskListener'
-            : 'activiti:ExecutionListener';
+          // const listenerTagName = taskTags.includes(businessObject.$type)
+          //     ? 'activiti:TaskListener'
+          //     : 'activiti:ExecutionListener';
+          const listenerTagName = options.type ? options.type : 'activiti:TaskListener';
           bpmnContext.updateExtensionElements(
-            listenerTagName,
-            value.map((attr: { event: string; type: string; content: string }) => {
-              return moddle.create(listenerTagName, {
-                event: attr.event,
-                [attr.type]: attr.content,
-              });
-            }),
+              listenerTagName,
+              value.map((attr: { event: string; type: string; content: string }) => {
+                return moddle.create(listenerTagName, {
+                  event: attr.event,
+                  [attr.type]: attr.content,
+                });
+              }),
           );
         },
       },
@@ -251,11 +255,11 @@ export const ExtensionGroupProperties: GroupProperties = {
       },
       getValue: (businessObject: ModdleElement): Array<any> => {
         return businessObject?.extensionElements?.values
-          ?.filter((item: PropertyElement) => item.$type === 'activiti:Properties')[0]
-          ?.values.map((item: PropertyElement) => ({
-            name: item.name,
-            value: item.value,
-          }));
+            ?.filter((item: PropertyElement) => item.$type === 'activiti:Properties')[0]
+            ?.values.map((item: PropertyElement) => ({
+              name: item.name,
+              value: item.value,
+            }));
       },
       setValue(businessObject: ModdleElement, key: string, value: []): void {
         const bpmnContext = BpmnStore;
@@ -322,11 +326,11 @@ export const FormGroupProperties: GroupProperties = {
       },
       getValue: (businessObject: ModdleElement): Array<FromPropertyElement> => {
         return businessObject?.extensionElements?.values
-          ?.filter((item: FromPropertyElement) => item.$type === 'activiti:FormProperty')
-          .map((elem: FromPropertyElement) => {
-            console.warn('elem', elem);
-            return { id: elem?.id, type: elem.type, name: elem?.$attrs?.name };
-          });
+            ?.filter((item: FromPropertyElement) => item.$type === 'activiti:FormProperty')
+            .map((elem: FromPropertyElement) => {
+              console.warn('elem', elem);
+              return { id: elem?.id, type: elem.type, name: elem?.$attrs?.name };
+            });
       },
       setValue(businessObject: ModdleElement, key: string, value: []): void {
         const bpmnContext = BpmnStore;
