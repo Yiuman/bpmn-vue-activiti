@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "axios": "^0.23.0",
     "bpmn-js": "^8.1.0",
     "bpmn-js-properties-panel": "^0.39.0",
     "codemirror": "^5.59.2",

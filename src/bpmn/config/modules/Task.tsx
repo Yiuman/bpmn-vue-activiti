@@ -10,6 +10,9 @@ import PrefixLabelSelect from '@/components/prefix-label-select';
 import { ElInput, ElOption } from 'element-plus';
 import { ModdleElement } from '../../type';
 import { BpmnStore } from '../../store';
+import PrefixLabelTreeSelect from '@/components/prefix-label-treeselect';
+import axios from 'axios';
+import { rejects } from 'assert';
 
 const TASK_EVENT_OPTIONS = [
   { label: '创建', value: 'create' },
@@ -35,19 +38,35 @@ const ExecutionListenerProperties = getElementTypeListenerProperties({
   type: 'activiti:ExecutionListener',
 });
 
-const USER_OPTIONS = [
+let USER_OPTIONS = [
   { label: '张三', value: '1' },
   { label: '李四', value: '2' },
   { label: '王五', value: '3' },
 ];
 
-const UserOption: JSX.Element = (
-  <>
-    {USER_OPTIONS.map((item) => {
-      return <ElOption {...item} />;
-    })}
-  </>
-);
+var UserOption: JSX.Element;
+
+bbb();
+// USER_OPTIONS = res.data.data;
+
+async function bbb() {
+  const res = await aaaa();
+  if (res.status === 200 && res.data.data) {
+    USER_OPTIONS = res.data.data;
+  }
+  console.log(USER_OPTIONS);
+  UserOption = USER_OPTIONS.map((item) => {
+    return <ElOption {...item} />;
+  })
+}
+
+// const UserOption: JSX.Element = (
+//   <>
+//     {USER_OPTIONS.map((item) => {
+//       return <ElOption {...item} />;
+//     })}
+//   </>
+// );
 
 /**
  * 用户任务属性配置
@@ -60,12 +79,31 @@ export const BpmnUserGroupProperties: GroupProperties = {
      * 处理人属性
      */
     assignee: {
+      //component: PrefixLabelTreeSelect,
       component: PrefixLabelSelect,
       prefixTitle: '处理人',
       allowCreate: true,
       filterable: true,
       vSlots: {
         default: (): JSX.Element => UserOption,
+        // async default(): JSX.Element {
+        //   const res = await aaaa();
+        //   console.log('assignee ', res);
+        //   if (res.status === 200) {
+        //     // USER_OPTIONS = res.data.data;
+        //   }
+        //   console.log(USER_OPTIONS);
+        //   const UserOptions: JSX.Element = (
+        //     <>
+        //       {USER_OPTIONS.map((item) => {
+        //         console.log(item)
+        //         return <ElOption {...item} />;
+        //       })}
+        //     </>
+        //   );
+        //   console.log(UserOptions)
+        //   return UserOptions;
+        // },
       },
     },
     /**
@@ -78,10 +116,13 @@ export const BpmnUserGroupProperties: GroupProperties = {
       multiple: true,
       allowCreate: true,
       vSlots: {
-        default: (): JSX.Element => UserOption,
+        default: (): JSX.Element => {
+          console.log(UserOption)
+          return UserOption;
+        },
       },
       getValue(businessObject: ModdleElement): string {
-        console.warn('businessObject', businessObject);
+        console.log('candidateUsers businessObject', businessObject);
 
         return 'string' === typeof businessObject.candidateUsers
           ? businessObject.candidateUsers.split(',')
@@ -265,3 +306,23 @@ export default {
   //调用任务
   'bpmn:CallActivity': CommonGroupPropertiesArray,
 };
+
+function aaaa() {
+  const url = '/pmsp/api/org/get?type=user';
+  const res = axios({
+    method: 'get',
+    url: url, //后端提供的接口
+    //data:this.$qs.stringify(prames),//请求时需要的参数
+    //responseType: 'blob',//设置响应数据类型
+  });
+  return res;
+  // }).then((res) => {
+  //   console.log(res);
+  //   if (!res) {
+  //     return;
+  //   }
+  //   USER_OPTIONS = res.data.data;
+  //   console.log('USER_OPTIONS:', USER_OPTIONS);
+  // });
+  console.log('USER_OPTIONS:', USER_OPTIONS);
+}

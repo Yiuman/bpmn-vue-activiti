@@ -16,7 +16,11 @@ const PrefixLabelSelect = defineComponent({
       get: () => props.value,
       set: (val) => emit('update:modelValue', val),
     });
-
+    console.log('PrefixLabelSelect slots', slots);
+    console.log('PrefixLabelSelect props', props);
+    console.log('PrefixLabelSelect props.prefixTitle', props.prefixTitle);
+    console.log('PrefixLabelSelect computedModelValue', computedModelValue);
+    console.log('PrefixLabelSelect computedModelValue.value', computedModelValue.value);
     return () => (
       <div class="prefix-label-select-container">
         {props.prefixTitle && <div class="prefix-title ">{props.prefixTitle}</div>}

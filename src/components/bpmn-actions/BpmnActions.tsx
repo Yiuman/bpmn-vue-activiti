@@ -9,6 +9,7 @@ import 'codemirror/theme/material.css';
 
 import './bpmn-actions.css';
 import { ModdleElement } from '@/bpmn/type';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'BpmnActions',
@@ -24,12 +25,39 @@ export default defineComponent({
       zoom,
       previewActive,
       xml,
+      modelId: '',
+      category: '',
     };
   },
   render() {
     const bpmnContext = BpmnStore;
     //codemirror编辑器
     let coder: CodeMirror.EditorFromTextArea;
+    console.log('modelId:', getQueryString('modelId'));
+    console.log('category:', getQueryString('category'));
+    this.modelId = getQueryString('modelId');
+    this.category = getQueryString('category');
+
+    const getFlowXml = function (modelId: string) {
+      console.log('getFlowXml modelId...', modelId);
+      if (modelId == null || modelId == '') {
+        return;
+      }
+      const selectedFile = '/pmsp/a/act/model/export?id=' + modelId;
+      axios({
+        method: 'get',
+        url: selectedFile, //后端提供的接口
+        //data:this.$qs.stringify(prames),//请求时需要的参数
+        //responseType: 'blob',//设置响应数据类型
+      }).then((data) => {
+        console.log(data);
+        if (!data) {
+          return;
+        }
+        bpmnContext.importXML(data.data as string);
+      });
+    };
+    getFlowXml(this.modelId);
 
     const importFile = function (event: Event) {
       const eventTarget = event.target as HTMLInputElement;
@@ -46,6 +74,62 @@ export default defineComponent({
     };
     const buttonRenderProps: ButtonRenderProps = {
       buttons: [
+        {
+          label: '保存',
+          icon: 'icon-baocun1359',
+          action: () => {
+            const rootElement: ModdleElement = bpmnContext
+              .getModeler()
+              .get('canvas')
+              .getRootElement();
+            bpmnContext
+              .getXML()
+              .then((response: { xml: string }) => {
+                console.log(response);
+                console.log(rootElement);
+                // download(response.xml, rootElement.id || 'process', 'bpmn');
+                if (this.modelId == null || this.modelId == '') {
+                  this.modelId = getQueryString('modelId');
+                }
+                if (this.modelId == null || this.modelId == '') {
+                  return;
+                }
+                if (this.category == null || this.category == '') {
+                  this.category = getQueryString('category');
+                }
+                if (this.category == null || this.category == '') {
+                  return;
+                }
+
+                const bpmnfiles = new Blob([response.xml], { type: 'application/octet-stream' });
+                const param = new FormData(); // 创建form对象
+                param.append('exportDir', '描述'); //
+                param.append('category', this.category); //分类id
+                param.append('file', bpmnfiles, 'diagram.bpmn');
+                const config = {
+                  headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                  },
+                };
+                //var url = this.baseUrl + '/model/' + this.modelId + '/saveModels';
+                const url = '/pmsp/act/service/model/' + this.modelId + '/saveModels';
+                console.log(url);
+                console.log(param);
+                // 添加请求头
+                axios.post(url, param, config).then((responses) => {
+                  console.log(responses);
+                  if (responses.status === 200) {
+                    //this.dialog = false;
+                    //this.$parent.init();
+                  }
+                });
+              })
+              .catch((err: unknown) => {
+                console.warn(err);
+              });
+          },
+        },
         {
           label: '导入',
           icon: 'icon-shangchuan',
@@ -148,20 +232,20 @@ export default defineComponent({
               });
           },
         },
-        // {
-        //   label: '撤销',
-        //   icon: 'icon-weibiaoti545',
-        //   action: () => {
-        //     bpmnContext.getModeler().get('commandStack').undo();
-        //   },
-        // },
-        // {
-        //   label: '恢复',
-        //   icon: 'icon-weibiaoti546',
-        //   action: () => {
-        //     bpmnContext.getModeler().get('commandStack').redo();
-        //   },
-        // },
+        {
+          label: '撤销',
+          icon: 'icon-weibiaoti545',
+          action: () => {
+            bpmnContext.getModeler().get('commandStack').undo();
+          },
+        },
+        {
+          label: '恢复',
+          icon: 'icon-weibiaoti546',
+          action: () => {
+            bpmnContext.getModeler().get('commandStack').redo();
+          },
+        },
       ],
     };
     return (
@@ -197,4 +281,16 @@ const download = (data: string, filename: string, type: string): void => {
   tempLink.click(); // 点击下载
   document.body.removeChild(tempLink); // 下载完成移除元素
   window.URL.revokeObjectURL(href); // 释放掉blob对象
+};
+
+const getQueryString = (name: string): string => {
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+  const r = window.location.search.substr(1).match(reg);
+  //console.log(r);
+  if (r != null) {
+    console.log(decodeURIComponent(r[2]));
+    //return unescape(r[2]);
+    return decodeURIComponent(r[2]);
+  }
+  return '';
 };

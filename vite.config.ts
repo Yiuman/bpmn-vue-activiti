@@ -20,6 +20,13 @@ function rawTransform(
 }
 
 export default {
+  base: './',
+  //publicDir: './',
+  build: {
+    //assetsDir: 'assets',
+    assetsPublicPath: './',
+  },
+  //assetsPublicPath: '',
   optimizeDeps: {
     //声明深度路径模块
     include: [
@@ -40,4 +47,13 @@ export default {
       },
     ],
   },
+  server: {
+    proxy: {
+      '/pmsp': {
+        target: 'http://localhost:8181',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/pmsp/, '/pmsp')
+      },
+    }
+  }
 };
