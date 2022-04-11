@@ -219,7 +219,6 @@ const BaseTaskProperties = {
 
 const CommonGroupPropertiesArray = [
   BaseTaskProperties,
-  FormGroupProperties,
   TaskListenerProperties,
   ExtensionGroupProperties,
   DocumentGroupProperties,
