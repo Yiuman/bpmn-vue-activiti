@@ -23,4 +23,6 @@ export default {
   'bpmn:Process': ProcessGroupPropertiesArray,
   //子流程
   'bpmn:SubProcess': ProcessGroupPropertiesArray,
+  //转运
+  'bpmn:Transaction': ProcessGroupPropertiesArray,
 };
