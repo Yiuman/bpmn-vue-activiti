@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="fix: 任务类型-除用户任务外排除表单配置（表单仅为开始事件&amp;用户任务使用）&#10;&#10;Closes #32">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/resources/activiti-moddel.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/resources/activiti-moddel.json" afterDir="false" />
-    </list>
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +18,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -203,7 +205,7 @@
       <workItem from="1654090618190" duration="1311000" />
       <workItem from="1654509893330" duration="2000" />
       <workItem from="1660655699867" duration="792000" />
-      <workItem from="1672898288097" duration="309000" />
+      <workItem from="1672898288097" duration="785000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -457,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649693162554</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="fix: 升级vite&amp;jxs插件解决运行空白问题">
+      <created>1672898882939</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1672898882939</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,7 +483,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="修复因businessObject更新时导致SubList为部分列数据暂时未空的问题" />
     <MESSAGE value="修复已知BUG，重构优化代码" />
     <MESSAGE value="完善BPMNSTORE，添加用户回路特性配置" />
     <MESSAGE value="添加readme说明" />
@@ -499,7 +507,8 @@
     <MESSAGE value="docs: 修正readme" />
     <MESSAGE value="fix: 修正候选人无法回显的问题&#10;&#10;Closes #13" />
     <MESSAGE value="fix: 任务类型-除用户任务外排除表单配置（表单仅为开始事件&amp;用户任务使用）&#10;&#10;Closes #32" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 任务类型-除用户任务外排除表单配置（表单仅为开始事件&amp;用户任务使用）&#10;&#10;Closes #32" />
+    <MESSAGE value="fix: 升级vite&amp;jxs插件解决运行空白问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 升级vite&amp;jxs插件解决运行空白问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
