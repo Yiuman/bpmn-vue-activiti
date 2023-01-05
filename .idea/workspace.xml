@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="docs: 修正readme">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/prefix-label-select/PrefixLabelSelect.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +18,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -185,7 +185,27 @@
       <workItem from="1629028715256" duration="11000" />
       <workItem from="1629386036572" duration="1033000" />
       <workItem from="1629698798666" duration="218000" />
-      <workItem from="1630248829499" duration="2857000" />
+      <workItem from="1630248829499" duration="3308000" />
+      <workItem from="1630335309430" duration="5000" />
+      <workItem from="1634871894218" duration="675000" />
+      <workItem from="1637129834457" duration="2178000" />
+      <workItem from="1638267654205" duration="60000" />
+      <workItem from="1645785012124" duration="189000" />
+      <workItem from="1646014375383" duration="19000" />
+      <workItem from="1646379271480" duration="15000" />
+      <workItem from="1646625128721" duration="25000" />
+      <workItem from="1647438460759" duration="2267000" />
+      <workItem from="1648561129520" duration="3323000" />
+      <workItem from="1649687117526" duration="1988000" />
+      <workItem from="1649906797623" duration="8000" />
+      <workItem from="1650118077004" duration="1658000" />
+      <workItem from="1651753633287" duration="1323000" />
+      <workItem from="1651942195714" duration="87000" />
+      <workItem from="1653465962482" duration="79000" />
+      <workItem from="1654090618190" duration="1311000" />
+      <workItem from="1654509893330" duration="2000" />
+      <workItem from="1660655699867" duration="792000" />
+      <workItem from="1672898288097" duration="785000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -425,7 +445,28 @@
       <option name="project" value="LOCAL" />
       <updated>1630249486984</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="fix: 修正候选人无法回显的问题&#10;&#10;Closes #13">
+      <created>1630252955187</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1630252955187</updated>
+    </task>
+    <task id="LOCAL-00036" summary="fix: 任务类型-除用户任务外排除表单配置（表单仅为开始事件&amp;用户任务使用）&#10;&#10;Closes #32">
+      <created>1649693162554</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1649693162554</updated>
+    </task>
+    <task id="LOCAL-00037" summary="fix: 升级vite&amp;jxs插件解决运行空白问题">
+      <created>1672898882939</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1672898882939</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,9 +483,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="部分代码重构、修复已知bug、完成流程监听器配置" />
-    <MESSAGE value="修复已知BUG、完善`顺序流`的配置、`任务`添加监听器配置" />
-    <MESSAGE value="修复因businessObject更新时导致SubList为部分列数据暂时未空的问题" />
     <MESSAGE value="修复已知BUG，重构优化代码" />
     <MESSAGE value="完善BPMNSTORE，添加用户回路特性配置" />
     <MESSAGE value="添加readme说明" />
@@ -467,7 +505,10 @@
     <MESSAGE value="build: 升级依赖" />
     <MESSAGE value="docs: 添加后端链接地址，添加蜜月友链" />
     <MESSAGE value="docs: 修正readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs: 修正readme" />
+    <MESSAGE value="fix: 修正候选人无法回显的问题&#10;&#10;Closes #13" />
+    <MESSAGE value="fix: 任务类型-除用户任务外排除表单配置（表单仅为开始事件&amp;用户任务使用）&#10;&#10;Closes #32" />
+    <MESSAGE value="fix: 升级vite&amp;jxs插件解决运行空白问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 升级vite&amp;jxs插件解决运行空白问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -509,7 +509,7 @@
                     "type": "String"
                 }
             ]
-        },
+        },  
         {
             "name": "ExternalCapable",
             "extends": [
