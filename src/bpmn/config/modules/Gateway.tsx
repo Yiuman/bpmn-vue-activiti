@@ -19,4 +19,6 @@ export default {
   'bpmn:ComplexGateway': CommonGroupPropertiesArray,
   //事件网关
   'bpmn:EventBasedGateway': CommonGroupPropertiesArray,
+  //相容网关
+  'bpmn:InclusiveGateway': CommonGroupPropertiesArray,
 };
