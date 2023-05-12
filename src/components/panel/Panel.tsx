@@ -1,4 +1,4 @@
-import { defineComponent, reactive, watch } from 'vue';
+import { defineComponent, reactive, watch, isRef } from 'vue';
 import { BpmnStore } from '@/bpmn/store';
 import DynamicBinder from '../../components/dynamic-binder';
 import { ElCollapse, ElCollapseItem } from 'element-plus';
@@ -16,7 +16,9 @@ export default defineComponent({
     //需要注意，如果字段定义里边属性定义了`setValue`方法，则不会进这里了
     function onFieldChange(key: string, value: unknown): void {
       const shape = bpmnContext.getShape();
-      bpmnContext.getModeling().updateProperties(shape, { [key]: value });
+      bpmnContext
+        .getModeling()
+        .updateProperties(shape, { [key]: isRef(value) ? value.value : value });
     }
 
     const panelState = reactive({
@@ -51,7 +53,7 @@ export default defineComponent({
         default: () => (
           <DynamicBinder
             {...{ onFieldChange: onFieldChange }}
-            fieldDefine={groupItem.properties}
+            fieldDefineProps={groupItem.properties}
             v-model={contextState.businessObject}
           />
         ),
