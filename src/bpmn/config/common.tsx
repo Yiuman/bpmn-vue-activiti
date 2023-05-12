@@ -124,7 +124,7 @@ export const getElementTypeListenerProperties = function (options: {
             editComponent: function (scope: any, state: SubListState<any>): JSX.Element {
               return (
                 <ElFormItem
-                  size="mini"
+                  size="small"
                   class="sublist-form-item"
                   label={scope.column.name}
                   prop={scope.column.property}
@@ -150,7 +150,7 @@ export const getElementTypeListenerProperties = function (options: {
             editComponent: function (scope: any, state: SubListState<any>): JSX.Element {
               return (
                 <ElFormItem
-                  size="mini"
+                  size="small"
                   class="sublist-form-item"
                   label={scope.column.name}
                   prop={scope.column.property}
@@ -198,7 +198,6 @@ export const getElementTypeListenerProperties = function (options: {
         },
         setValue(businessObject: ModdleElement, key: string, value: []): void {
           const bpmnContext = BpmnStore;
-          console.warn('activeBusinessObject', businessObject);
           const moddle = bpmnContext.getModeler().get('moddle');
           //判断当前活动的模型类型，使用不同类型的标签监听器
           const listenerTagName = taskTags.includes(businessObject.$type)
@@ -324,7 +323,6 @@ export const FormGroupProperties: GroupProperties = {
         return businessObject?.extensionElements?.values
           ?.filter((item: FromPropertyElement) => item.$type === 'activiti:FormProperty')
           .map((elem: FromPropertyElement) => {
-            console.warn('elem', elem);
             return { id: elem?.id, type: elem.type, name: elem?.$attrs?.name };
           });
       },

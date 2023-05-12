@@ -70,8 +70,6 @@ export const BpmnUserGroupProperties: GroupProperties = {
         default: (): JSX.Element => UserOption,
       },
       getValue(businessObject: ModdleElement): string {
-        console.warn('businessObject', businessObject);
-
         return 'string' === typeof businessObject.candidateUsers
           ? businessObject.candidateUsers.split(',')
           : businessObject.candidateUsers;

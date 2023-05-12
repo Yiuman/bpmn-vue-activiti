@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="" />
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/dynamic-binder/DataBinder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/bpmn-actions/BpmnActions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/bpmn-actions/BpmnActions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dynamic-binder/DynamicBinder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dynamic-binder/DynamicBinder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dynamic-binder/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dynamic-binder/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -205,7 +217,12 @@
       <workItem from="1654090618190" duration="1311000" />
       <workItem from="1654509893330" duration="2000" />
       <workItem from="1660655699867" duration="792000" />
-      <workItem from="1672898288097" duration="785000" />
+      <workItem from="1672898288097" duration="1506000" />
+      <workItem from="1673504669311" duration="599000" />
+      <workItem from="1673506415350" duration="14000" />
+      <workItem from="1673944347689" duration="1513000" />
+      <workItem from="1681270367231" duration="8000" />
+      <workItem from="1683858224986" duration="17357000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -466,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672898882939</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="fix: 升级vite&amp;jxs插件解决运行空白问题">
+      <created>1672899104858</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1672899104858</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

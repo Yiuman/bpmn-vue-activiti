@@ -117,7 +117,6 @@ export default defineComponent({
           label: '预览',
           icon: 'icon-xianshi',
           action: () => {
-            console.warn();
             bpmnContext
               .getXML()
               .then((response) => {

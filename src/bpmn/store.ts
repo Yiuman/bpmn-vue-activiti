@@ -26,7 +26,7 @@ function refreshState(elementRegistry: any, elementAction: any): void {
   let type = element.type;
   if (element.type === 'label' && /_label$/.test(element.id)) {
     const replace = element.id.replace(/_label$/, '');
-    type = elementRegistry._elements[replace].element.type;
+    type = elementRegistry._elements[replace]?.element.type;
   }
   bpmnState.activeBindDefine = shape ? BpmnGroupPropertiesConfig[type] : null;
 }
@@ -43,28 +43,25 @@ export const BpmnStore: BpmnContext = {
     //添加click、shapeAdd事件，属性更新后的事件，用于变更当前的业务对象，刷新属性配置栏
     ['element.click', 'shape.added'].forEach((event) => {
       BpmnStore.addEventListener(event, function (elementAction) {
-        // console.warn('elementAction', elementAction);
         const element = elementAction.element || elementAction.context.element;
-        if (
-          element &&
-          !(element.type == 'label' && elementAction.type == 'shape.added') && // 如果是为label的add事件不需要刷新属性配置栏，否则输入节点名称时，会造成输入中断焦点丢失
-          (!bpmnState.activeElement || bpmnState.activeElement.id !== element.id)
-        ) {
-          bpmnState.businessObject = null;
-          nextTick().then(() => {
-            refreshState(elementRegistry, elementAction);
-          });
+        if (!element) {
+          return;
         }
+
+        //如果是为label的add事件不需要刷新属性配置栏，否则输入节点名称时，会造成输入中断焦点丢失
+        if (element.type == 'label' && elementAction.type == 'shape.added') {
+          return;
+        }
+
+        // if (bpmnState.activeElement && bpmnState.activeElement.id !== element.id) {
+        //   return;
+        // }
+        bpmnState.businessObject = null;
+        nextTick().then(() => {
+          refreshState(elementRegistry, elementAction);
+        });
       });
     });
-    // this.addEventListener('element.changed', function (elementAction: any) {
-    // 这里是处理修改shape中的label后导致的不及时更新问题
-    // 现将业务对象至为空对象，视图更新后，再重新进行渲染
-    // bpmnState.businessObject = {};
-    // nextTick(() => {
-    //   refreshState(context.modeler.get('elementRegistry'), elementAction);
-    // });
-    // });
   },
   getModeler() {
     return this.modeler;
@@ -74,9 +71,6 @@ export const BpmnStore: BpmnContext = {
     nextTick().then(() => {
       refreshState(this.modeler.get('elementRegistry'), bpmnState.activeElement);
     });
-    // nextTick(() => {
-    //
-    // });
   },
   getShape() {
     return this.getShapeById(this.getState().activeElement.element.id);

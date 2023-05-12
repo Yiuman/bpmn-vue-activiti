@@ -1,6 +1,8 @@
-import { defineComponent, PropType, reactive, toRaw, watchEffect, watch } from 'vue';
+import { defineComponent, PropType, reactive, toRaw, watch, ref } from 'vue';
 import ScriptHelper, { resolve } from '../../utils/script-helper';
 import { FieldDefine } from './index';
+import DataBinder from './DataBinder';
+import { PropertiesMap } from '@/bpmn/config';
 
 /**
  * 动态绑定组件
@@ -18,9 +20,8 @@ export default defineComponent({
     /**
      * 组件的需要绑定数据的定义
      */
-    fieldDefine: {
-      type: Object as PropType<FieldDefine>,
-      default: () => ({}),
+    fieldDefineProps: {
+      type: Object as PropType<PropertiesMap<FieldDefine>>,
       required: true,
     },
     //绑定数据的转换器
@@ -31,64 +32,98 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'fieldChange'],
   setup(props, context) {
-    const state = reactive({
-      flatFieldDefine: flatObject(props.fieldDefine || {}, {}),
-      handingModel: Object.assign({}),
-    });
-    watchEffect(() => {
-      state.handingModel = props.modelValue;
-      state.flatFieldDefine = flatObject(props.fieldDefine, {});
-    });
+    const flatFieldDefine = flatObject(props.fieldDefineProps);
+    // const state = reactive({
+    //   flatFieldDefine: flatObject(props.fieldDefine || {}, {}),
+    //   handingModel: Object.assign({}),
+    // });
+    // watchEffect(() => {
+    //   state.handingModel = props.modelValue;
+    //   state.flatFieldDefine = flatObject(props.fieldDefine, {});
+    // });
 
     //绑定转换函数赋值，然props有则用props的否则用默认的
-    const bindTransformer = props.bindTransformer || defaultTransformer;
-    const dataBindTransformer = function (key: string, value: unknown) {
-      return bindTransformer(state.handingModel, key, value);
-    };
+    // const bindTransformer = props.bindTransformer || defaultTransformer;
+    // const dataBindTransformer = function (key: string, value: unknown) {
+    //   return bindTransformer(props.modelValue, key, value);
+    // };
+    const rawModelValue = toRaw(props.modelValue);
+    const bindDataMap: PropertiesMap<any> = {};
+    Object.keys(flatFieldDefine).forEach((key) => {
+      const define = flatFieldDefine[key];
+      const valueRef = ref(
+        define.getValue ? define.getValue(rawModelValue) : resolve(key, props.modelValue) || '',
+      );
+      bindDataMap[key] = valueRef;
+
+      watch(
+        () => valueRef.value,
+        () => {
+          //如果有setValue还是则直接使用独立的setValue
+          if (define.setValue) {
+            //setValue有返回值，值进行赋值后执行
+            const setValueCallBack = define.setValue(rawModelValue, key, valueRef.value);
+            if (setValueCallBack) {
+              setValueCallBack();
+            }
+          } else {
+            context.emit('fieldChange', key, valueRef.value);
+          }
+        },
+      );
+    });
 
     return () => (
       <div class="dynamic-binder">
-        {Object.keys(state.flatFieldDefine).map((key) => {
-          const define = state.flatFieldDefine[key];
+        {Object.keys(flatFieldDefine).map((key) => {
+          const define = flatFieldDefine[key];
+          return (
+            <DataBinder
+              bindKey={key}
+              fieldDefine={define}
+              v-model={bindDataMap[key].value}
+              v-if={predicate(define, rawModelValue)}
+            />
+          );
 
-          if (define && predicate(define, toRaw(props.modelValue))) {
-            const bindData = dataBindTransformer(key, define);
-            //组件不能是代理对象，这里直接用目标对象
-            const Component = toRaw(define.component);
-
-            watch(
-              () => bindData.value,
-              () => {
-                // state.handingModel[bindData.bindKey] = bindData.value;
-                context.emit('update:modelValue', state.handingModel);
-
-                //如果有setValue还是则直接使用独立的setValue
-                if (bindData.setValue) {
-                  //setValue有返回值，值进行赋值后执行
-                  const setValueCallBack = bindData.setValue(
-                    toRaw(props.modelValue),
-                    bindData.bindKey,
-                    bindData.value,
-                  );
-                  if (setValueCallBack) {
-                    setValueCallBack();
-                  }
-                } else {
-                  context.emit('fieldChange', bindData.bindKey, bindData.value);
-                }
-              },
-            );
-
-            return (
-              <Component
-                {...bindData}
-                v-model={bindData.value}
-                v-slots={bindData.vSlots}
-                class={`${Component.name}-${key} dynamic-binder-item`}
-              />
-            );
-          }
-          return null;
+          // if (define && predicate(define, toRaw(props.modelValue))) {
+          //   const bindData = dataBindTransformer(key, define);
+          //   //组件不能是代理对象，这里直接用目标对象
+          //   const Component = toRaw(define.component);
+          //
+          //   watch(
+          //     () => bindData.value,
+          //     () => {
+          //       // state.handingModel[bindData.bindKey] = bindData.value;
+          //       context.emit('update:modelValue', state.handingModel);
+          //
+          //       //如果有setValue还是则直接使用独立的setValue
+          //       if (bindData.setValue) {
+          //         //setValue有返回值，值进行赋值后执行
+          //         const setValueCallBack = bindData.setValue(
+          //           toRaw(props.modelValue),
+          //           bindData.bindKey,
+          //           bindData.value,
+          //         );
+          //         if (setValueCallBack) {
+          //           setValueCallBack();
+          //         }
+          //       } else {
+          //         context.emit('fieldChange', bindData.bindKey, bindData.value);
+          //       }
+          //     },
+          //   );
+          //
+          //   return (
+          //     <Component
+          //       {...bindData}
+          //       v-model={bindData.value}
+          //       v-slots={bindData.vSlots}
+          //       class={`${Component.name}-${key} dynamic-binder-item`}
+          //     />
+          //   );
+          // }
+          // return null;
         })}
       </div>
     );
@@ -109,10 +144,10 @@ export default defineComponent({
  出来的对象会变成，{a.b.c:'xxx'}
  *
  * @param source 源对象
- * @param target 目标对象
  * @param prefix 前缀
  */
-function flatObject(source: FieldDefine, target: FieldDefine, prefix = ''): FieldDefine {
+function flatObject(source: PropertiesMap<FieldDefine>, prefix = ''): FieldDefine {
+  const result: FieldDefine = {};
   Object.keys(source).forEach((key) => {
     const currentKeyObj = source[key];
     if (!currentKeyObj || !(typeof currentKeyObj === 'object')) {
@@ -120,12 +155,12 @@ function flatObject(source: FieldDefine, target: FieldDefine, prefix = ''): Fiel
     }
     const component = currentKeyObj.component;
     if (component) {
-      target[prefix + key] = currentKeyObj;
+      result[prefix + key] = currentKeyObj;
     } else {
-      flatObject(currentKeyObj, target, `${key}.`);
+      flatObject(currentKeyObj, `${key}.`);
     }
   });
-  return target;
+  return result;
 }
 
 /**
