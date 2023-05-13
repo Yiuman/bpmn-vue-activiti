@@ -16,9 +16,10 @@ export default defineComponent({
     //需要注意，如果字段定义里边属性定义了`setValue`方法，则不会进这里了
     function onFieldChange(key: string, value: unknown): void {
       const shape = bpmnContext.getShape();
-      bpmnContext
-        .getModeling()
-        .updateProperties(shape, { [key]: isRef(value) ? value.value : value });
+      if (!shape) {
+        return;
+      }
+      bpmnContext.updateProperties(shape, { [key]: isRef(value) ? value.value : value });
     }
 
     const panelState = reactive({
@@ -62,7 +63,7 @@ export default defineComponent({
 
     return () => (
       <>
-        {contextState.isActive && contextState.businessObject && contextState.activeBindDefine && (
+        {contextState.businessObject && contextState.activeBindDefine && (
           <>
             <div
               class="bpmn-panel-shrinkage"

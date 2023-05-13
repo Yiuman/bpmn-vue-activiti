@@ -102,7 +102,7 @@ export const BpmnUserGroupProperties: GroupProperties = {
         loopCharacteristics.loopCardinality = moddle.create('bpmn:FormalExpression', {
           body: value,
         });
-        bpmnContext.getModeling().updateProperties(bpmnContext.getShape(), {
+        bpmnContext.updateProperties(bpmnContext.getShape(), {
           loopCharacteristics: loopCharacteristics,
         });
       },
@@ -140,7 +140,7 @@ export const BpmnUserGroupProperties: GroupProperties = {
         loopCharacteristics.completionCondition = moddle.create('bpmn:FormalExpression', {
           body: value,
         });
-        bpmnContext.getModeling().updateProperties(bpmnContext.getShape(), {
+        bpmnContext.updateProperties(bpmnContext.getShape(), {
           loopCharacteristics: loopCharacteristics,
         });
       },
@@ -189,10 +189,9 @@ const BaseTaskProperties = {
       },
       setValue(businessObject: ModdleElement, key: string, value: string): () => void {
         const shape = BpmnStore.getShape();
-        const modeling = BpmnStore.getModeling();
         switch (value) {
           case 'Null':
-            modeling.updateProperties(shape, {
+            BpmnStore.updateProperties(shape, {
               loopCharacteristics: null,
             });
             // delete businessObject.loopCharacteristics;

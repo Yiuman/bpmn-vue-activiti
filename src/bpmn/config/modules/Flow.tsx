@@ -62,19 +62,18 @@ const BaseProperties = {
           .getModeler()
           .get('elementRegistry')
           .get(line.businessObject.sourceRef.id);
-        const modeling = bpmnContext.getModeling();
         if (!value || value === 'normal') {
-          modeling.updateProperties(line, { conditionExpression: null });
+          bpmnContext.updateProperties(line, { conditionExpression: null });
           delete line.businessObject.conditionExpression;
         }
 
         if (value === 'default') {
-          modeling.updateProperties(sourceShape, { default: line });
+          bpmnContext.updateProperties(sourceShape, { default: line });
           delete line.businessObject.conditionExpression;
         }
 
         if (value === 'condition') {
-          modeling.updateProperties(line, {
+          bpmnContext.updateProperties(line, {
             conditionExpression: bpmnContext
               .getModeler()
               .get('moddle')
@@ -98,7 +97,7 @@ const BaseProperties = {
       setValue(businessObject: ModdleElement, key: string, value: unknown): void {
         const bpmnContext = BpmnStore;
         const moddle = bpmnContext.getModeler().get('moddle');
-        bpmnContext.getModeling().updateProperties(bpmnContext.getShape(), {
+        bpmnContext.updateProperties(bpmnContext.getShape(), {
           conditionExpression: moddle.create('bpmn:FormalExpression', { body: value }),
         });
       },

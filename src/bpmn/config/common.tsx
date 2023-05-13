@@ -20,7 +20,7 @@ const commonProperties: PropertiesMap<FieldDefine> = {
       const isNotNull = value;
       const latestValue = value || ' ';
       const shape = BpmnStore.getShape();
-      BpmnStore.getModeling().updateProperties(shape, {
+      BpmnStore.updateProperties(shape, {
         [key]: isNotNull ? latestValue.trim() : latestValue,
       });
     },
