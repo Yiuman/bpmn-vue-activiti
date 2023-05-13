@@ -1,7 +1,7 @@
 // 模型节点
 import { UnwrapRef } from 'vue';
 import Modeler from 'bpmn-js/lib/Modeler';
-import { GroupProperties } from './config';
+import { GroupProperties, PropertiesMap } from './config';
 
 export interface BpmnState {
   /**
@@ -13,9 +13,9 @@ export interface BpmnState {
    */
   businessObject: any;
   /**
-   * 是否活动
+   * 更新properties
    */
-  isActive: boolean;
+  updatingProperties: boolean;
 
   /**
    * 当前活动节点的绑定字段配置
@@ -138,4 +138,6 @@ export interface BpmnContext {
    * @param value 值
    */
   updateExtensionElements(elementName: string, value: ModdleElement | Array<ModdleElement>): void;
+
+  updateProperties(element: ModdleElement, properties: PropertiesMap<any>): void;
 }

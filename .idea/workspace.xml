@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/dynamic-binder/DataBinder.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/bpmn-actions/BpmnActions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/bpmn-actions/BpmnActions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dynamic-binder/DynamicBinder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dynamic-binder/DynamicBinder.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dynamic-binder/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dynamic-binder/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/type.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/type.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
