@@ -151,6 +151,7 @@ export const BpmnStore: BpmnContext = {
       values: otherExtensions.concat(value instanceof Array ? value : [value]),
     });
     this.updateProperties(element, { extensionElements: extensions });
+    // this.updateProperties(element, );
   },
   updateProperties(element: ModdleElement, properties: PropertiesMap<any>) {
     bpmnState.updatingProperties = true;

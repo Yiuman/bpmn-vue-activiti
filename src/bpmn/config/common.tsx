@@ -181,20 +181,24 @@ export const getElementTypeListenerProperties = function (options: {
           const listenerTagName = taskTags.includes(businessObject.$type)
             ? 'activiti:TaskListener'
             : 'activiti:ExecutionListener';
-          return businessObject?.extensionElements?.values
-            ?.filter((item: ModdleElement) => item.$type === listenerTagName)
-            ?.map((item: ModdleElement) => {
-              const type = item.expression
-                ? 'expression'
-                : item.delegateExpression
-                ? 'delegateExpression'
-                : 'class';
-              return {
-                event: item.event,
-                type: type,
-                content: item[type],
-              };
-            });
+          const listeners = businessObject?.extensionElements?.values?.filter(
+            (item: ModdleElement) => item.$type === listenerTagName,
+          );
+
+          return listeners
+            ? listeners?.map((item: ModdleElement) => {
+                const type = item.expression
+                  ? 'expression'
+                  : item.delegateExpression
+                  ? 'delegateExpression'
+                  : 'class';
+                return {
+                  event: item.event,
+                  type: type,
+                  content: item[type],
+                };
+              })
+            : [];
         },
         setValue(businessObject: ModdleElement, key: string, value: []): void {
           const bpmnContext = BpmnStore;
@@ -249,12 +253,15 @@ export const ExtensionGroupProperties: GroupProperties = {
         value: [{ required: true, message: '属性值不能为空' }],
       },
       getValue: (businessObject: ModdleElement): Array<any> => {
-        return businessObject?.extensionElements?.values
-          ?.filter((item: PropertyElement) => item.$type === 'activiti:Properties')[0]
-          ?.values.map((item: PropertyElement) => ({
-            name: item.name,
-            value: item.value,
-          }));
+        const extProperties = businessObject?.extensionElements?.values?.filter(
+          (item: PropertyElement) => item.$type === 'activiti:Properties',
+        )[0]?.values;
+        return extProperties
+          ? extProperties.map((item: PropertyElement) => ({
+              name: item.name,
+              value: item.value,
+            }))
+          : [];
       },
       setValue(businessObject: ModdleElement, key: string, value: []): void {
         const bpmnContext = BpmnStore;
@@ -320,11 +327,14 @@ export const FormGroupProperties: GroupProperties = {
         name: [{ required: true, message: '名称不能为空' }],
       },
       getValue: (businessObject: ModdleElement): Array<FromPropertyElement> => {
-        return businessObject?.extensionElements?.values
-          ?.filter((item: FromPropertyElement) => item.$type === 'activiti:FormProperty')
-          .map((elem: FromPropertyElement) => {
-            return { id: elem?.id, type: elem.type, name: elem?.$attrs?.name };
-          });
+        const formProperties = businessObject?.extensionElements?.values?.filter(
+          (item: FromPropertyElement) => item.$type === 'activiti:FormProperty',
+        );
+        return formProperties
+          ? formProperties.map((elem: FromPropertyElement) => {
+              return { id: elem?.id, type: elem.type, name: elem?.$attrs?.name };
+            })
+          : [];
       },
       setValue(businessObject: ModdleElement, key: string, value: []): void {
         const bpmnContext = BpmnStore;

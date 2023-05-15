@@ -1,9 +1,10 @@
 import { defineComponent, PropType, reactive, watch, ref, onMounted, toRaw } from 'vue';
-import { ElInput, ElTable, ElTableColumn, ElForm, ElFormItem } from 'element-plus';
-import { TableProps } from 'element-plus/lib/el-table/src/table/defaults';
+import { ElInput, ElTable, ElTableColumn, ElForm, ElFormItem, FormItemRule } from 'element-plus';
+import { TableProps } from 'element-plus/lib/components/table/src/table/defaults';
+import { FormProps } from 'element-plus/lib/components/form/src/form';
 import { TableColumn, SubListState } from './type';
 import './sublist.css';
-import { SetupContext } from '@vue/runtime-core';
+import { ExtractPropTypes, SetupContext } from '@vue/runtime-core';
 
 /**
  * 深拷贝
@@ -39,7 +40,7 @@ export default defineComponent({
       default: () => Object.assign({}),
     },
     rules: {
-      type: Object as PropType<{ [key: string]: Array<ObjectConstructor> }>,
+      type: Object as PropType<Record<string, Array<FormItemRule>>>,
       default: () => null,
     },
     /**
@@ -121,11 +122,11 @@ export default defineComponent({
     const sublistState = this.sublistState;
     const tableProps = deepCopy(props.tableProps);
 
-    const formProps = {
-      size: 'mini',
+    const formProps: ExtractPropTypes<FormProps> = {
+      size: 'small',
       inline: true,
-      'inline-message': true,
-      'show-message': true,
+      inlineMessage: true,
+      showMessage: true,
       rules: props.rules,
       model: sublistState.editItem,
     };
@@ -276,14 +277,14 @@ function getDefaultEditComponent(): (scope: any, state: SubListState<any>) => JS
   return function (scope, state) {
     return (
       <ElFormItem
-        size="mini"
+        size="small"
         class="sublist-form-item"
         label={scope.column.name}
         prop={scope.column.property}
       >
         <ElInput
           label={scope.column.label}
-          size="mini"
+          size="small"
           v-model={state.editItem[scope.column.property]}
         />
       </ElFormItem>

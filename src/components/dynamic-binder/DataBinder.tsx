@@ -27,9 +27,9 @@ export default defineComponent({
   setup(props, context) {
     const fieldDefine = toRaw(props.fieldDefine);
     const Component = toRaw(fieldDefine.component) as any;
-    const rawValue = toRaw(props.modelValue);
+    // const rawValue = toRaw(props.modelValue);
 
-    const bindValue = ref(fieldDefine.getValue ? fieldDefine.getValue(rawValue) : rawValue);
+    const bindValue = ref(props.modelValue ? props.modelValue : null);
     watch(
       () => bindValue.value,
       () => {
