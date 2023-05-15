@@ -1,4 +1,4 @@
-import { TableColumnCtx } from 'element-plus/lib/el-table/src/table-column/defaults';
+import { TableColumnCtx } from 'element-plus/lib/components/table/src/table-column/defaults';
 
 /**
  * 状态

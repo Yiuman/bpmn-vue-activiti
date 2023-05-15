@@ -33,20 +33,6 @@ export default defineComponent({
   emits: ['update:modelValue', 'fieldChange'],
   setup(props, context) {
     const flatFieldDefine = flatObject(props.fieldDefineProps);
-    // const state = reactive({
-    //   flatFieldDefine: flatObject(props.fieldDefine || {}, {}),
-    //   handingModel: Object.assign({}),
-    // });
-    // watchEffect(() => {
-    //   state.handingModel = props.modelValue;
-    //   state.flatFieldDefine = flatObject(props.fieldDefine, {});
-    // });
-
-    //绑定转换函数赋值，然props有则用props的否则用默认的
-    // const bindTransformer = props.bindTransformer || defaultTransformer;
-    // const dataBindTransformer = function (key: string, value: unknown) {
-    //   return bindTransformer(props.modelValue, key, value);
-    // };
     const rawModelValue = toRaw(props.modelValue);
     const bindDataMap: PropertiesMap<any> = {};
     Object.keys(flatFieldDefine).forEach((key) => {

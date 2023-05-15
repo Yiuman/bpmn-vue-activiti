@@ -7,11 +7,11 @@
     <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Task.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/type.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/type.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/panel/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/panel/Panel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dynamic-binder/DataBinder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dynamic-binder/DataBinder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dynamic-binder/DynamicBinder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dynamic-binder/DynamicBinder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/sublist/SubList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sublist/SubList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/sublist/type.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sublist/type.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,6 +219,7 @@
       <workItem from="1673944347689" duration="1513000" />
       <workItem from="1681270367231" duration="8000" />
       <workItem from="1683858224986" duration="17357000" />
+      <workItem from="1684162778655" duration="3209000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -486,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672899104858</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="fix: 处理element.changed事件导致表单丢失焦点的问题">
+      <created>1683973303004</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1683973303004</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="修复已知BUG，重构优化代码" />
     <MESSAGE value="完善BPMNSTORE，添加用户回路特性配置" />
     <MESSAGE value="添加readme说明" />
     <MESSAGE value="去除无用警告" />
@@ -528,7 +535,8 @@
     <MESSAGE value="fix: 修正候选人无法回显的问题&#10;&#10;Closes #13" />
     <MESSAGE value="fix: 任务类型-除用户任务外排除表单配置（表单仅为开始事件&amp;用户任务使用）&#10;&#10;Closes #32" />
     <MESSAGE value="fix: 升级vite&amp;jxs插件解决运行空白问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 升级vite&amp;jxs插件解决运行空白问题" />
+    <MESSAGE value="fix: 处理element.changed事件导致表单丢失焦点的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 处理element.changed事件导致表单丢失焦点的问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
