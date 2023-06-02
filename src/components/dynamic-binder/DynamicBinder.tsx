@@ -1,4 +1,4 @@
-import { defineComponent, PropType, reactive, toRaw, watch, ref } from 'vue';
+import { defineComponent, PropType, toRaw, watch, ref } from 'vue';
 import ScriptHelper, { resolve } from '../../utils/script-helper';
 import { FieldDefine } from './index';
 import DataBinder from './DataBinder';
@@ -63,53 +63,10 @@ export default defineComponent({
       <div class="dynamic-binder">
         {Object.keys(flatFieldDefine).map((key) => {
           const define = flatFieldDefine[key];
-          return (
-            <DataBinder
-              bindKey={key}
-              fieldDefine={define}
-              v-model={bindDataMap[key].value}
-              v-if={predicate(define, rawModelValue)}
-            />
-          );
-
-          // if (define && predicate(define, toRaw(props.modelValue))) {
-          //   const bindData = dataBindTransformer(key, define);
-          //   //组件不能是代理对象，这里直接用目标对象
-          //   const Component = toRaw(define.component);
-          //
-          //   watch(
-          //     () => bindData.value,
-          //     () => {
-          //       // state.handingModel[bindData.bindKey] = bindData.value;
-          //       context.emit('update:modelValue', state.handingModel);
-          //
-          //       //如果有setValue还是则直接使用独立的setValue
-          //       if (bindData.setValue) {
-          //         //setValue有返回值，值进行赋值后执行
-          //         const setValueCallBack = bindData.setValue(
-          //           toRaw(props.modelValue),
-          //           bindData.bindKey,
-          //           bindData.value,
-          //         );
-          //         if (setValueCallBack) {
-          //           setValueCallBack();
-          //         }
-          //       } else {
-          //         context.emit('fieldChange', bindData.bindKey, bindData.value);
-          //       }
-          //     },
-          //   );
-          //
-          //   return (
-          //     <Component
-          //       {...bindData}
-          //       v-model={bindData.value}
-          //       v-slots={bindData.vSlots}
-          //       class={`${Component.name}-${key} dynamic-binder-item`}
-          //     />
-          //   );
-          // }
-          // return null;
+          const show = predicate(define, rawModelValue);
+          return show ? (
+            <DataBinder bindKey={key} fieldDefine={define} v-model={bindDataMap[key].value} />
+          ) : null;
         })}
       </div>
     );
@@ -169,25 +126,4 @@ function predicate(fieldDefine: FieldDefine, modelValue: unknown): boolean {
     }
   }
   return true;
-}
-
-/**
- * 默认的转换函数
- * @param sourceModel 源模型对象
- * @param bindKey 绑定数据的Key
- * @param bindDefine 绑定定义
- */
-function defaultTransformer(
-  sourceModel: unknown,
-  bindKey: string,
-  bindDefine: FieldDefine,
-): unknown {
-  return reactive({
-    bindKey,
-    ...bindDefine,
-    sourceModel,
-    value: bindDefine.getValue
-      ? bindDefine.getValue(toRaw(sourceModel))
-      : resolve(bindKey, sourceModel) || '',
-  });
 }

@@ -62,18 +62,19 @@ const BaseProperties = {
           .getModeler()
           .get('elementRegistry')
           .get(line.businessObject.sourceRef.id);
+        const modeling = bpmnContext.getModeling();
         if (!value || value === 'normal') {
-          bpmnContext.updateProperties(line, { conditionExpression: null });
+          modeling.updateProperties(line, { conditionExpression: null });
           delete line.businessObject.conditionExpression;
         }
 
         if (value === 'default') {
-          bpmnContext.updateProperties(sourceShape, { default: line });
+          modeling.updateProperties(sourceShape, { default: line });
           delete line.businessObject.conditionExpression;
         }
 
         if (value === 'condition') {
-          bpmnContext.updateProperties(line, {
+          modeling.updateProperties(line, {
             conditionExpression: bpmnContext
               .getModeler()
               .get('moddle')
