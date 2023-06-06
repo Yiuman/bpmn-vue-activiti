@@ -93,7 +93,7 @@ const BaseProperties = {
         return 'condition' === getSequenceFlowType(businessObject);
       },
       getValue(businessObject: ModdleElement): string {
-        return businessObject?.conditionExpression?.body;
+        return businessObject?.conditionExpression?.body ?? '';
       },
       setValue(businessObject: ModdleElement, key: string, value: unknown): void {
         const bpmnContext = BpmnStore;
