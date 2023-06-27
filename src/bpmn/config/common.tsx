@@ -178,7 +178,7 @@ export const getElementTypeListenerProperties = function (options: {
           content: [{ required: true, message: '执行内容不能为空' }],
         },
         getValue: (businessObject: ModdleElement): Array<any> => {
-          const listenerTagName = taskTags.includes(businessObject.$type)
+          const listenerTagName = taskTags?.includes(businessObject.$type)
             ? 'activiti:TaskListener'
             : 'activiti:ExecutionListener';
           const listeners = businessObject?.extensionElements?.values?.filter(
@@ -354,8 +354,3 @@ export const FormGroupProperties: GroupProperties = {
   },
 };
 
-// export const FormProperties: GroupProperties = {
-//   name: '表单属性',
-//   icon: 'el-icon-document-add',
-//   properties: {},
-// };

@@ -6,7 +6,7 @@ export default defineComponent({
   props: {
     //传进来的源对象，这里需要通过动态组件修改源对象的值进行数据动态绑定
     modelValue: {
-      type: Object as PropType<unknown>,
+      type: null,
       default: () => Object.assign({}),
       required: true,
     },
@@ -36,9 +36,10 @@ export default defineComponent({
         context.emit('update:modelValue', bindValue.value);
       },
     );
+    const key = `field-binder-${props.bindKey}`;
     return () => (
       <Component
-        v-key={`field-binder-${props.bindKey}`}
+        key={key}
         {...fieldDefine}
         v-model={bindValue.value}
         v-slots={fieldDefine.vSlots}

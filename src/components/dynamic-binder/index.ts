@@ -15,7 +15,6 @@ export interface FieldDefine extends Map {
 
 export interface Map {
   [key: string]: any;
-
   [index: number]: any;
 }
 
