@@ -23,13 +23,14 @@ const getBpmnGroupPropertiesConfig = () => {
   const BpmnGroupPropertiesConfig: PropertiesMap<Array<GroupProperties>> = {};
   for (const path in modules) {
     modules[path]().then((mod: any) => {
-      const moduleDefuatlExport = mod.default;
-      for (const moduleKey in moduleDefuatlExport) {
-        BpmnGroupPropertiesConfig[moduleKey] = moduleDefuatlExport[moduleKey];
+      const moduleDefaultExport = mod.default;
+      for (const moduleKey in moduleDefaultExport) {
+        BpmnGroupPropertiesConfig[moduleKey] = moduleDefaultExport[moduleKey];
       }
     });
   }
   return BpmnGroupPropertiesConfig;
 };
 
-export default getBpmnGroupPropertiesConfig();
+const propertiesConfig = getBpmnGroupPropertiesConfig();
+export default propertiesConfig;

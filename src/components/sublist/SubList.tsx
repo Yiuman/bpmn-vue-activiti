@@ -109,7 +109,7 @@ export default defineComponent({
     };
 
     //创建操作列
-    const actionColumnProps = buildActionColumnProps(sublistState, ctx);
+    const actionColumnProps = buildActionColumnProps(sublistState, ctx as SetupContext);
     return {
       sublistState,
       addData,
@@ -178,7 +178,7 @@ export default defineComponent({
 /**
  * 创建执行操作的列（编辑、删除）
  */
-const buildActionColumnProps = (state: SubListState<any>, ctx: SetupContext<any>): any => {
+const buildActionColumnProps = (state: SubListState<any>, ctx: SetupContext<any, any>): any => {
   //编辑
   function actionEdit(scope: any): void {
     state.editIndex = scope.$index;

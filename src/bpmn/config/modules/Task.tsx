@@ -69,10 +69,13 @@ export const BpmnUserGroupProperties: GroupProperties = {
       vSlots: {
         default: (): JSX.Element => UserOption,
       },
-      getValue(businessObject: ModdleElement): string {
+      getValue(businessObject: ModdleElement): [] {
+        if (!businessObject.candidateUsers) {
+          return [];
+        }
         return 'string' === typeof businessObject.candidateUsers
-          ? businessObject.candidateUsers.split(',')
-          : businessObject.candidateUsers;
+          ? businessObject?.candidateUsers.split(',')
+          : businessObject?.candidateUsers;
       },
     },
     /**
@@ -96,13 +99,12 @@ export const BpmnUserGroupProperties: GroupProperties = {
         return loopCharacteristics.loopCardinality?.body;
       },
       setValue(businessObject: ModdleElement, key: string, value: string): void {
-        const bpmnContext = BpmnStore;
-        const moddle = bpmnContext.getModeler().get('moddle');
+        const moddle = BpmnStore.getModeler().get('moddle');
         const loopCharacteristics = businessObject.loopCharacteristics;
         loopCharacteristics.loopCardinality = moddle.create('bpmn:FormalExpression', {
           body: value,
         });
-        bpmnContext.updateProperties(bpmnContext.getShape(), {
+        BpmnStore.updateProperties(BpmnStore.getShape(), {
           loopCharacteristics: loopCharacteristics,
         });
       },
@@ -117,7 +119,6 @@ export const BpmnUserGroupProperties: GroupProperties = {
      */
     completionCondition: {
       component: ElInput,
-
       placeholder:
         '如：${nrOfCompletedInstances/nrOfInstances >= 0.25} 表示完成数大于等于4分1时任务完成',
       vSlots: {
