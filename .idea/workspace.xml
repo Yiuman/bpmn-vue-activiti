@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/modules/Flow.tsx" afterDir="false" />
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56">
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,21 +38,32 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/node_modules/@vue/runtime-core/dist/runtime-core.d.ts" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1nQ0xj4XoIWEBlxhJ1MDIuUn7Cl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/yiumankam/workspace/vue_space/bpmn-vue-activiti/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "/Users/yiumankam/workspace/vue_space/bpmn-vue-activiti/node_modules/prettier",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "ts.external.directory.path": "/Users/yiumankam/workspace/vue_space/bpmn-vue-activiti/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -207,6 +221,18 @@
       <workItem from="1683858224986" duration="17357000" />
       <workItem from="1684162778655" duration="4099000" />
       <workItem from="1685695879904" duration="111000" />
+      <workItem from="1686013855349" duration="283000" />
+      <workItem from="1686015724644" duration="16000" />
+      <workItem from="1686015751726" duration="627000" />
+      <workItem from="1686641119620" duration="2000" />
+      <workItem from="1686907061289" duration="68000" />
+      <workItem from="1687844873817" duration="8866000" />
+      <workItem from="1688018060180" duration="41000" />
+      <workItem from="1688088038363" duration="81000" />
+      <workItem from="1688370216416" duration="31000" />
+      <workItem from="1688439941343" duration="13000" />
+      <workItem from="1688716199420" duration="264000" />
+      <workItem from="1688716481134" duration="2889000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -488,7 +514,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684166216394</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="fix: 处理线的默认值">
+      <created>1686013900540</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1686013900540</updated>
+    </task>
+    <task id="LOCAL-00042" summary="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56">
+      <created>1687853228995</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1687853228995</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -501,12 +541,11 @@
         <option value="Default.Author" />
         <option value="Default.Date" />
         <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
       </list>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加readme说明" />
-    <MESSAGE value="去除无用警告" />
     <MESSAGE value="去除modeler无用引入" />
     <MESSAGE value="jsx由三目改为&amp;&amp;表达式" />
     <MESSAGE value="nextTick改为promise方式调用" />
@@ -530,7 +569,9 @@
     <MESSAGE value="fix: 升级vite&amp;jxs插件解决运行空白问题" />
     <MESSAGE value="fix: 处理element.changed事件导致表单丢失焦点的问题" />
     <MESSAGE value="fix: 处理getValue定义类型属性无法更新的问题，DataBinder数组" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 处理getValue定义类型属性无法更新的问题，DataBinder数组" />
+    <MESSAGE value="fix: 处理线的默认值" />
+    <MESSAGE value="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

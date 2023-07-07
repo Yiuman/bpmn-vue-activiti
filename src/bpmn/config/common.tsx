@@ -56,7 +56,7 @@ export const DocumentGroupProperties: GroupProperties = {
       component: ElInput,
       type: 'textarea',
       getValue: (obj: { documentation: Array<Documentation> }): string => {
-        return obj['documentation']?.[0]?.['text'];
+        return obj['documentation']?.[0]?.['text'] ?? '';
       },
       setValue(businessObject: ModdleElement, key: string, value: unknown): void {
         BpmnStore.createElement('bpmn:Documentation', 'documentation', { text: value }, true);
@@ -353,4 +353,3 @@ export const FormGroupProperties: GroupProperties = {
     },
   },
 };
-
