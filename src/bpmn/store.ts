@@ -42,18 +42,30 @@ export const BpmnStore: BpmnContext = {
     //添加click、shapeAdd事件，属性更新后的事件，用于变更当前的业务对象，刷新属性配置栏
     ['element.click', 'shape.added', 'element.changed'].forEach((event) => {
       BpmnStore.addEventListener(event, function (elementAction) {
+        console.warn('elementAction', elementAction, bpmnState.activeElement?.element);
         const element = elementAction.element || elementAction.context.element;
         if (!element && !elementAction.type) {
           return;
         }
-
+        console.warn(
+          'elementTypeEquals',
+          bpmnState.activeElement?.element.type,
+          bpmnState.activeElement?.element?.type === element.type,
+        );
         //如果是为label的add事件不需要刷新属性配置栏，否则输入节点名称时，会造成输入中断焦点丢失
         if (element.type == 'label' && elementAction.type == 'shape.added') {
           return;
         }
 
         //当前上下文中更新属性 触发element.changed直接过  不刷新业务对象 防止属性表单丢失焦点
-        if ('element.changed' == elementAction.type && bpmnState.updatingProperties) {
+        const updating = bpmnState.updatingProperties;
+        //当触发element.changed事件 需要判断改变的类型是否与当前选中的一样  一样才刷新
+        const elementTypeNonEqualActive =
+          bpmnState?.activeElement?.element &&
+          Object.getPrototypeOf(element) !==
+            Object.getPrototypeOf(bpmnState?.activeElement?.element);
+
+        if ('element.changed' == elementAction.type && (updating || elementTypeNonEqualActive)) {
           return;
         }
 
