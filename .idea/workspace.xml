@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56">
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
-    </list>
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -232,7 +227,7 @@
       <workItem from="1688370216416" duration="31000" />
       <workItem from="1688439941343" duration="13000" />
       <workItem from="1688716199420" duration="264000" />
-      <workItem from="1688716481134" duration="2889000" />
+      <workItem from="1688716481134" duration="3738000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -528,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687853228995</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="fix: 修正节点类型改变改变active节点的BUG&amp;修正文档属性显示[Object object]的问题&#10;&#10;Closes #58">
+      <created>1688719619622</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1688719619622</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -546,7 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="去除modeler无用引入" />
     <MESSAGE value="jsx由三目改为&amp;&amp;表达式" />
     <MESSAGE value="nextTick改为promise方式调用" />
     <MESSAGE value="fix:完善ts类型约束" />
@@ -571,7 +572,8 @@
     <MESSAGE value="fix: 处理getValue定义类型属性无法更新的问题，DataBinder数组" />
     <MESSAGE value="fix: 处理线的默认值" />
     <MESSAGE value="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56" />
+    <MESSAGE value="fix: 修正节点类型改变改变active节点的BUG&amp;修正文档属性显示[Object object]的问题&#10;&#10;Closes #58" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 修正节点类型改变改变active节点的BUG&amp;修正文档属性显示[Object object]的问题&#10;&#10;Closes #58" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
