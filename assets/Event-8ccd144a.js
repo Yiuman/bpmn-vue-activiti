@@ -1,0 +1,1 @@
+import{C as e,F as n,E as t,D as o}from"./common-2f1289ac.js";import"./index-8710f95a.js";const r=[e,t,o],s={"bpmn:StartEvent":[e,n,t,o],"bpmn:EndEvent":r,"bpmn:IntermediateThrowEvent":r,"bpmn:IntermediateCatchEvent":r};export{s as default};
