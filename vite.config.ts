@@ -20,6 +20,7 @@ function rawTransform(
 }
 
 export default {
+  base: './',
   optimizeDeps: {
     //声明深度路径模块
     include: [

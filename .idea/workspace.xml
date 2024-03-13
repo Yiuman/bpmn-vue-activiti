@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56">
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+    <list default="true" id="5ca814b1-e26e-4fae-9936-63570f58f51c" name="Default Changelist" comment="refactor: 干掉console">
+      <change afterPath="$PROJECT_DIR$/gh-pages-deploy.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/config/common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/config/common.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bpmn/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bpmn/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="gh-pages" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,21 +48,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "/Users/yiumankam/workspace/vue_space/bpmn-vue-activiti/node_modules/prettier",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "ts.external.directory.path": "/Users/yiumankam/workspace/vue_space/bpmn-vue-activiti/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/yiumankam/workspace/vue_space/bpmn-vue-activiti/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/yiumankam/workspace/vue_space/bpmn-vue-activiti/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -232,7 +233,15 @@
       <workItem from="1688370216416" duration="31000" />
       <workItem from="1688439941343" duration="13000" />
       <workItem from="1688716199420" duration="264000" />
-      <workItem from="1688716481134" duration="2889000" />
+      <workItem from="1688716481134" duration="4490000" />
+      <workItem from="1694055368990" duration="700000" />
+      <workItem from="1694511766470" duration="786000" />
+      <workItem from="1695800598929" duration="598000" />
+      <workItem from="1699859696875" duration="599000" />
+      <workItem from="1708651021559" duration="827000" />
+      <workItem from="1709174779253" duration="1041000" />
+      <workItem from="1709621683572" duration="2221000" />
+      <workItem from="1710293176536" duration="2558000" />
     </task>
     <task id="LOCAL-00001" summary="添加节点可配置的属性、完善动态数据绑定组件获取value的方式">
       <created>1612262300163</created>
@@ -528,7 +537,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687853228995</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="fix: 修正节点类型改变改变active节点的BUG&amp;修正文档属性显示[Object object]的问题&#10;&#10;Closes #58">
+      <created>1688719619622</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1688719619622</updated>
+    </task>
+    <task id="LOCAL-00044" summary="refactor: 干掉console">
+      <created>1688720565533</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1688720565533</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -546,8 +569,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="去除modeler无用引入" />
-    <MESSAGE value="jsx由三目改为&amp;&amp;表达式" />
     <MESSAGE value="nextTick改为promise方式调用" />
     <MESSAGE value="fix:完善ts类型约束" />
     <MESSAGE value="fix: 解决节点ID为空是bpmn-js报错的问题（导致绑定ID输入框不能删除最后一个字符的问题）&#10;&#10;Closes #2" />
@@ -571,7 +592,9 @@
     <MESSAGE value="fix: 处理getValue定义类型属性无法更新的问题，DataBinder数组" />
     <MESSAGE value="fix: 处理线的默认值" />
     <MESSAGE value="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 修正组件值异常而导致用户任务无法正常渲染问题&#10;&#10;Closes #56" />
+    <MESSAGE value="fix: 修正节点类型改变改变active节点的BUG&amp;修正文档属性显示[Object object]的问题&#10;&#10;Closes #58" />
+    <MESSAGE value="refactor: 干掉console" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: 干掉console" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

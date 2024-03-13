@@ -3,7 +3,7 @@
 ## 项目简介
 基于[Vue3.x](https://v3.vuejs.org/guide/introduction.html) + [Vite](https://vitejs.dev/) +[ bpmn-js](https://bpmn.io/toolkit/bpmn-js/) + [element-plus](https://element-plus.gitee.io/#/zh-CN) + tsx 实现的Activiti流程设计器
 
-:smiley:[我是一个活生生的例子](http://42.192.95.146:18080/)
+:smiley:[我是一个活生生的例子](https://yiuman.github.io/bpmn-vue-activiti/)
 
 :kissing_smiling_eyes: 如果此项目对你有帮助，请记得给我一个小星星:star:
 
